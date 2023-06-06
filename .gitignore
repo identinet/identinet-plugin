@@ -130,5 +130,8 @@ dist
 .pnp.*
 
 # Web Extension
-/web-ext-artifacts/
+/.build_*/
+/dist/
+*.pem
+*.crx
 /manifest.json
