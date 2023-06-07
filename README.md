@@ -60,16 +60,25 @@ Requirements:
 Steps to start development:
 
 1. Install node modules: `just deps`
-2. Build manifest file for your browser:
-   - Firefox: `just create-manifest-firefox`
-   - Chrome: `just create-manifest-chrome`
+2. Build extension: `just build`
+   - Firefox build directory: `.build_firefox`
+   - Chrome build directory: `.build_chrome`
 3. Install plugin temporarily:
    - Firefox:
-     [Load Temporary Add-on](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Your_first_WebExtension#installing)
+     - Open [about:debugging](about:debugging#/runtime/this-firefox) and select
+       "This Firefox"
+     - Click on "Load Temporary Add-on..." and select `manifest.json` in the
+       Firefox build directory
+     - See more detailed
+       [instructions](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Your_first_WebExtension#installing)
    - Chrome:
-     [Loading an unpacked extension](https://developer.chrome.com/docs/extensions/mv3/getstarted/development-basics/#load-unpacked)
+     - Open [chrome://extensions/](chrome://extensions/)
+     - Click on "Load unpacked" and select the Chrome build directory
+     - See more detailed
+       [instructions](https://developer.chrome.com/docs/extensions/mv3/getstarted/development-basics/#load-unpacked)
 4. Start development
-5. Manually reload extension to include changes
+5. Manually reload extension by clicking reload (Firefox) or update (Chrome) to
+   include changes
 
 ## Resources
 
