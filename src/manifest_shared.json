@@ -12,11 +12,12 @@
     "128": "icons/favicon_128.png"
   },
   "action": {
-    "default_title": "Hello my friend",
-    "default_popup": "hello.html",
+    "default_title": "identinet Decentralized Identity information",
+    "default_popup": "index.html",
     "default_icon": "icons/favicon_48.png"
   },
   "permissions": [
-    "activeTab"
+    "activeTab",
+    "tabs"
   ]
 }
