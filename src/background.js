@@ -1,117 +1,159 @@
-import { S } from "./lib/sanctuary/mod.js";
+import { log, S } from "./lib/sanctuary/mod.js";
+import { api, getCurrentTab, url2DID } from "./lib/identinet/mod.js";
+import { chainRej, encaseP, promise, reject, resolve } from "fluture";
 
-console.log("background", typeof chrome, typeof browser, chrome);
-
-// let api = typeof chrome ? chrome : browser;
-
-// chrome.alarms.onAlarm.addListener(function (alarm) {
-//   appendToLog(
-//     "alarms.onAlarm --" +
-//       " name: " + alarm.name +
-//       " scheduledTime: " + alarm.scheduledTime,
-//   );
-// });
-
-// {did : bool}
-const activeConnections = {};
+const fetchPath = (pathname) => (url) => {
+  const url_copy = new URL(url);
+  url_copy.pathname = pathname;
+  console.log(`fetching ${url_copy}`);
+  return encaseP((url) => fetch(url, { mode: "no-cors" }))(url_copy);
+};
 
 /**
- * url2DID derives from a DID plus base URL from a URL object.
+ * fromResult triggers side effects based on a the results of a Response
+ * object. Be careful when reading from the Response since this can only be done
+ * once and the Response is returned from this function, so other functions
+ * might try to read from it again and fail!
  *
- * @param {URL} url - A URL object.
- * @returns {Object} - {did: string, base_url: URL}
+ * @param {Function} notOkFn - Called with the resonse object in case the result is not ok.
+ * @param {Function} okFn - Called with the resonse object in case the result is ok.
+ * @returns {Response} returns the passed in response object.
  */
-function url2DID(url) {
-  S.map(console.log)(["a", "b"]);
-  const protocol = "https";
-  const port = url.port ? url.port : 443;
-  const base_url = new URL(`${protocol}://${url.hostname}:${port}`);
-  let domainname = base_url.hostname;
-  if (port != 443) {
-    domainname = encodeURIComponent(`${domainname}:${port}`);
+const resultOkOr = (notOkFn) => (okFn) => (response) => {
+  console.log("response", response);
+  if (response.ok) {
+    if (typeof okFn === "function") {
+      console.log("run okFn");
+      okFn(response);
+    }
+    return response;
   }
-  const did = `did:web:${domainname}`;
-  return { did, base_url };
+  if (typeof notOkFn === "function") {
+    console.log("run notOkFn");
+    notOkFn(response);
+  }
+  return response;
+};
+
+const setIcon = (tabId) => (path) => {
+  api.action.setIcon({
+    path: path,
+    tabId,
+  });
+  return tabId;
+};
+
+const setIconSlash = (tabId) => () => {
+  setIcon(tabId)("icons/shield-slash.svg.png");
+};
+
+const setIconCheck = (tabId) => () => {
+  setIcon(tabId)("icons/shield-check.svg.png");
+};
+
+const storeDIDDoc = (did) => (response) => {
+  S.pipe([
+    encaseP((r) => r.json()),
+    S.map(log("json")),
+    S.chain((body) =>
+      S.pipe([
+        encaseP(api.storage.session.get(did)),
+        chainRej((_err) => ({})),
+        S.map(log("stored")),
+        S.chain((stored_data) =>
+          encaseP(
+            api.storage.session.set({
+              [did]: { diddoc: body, ...stored_data },
+            }),
+          )
+        ),
+      ])(did)
+    ),
+  ])(response);
+};
+
+const updateDID = (tabId) => (url) => {
+  return S.pipe([
+    // [x] domain to DID
+    url2DID,
+    S.map(log("did")),
+    // [x] fetch doc for DID
+    S.either(reject)(resolve),
+    S.chain(({ did, base_url }) =>
+      S.pipe([
+        // FIXME: somehow the object isn't fetched properly
+        fetchPath("/.well-known/did.json"),
+        S.map(log("res")),
+        // [ ] store diddoc in session cache - {did: {doc_verifed: bool, presentation: {}, persentation_verified}}
+        S.map(resultOkOr()(storeDIDDoc(did))),
+        // [x] update action icon
+        S.map(resultOkOr(setIconSlash(tabId))(setIconCheck(tabId))),
+        S.map(log("action")),
+      ])(base_url)
+    ),
+    chainRej((err) => {
+      console.log("reject", err);
+      // console.error(err);
+      setIconSlash(tabId)();
+      return resolve("an error occurred");
+    }),
+    promise,
+  ])(url);
+};
+
+async function initialUpdate() {
+  try {
+    const [tabId, url] = await getCurrentTab();
+    return updateDID(tabId)(url);
+  } catch (err) {
+    console.log(err);
+  }
 }
 
-// async function getCurrentTab() {
-//   const queryOptions = { active: true, lastFocusedWindow: true };
-//   // `tab` will either be a `tabs.Tab` instance or `undefined`.
-//   const [tab] = await chrome.tabs.query(queryOptions);
-//   console.log("tab", tab);
-//   const url = new URL(tab.url);
-//   let did = url2DID(url);
-//   console.log("did", did);
-//   // console.log("url", url.protocol, url.hostname, url.port);
-//   return tab;
-// }
-
-chrome.tabs.onActivated.addListener(async ({ tabId, windowId }) => {
-  console.log("activated", tabId, windowId); // prints in the *background* console
-  // let tab = await getCurrentTab();
-  const tab = await chrome.tabs.get(tabId);
-  console.log("tab", tab);
-  const url = new URL(tab.url);
-  // console.log("url", url.protocol, url.hostname, url.port);
-  console.log("url", url);
-
-  // [x] domain to DID
-  // TOOD: return Some(URL) if URL present and protocoal https
-  const { did, base_url } = url2DID(url);
-  console.log("did", did);
-
-  // [x] fetch doc for DID
-  const diddoc_url = new URL(base_url);
-  diddoc_url.pathname = "/.well-known/did.json";
-  // const res = await fetch(diddoc_url, { mode: "no-cors", cache: "no-cache" });
-  const res = await fetch(diddoc_url, { mode: "no-cors" });
-  // add promise to store
-  console.log("res", diddoc_url, res);
-  // [ ] store diddoc in session cache - {did: {doc_verifed: bool, presentation: {}, persentation_verified}}
-  // [ ] delete promise from store
-  // [x] update action icon
-  if (res.ok) {
-    chrome.action.setIcon({
-      path: { "128": "icons/shield-check.svg.png" },
-      tabId,
-    });
-  } else {
-    chrome.action.setIcon({
-      path: { "128": "icons/shield-slash.svg.png" },
-      tabId,
-    });
-  }
-
-  // [x] fetch presentation
-  const presentation_url = new URL(base_url);
-  presentation_url.pathname = "/.well-known/presentation.json";
-  const res1 = await fetch(presentation_url, {
+api.tabs.onActivated.addListener(async ({ tabId, _windowId }) => {
+  const res = await fetch("https://identinet.io/.well-known/did.json", {
     mode: "no-cors",
-    cache: "no-cache",
   });
-  console.log("res1", presentation_url, res1);
-  // [ ] store VC in session cache
-  // [ ] delete promise from store
-  // [x] update action action
-  if (res1.ok) {
-    chrome.action.setIcon({
-      path: { "128": "icons/shield-plus.svg.png" },
-      tabId,
-    });
-  } else {
-    chrome.action.setIcon({
-      path: { "128": "icons/shield-xmark.svg.png" },
-      tabId,
-    });
+  console.log("resres", res);
+  try {
+    const tab = await api.tabs.get(tabId);
+    const url = new URL(tab.url);
+    return updateDID(tabId)(url);
+  } catch (err) {
+    console.log(err);
   }
+
+  // // [x] fetch presentation
+  // const presentation_url = new URL(base_url);
+  // presentation_url.pathname = "/.well-known/presentation.json";
+  // const res1 = await fetch(presentation_url, {
+  //   mode: "no-cors",
+  // });
+  // console.log("res1", presentation_url, res1);
+  // // [ ] store VC in session cache
+  // // [ ] delete promise from store
+  // // [x] update action action
+  // if (res1.ok) {
+  //   api.action.setIcon({
+  //     path: { "128": "icons/shield-plus.svg.png" },
+  //     tabId,
+  //   });
+  // } else {
+  //   api.action.setIcon({
+  //     path: { "128": "icons/shield-xmark.svg.png" },
+  //     tabId,
+  //   });
+  // }
 
   // [ ] ui: pull in current status and display something
 });
 
-chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-  console.log("updated", tabId, changeInfo, tab, tab.url, changeInfo.status); // prints in the *background* console
-  // if (changeInfo.url || changeInfo.status === "loading") {
-  //   const url = changeInfo.url || tab.pendingUrl || tab.url;
-  //   console.log(url); // prints in the *background* console
-  // }
+api.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
+  if (changeInfo.status == "loading") {
+    // console.log("updated", tabId, changeInfo, tab, tab.url, changeInfo.status); // prints in the *background* console
+    const url = new URL(tab.url);
+    return updateDID(tabId)(url);
+  }
 });
+
+initialUpdate();
