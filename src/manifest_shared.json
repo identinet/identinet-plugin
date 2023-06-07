@@ -18,6 +18,11 @@
   },
   "permissions": [
     "activeTab",
-    "tabs"
+    "tabs",
+    "storage"
+  ],
+  "host_permissions": [
+    "https://*/.well-known/did.json",
+    "https://*/.well-known/presentation.json"
   ]
 }
