@@ -6,7 +6,8 @@ websites. The extension is a [did:hack project](https://didhack.xyz/).
 
 ## Installation
 
-- [ ] TODO
+- Firefox: [https://addons.mozilla.org/en-US/developers/addon/identinet]()
+- Chrome: [TODO]()
 
 ## Usage
 

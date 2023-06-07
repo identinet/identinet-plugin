@@ -19,9 +19,8 @@ format:
     @just --fmt --unstable
 
 # Lint extension - only the firefox extension is linted at the moment
-lint:
-    @just create-manifest-firefox
-    web-ext lint
+lint: build
+    web-ext lint --source-dir=.build_firefox
 
 # Build extension
 build:
@@ -29,22 +28,22 @@ build:
     let dist_dir = dist
     rm -rf $dist_dir
     mkdir $dist_dir
-    let manifest_shared = (open manifest_shared.json)
+    let manifest_shared = (open src/manifest_shared.json)
     [firefox chrome] | each {|browser|
       let build_dir = $".build_($browser)"
       rm -rf $build_dir
       mkdir $build_dir
-      cp -r icons $build_dir
-      cp *.js $build_dir
-      cp *.html $build_dir
+      cp -r src/icons $build_dir
+      cp src/*.js $build_dir
+      cp src/*.html $build_dir
       cp LICENSE $build_dir
-      $manifest_shared | merge (open $"manifest_($browser).json") | save -f $"($build_dir)/manifest.json"
+      $manifest_shared | merge (open $"src/manifest_($browser).json") | save -f $"($build_dir)/manifest.json"
       if $browser == "firefox" {
         web-ext build --overwrite-dest -s $build_dir -a $dist_dir
         $"($dist_dir)/($manifest_shared.name)-($manifest_shared.version).zip"
       } else {
         # build chrome extension
-        $manifest_shared | merge (open manifest_chrome.json) | save -f $"($build_dir)/manifest.json"
+        $manifest_shared | merge (open src/manifest_chrome.json) | save -f $"($build_dir)/manifest.json"
         # See https://peter.sh/experiments/chromium-command-line-switches/
         chromium $"--pack-extension=($build_dir)" --pack-extension-key=./identinet-plugin.pem
         mv $"($build_dir).crx" $"($dist_dir)/($manifest_shared.name)-($manifest_shared.version).crx"
@@ -54,16 +53,6 @@ build:
       }
     }
 
-# Create extension manifest for firefox
-create-manifest-firefox:
-    #!/usr/bin/env nu
-    # only the firefox extension is linted here
-    let manifest_shared = (open manifest_shared.json)
-    $manifest_shared | merge (open manifest_firefox.json) | save -f manifest.json
-
-# Create extension manifest for chrome
-create-manifest-chrome:
-    #!/usr/bin/env nu
-    # only the firefox extension is linted here
-    let manifest_shared = (open manifest_shared.json)
-    $manifest_shared | merge (open manifest_chrome.json) | save -f manifest.json
+# Watch changes and rebuild appliaction
+watch:
+    watch src  {|| just build}
