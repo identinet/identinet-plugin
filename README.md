@@ -25,6 +25,15 @@ displayed with the following icons:
 - ![](./icons/shield-xmark.svg) DID document incorrect or verification of
   credentials of failed.
 
+Examples:
+
+- Visit [google.com](https://www.google.com/) for a website without a DID
+  document
+- TODO: add page that only offers a DID document
+- Visit [identinet.io](https://identinet.io/) for a website a DID and a
+  verifiable presentation
+- TODO: add page that offers a broken DID document / presentation
+
 ## How it Works
 
 The extension ..
