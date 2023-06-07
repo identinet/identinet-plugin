@@ -29,12 +29,12 @@ build:
     rm -rf $dist_dir
     mkdir $dist_dir
     let manifest_shared = (open src/manifest_shared.json)
-    [firefox chrome] | each {|browser|
+    [firefox chrome] | par-each {|browser|
       let build_dir = $".build_($browser)"
       rm -rf $build_dir
       mkdir $build_dir
       cp -r src/icons $build_dir
-      cp src/*.js $build_dir
+      ls src/*.js | par-each {|it| yarn run rollup -i $it.name --file $"($build_dir)/($it.name | path basename)" --format esm  -p @rollup/plugin-commonjs -p @rollup/plugin-node-resolve -p rollup-plugin-polyfill-node}
       cp src/*.html $build_dir
       cp LICENSE $build_dir
       $manifest_shared | merge (open $"src/manifest_($browser).json") | save -f $"($build_dir)/manifest.json"
