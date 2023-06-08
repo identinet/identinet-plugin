@@ -102,6 +102,7 @@ accessible to everyone.
 - ✅ Functional plugin.
 - ✅ Firefox Extension is published.
 - 💤 Chrome Extension under review.
+- ☐ Plugin fetches data too often.
 - ☐ Plugin lacks a good UI.
 - ☐ Verification of Credentials not yet implemented.
 
