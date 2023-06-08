@@ -2,6 +2,14 @@ import { log, S } from "./lib/sanctuary/mod.js";
 import { api, getCurrentTab, url2DID } from "./lib/identinet/mod.js";
 import { chainRej, encaseP, promise, reject, resolve } from "fluture";
 
+/**
+ * fetchPath is a wrapper for fetch that simplifies retrieving DID and VC data
+ * with no-cors enabled.
+ *
+ * @param {string} pathname - Path that will be fetched.
+ * @param {URL} url - URL object that will be passed to fetch.
+ * @returns {Future<Response,Error>} that resolves the fetch Promise.
+ */
 const fetchPath = (pathname) => (url) => {
   const url_copy = new URL(url);
   url_copy.pathname = pathname;
@@ -10,31 +18,12 @@ const fetchPath = (pathname) => (url) => {
 };
 
 /**
- * fromResult triggers side effects based on a the results of a Response
- * object. Be careful when reading from the Response since this can only be done
- * once and the Response is returned from this function, so other functions
- * might try to read from it again and fail!
+ * setIcon sets the extension's action item for the specified tab.
  *
- * @param {Function} notOkFn - Called with the resonse object in case the result is not ok.
- * @param {Function} okFn - Called with the resonse object in case the result is ok.
- * @returns {Response} returns the passed in response object.
+ * @param {number} tabId - Tab number.
+ * @param {string} path - Path to the icon that will be set.
+ * @returns {number} Tab number.
  */
-const resultOkOr = (notOkFn) => (okFn) => (response) => {
-  console.log("response", response);
-  if (response.ok) {
-    if (typeof okFn === "function") {
-      console.log("run okFn");
-      okFn(response);
-    }
-    return response;
-  }
-  if (typeof notOkFn === "function") {
-    console.log("run notOkFn");
-    notOkFn(response);
-  }
-  return response;
-};
-
 const setIcon = (tabId) => (path) => {
   api.action.setIcon({
     path: path,
@@ -43,30 +32,45 @@ const setIcon = (tabId) => (path) => {
   return tabId;
 };
 
-const setIconSlash = (tabId) => () => {
+const setIconSlash = (tabId) => {
   setIcon(tabId)("icons/shield-slash.svg.png");
 };
 
-const setIconCheck = (tabId) => () => {
+const setIconCheck = (tabId) => {
   setIcon(tabId)("icons/shield-check.svg.png");
 };
 
+/**
+ * storeDIDDoc stores the DID document from a response object in the local
+ * store. It ensures that passed in DID matches the one in the document
+ * or returns an error.
+ *
+ * @param {string} did - The DID that the document shall be stored for.
+ * @param {Resoponse} resoponse - A response object that will yield the DID document.
+ * @returns {Future<string,Error>} returns the DID that the document has been
+ * stored at.
+ */
 const storeDIDDoc = (did) => (response) => {
-  S.pipe([
+  return S.pipe([
     encaseP((r) => r.json()),
-    S.map(log("json")),
+    // S.map(log("diddoc")),
+    S.chain((diddoc) =>
+      diddoc?.id === did
+        ? resolve(diddoc)
+        : reject("DID document doesn't match expected DID")
+    ),
     S.chain((body) =>
       S.pipe([
-        encaseP(api.storage.session.get(did)),
-        chainRej((_err) => ({})),
+        encaseP((did) => api.storage.local.get(did)),
+        // S.map(log("get store")),
+        chainRej((_err) => ({})), // in case no data is in the store, return an empty dataset
+        S.chain(encaseP((stored_data) =>
+          api.storage.local.set({
+            [did]: { diddoc: body, ...stored_data[did] },
+          })
+        )),
+        S.map(() => did),
         S.map(log("stored")),
-        S.chain((stored_data) =>
-          encaseP(
-            api.storage.session.set({
-              [did]: { diddoc: body, ...stored_data },
-            }),
-          )
-        ),
       ])(did)
     ),
   ])(response);
@@ -74,27 +78,34 @@ const storeDIDDoc = (did) => (response) => {
 
 const updateDID = (tabId) => (url) => {
   return S.pipe([
-    // [x] domain to DID
+    // domain to DID
     url2DID,
     S.map(log("did")),
-    // [x] fetch doc for DID
+    // fetch doc for DID
     S.either(reject)(resolve),
     S.chain(({ did, base_url }) =>
       S.pipe([
-        // FIXME: somehow the object isn't fetched properly
         fetchPath("/.well-known/did.json"),
-        S.map(log("res")),
-        // [ ] store diddoc in session cache - {did: {doc_verifed: bool, presentation: {}, persentation_verified}}
-        S.map(resultOkOr()(storeDIDDoc(did))),
-        // [x] update action icon
-        S.map(resultOkOr(setIconSlash(tabId))(setIconCheck(tabId))),
-        S.map(log("action")),
+        S.chain(
+          S.ifElse((res) => res.ok)(
+            (res) => {
+              setIconSlash(tabId);
+              return resolve(res);
+            },
+          )(() => reject(new Error("fetching DID document failed"))),
+        ),
+        // store diddoc in local cache - {did: {doc_verifed: bool, presentation: {}, persentation_verified}}
+        S.chain(storeDIDDoc(did)),
+        // update action icon
+        S.map((res) => {
+          setIconCheck(tabId);
+          return res;
+        }),
       ])(base_url)
     ),
     chainRej((err) => {
       console.log("reject", err);
-      // console.error(err);
-      setIconSlash(tabId)();
+      setIconSlash(tabId);
       return resolve("an error occurred");
     }),
     promise,
@@ -114,7 +125,6 @@ api.tabs.onActivated.addListener(async ({ tabId, _windowId }) => {
   const res = await fetch("https://identinet.io/.well-known/did.json", {
     mode: "no-cors",
   });
-  console.log("resres", res);
   try {
     const tab = await api.tabs.get(tabId);
     const url = new URL(tab.url);
@@ -130,7 +140,7 @@ api.tabs.onActivated.addListener(async ({ tabId, _windowId }) => {
   //   mode: "no-cors",
   // });
   // console.log("res1", presentation_url, res1);
-  // // [ ] store VC in session cache
+  // // [ ] store VC in local cache
   // // [ ] delete promise from store
   // // [x] update action action
   // if (res1.ok) {
