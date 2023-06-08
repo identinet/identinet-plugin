@@ -6,13 +6,19 @@ websites. The extension is a [did:hack project](https://didhack.xyz/).
 
 ## Presentation
 
-<a href="https://slidesdown.github.io/?slides=github.com/identinet/identinet-plugin">Slideshow
-</a>
-
-<embed type="text/html"
-       src="https://slidesdown.github.io/?slides=github.com/identinet/identinet-plugin"
-       width="250"
-       height="200">
+<div style="display: flex; gap: 1em;">
+  <div style="display: flex; flex-direction: column;">
+    <a href="https://slidesdown.github.io/?slides=github.com/identinet/identinet-plugin">Slideshow</a>
+  <embed type="text/html"
+           src="https://slidesdown.github.io/?slides=github.com/identinet/identinet-plugin"
+           width="250"
+           height="200">
+  </div>
+  <div style="display: flex; flex-direction: column;">
+    <a href="https://youtu.be/pXtc385wGfA">did:hack presentation</a>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/pXtc385wGfA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  </div>
+</div>
 
 ## Installation
 
