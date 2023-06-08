@@ -7,7 +7,7 @@ websites. The extension is a [did:hack project](https://didhack.xyz/).
 ## Installation
 
 - Firefox: [https://addons.mozilla.org/en-US/developers/addon/identinet]()
-- Chrome: [TODO]()
+- Chrome: [review pending]()
 
 ## Usage
 
@@ -17,22 +17,26 @@ extension to the browser bar so that it is permanently visible.
 The availability of a DID document and additional credentials for the website is
 displayed with the following icons:
 
-- ![](./icons/shield-slash.svg) No DID document is available.
-- ![](./icons/shield-check.svg) DID document is available, no credentials are
-  available.
-- ![](./icons/shield-plus.svg) DID and credentials are available, the
-  credentials have been successfully verified.
-- ![](./icons/shield-xmark.svg) DID document incorrect or verification of
-  credentials of failed.
+- <img style="height: 1em" alt="No DID document available" src="./src/icons/shield-slash.svg" />
+  No DID document is available.
+- <img style="height: 1em" alt="DID document available" src="./src/icons/shield-check.svg" />
+  DID document is available, no credentials are available.
+- <img style="height: 1em" alt="DID document and credentials available" src="./src/icons/shield-plus.svg" />
+  DID and credentials are available, the credentials have been successfully
+  verified.
+- <img style="height: 1em" alt="DID document and credentials available but broken" src="./src/icons/shield-xmark.svg" />
+  DID document incorrect or verification of credentials of failed.
 
 Examples:
 
-- Visit [google.com](https://www.google.com/) for a website without a DID
-  document
-- TODO: add page that only offers a DID document
-- Visit [identinet.io](https://identinet.io/) for a website a DID and a
-  verifiable presentation
-- TODO: add page that offers a broken DID document / presentation
+- <img style="height: 1em" alt="No DID document available" src="./src/icons/shield-slash.svg" />
+  <a href="https://no-id-example.identinet.io/">https://no-id-example.identinet.io/</a>
+- <img style="height: 1em" alt="DID document available" src="./src/icons/shield-check.svg" />
+  <a href="https://id-example.identinet.io/">https://id-example.identinet.io/</a>
+- <img style="height: 1em" alt="DID document and credentials available" src="./src/icons/shield-plus.svg" />
+  <a href="https://id-plus-example.identinet.io/">https://id-plus-example.identinet.io/</a>
+- <img style="height: 1em" alt="DID document and credentials available but broken" src="./src/icons/shield-xmark.svg" />
+  <a href="https://broken-example.identinet.io/">https://broken-example.identinet.io/</a>
 
 ## How it Works
 
@@ -46,6 +50,75 @@ The extension ..
    that might contain multiple credentials. It's expected that DID
    `did:web:<domainname>` issued the presentation and that it's publicly
    available at `https://<domainname>/.well-known/presentation.json`.
+
+## Create DID and Credentials for Domain
+
+Requirements:
+
+- [didkit CLI](https://www.spruceid.dev/didkit/didkit)
+- Website that's hosted at a custom domain name, e.g. example.com
+- `jq` or `yq`
+
+Create did:web DID and issue sample credential:
+
+1. Generate a key: `didkit key generate ed25519 > key.jwk`
+2. Generate a DID `did:web:<domainname>`:
+
+```bash
+DOMAINNAME="<your domainname>"
+DID_WEB="did:web:${DOMAINNAME}"
+DID_KEY=$(didkit key-to-did -k key.jwk)
+DID_DOC=$(didkit did-resolve "${DID_KEY}" | sed -e "s/${DID_KEY}/${DID_WEB}/g")
+
+echo "${DID_DOC}" > did.json
+```
+
+3. Store and publish `did.json` in the web server's root directory at path
+   `/.well-known/did.json`
+4. Verify that the DID is publicly resolveable:
+   `didkit did-resolve "${DID_WEB}"`
+5. Issue sample credential:
+
+```bash
+cat > credential.json <<EOF
+{
+  "@context": "https://www.w3.org/2018/credentials/v1",
+  "type": ["VerifiableCredential"],
+  "issuer": "${DID_WEB}",
+  "issuanceDate": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")",
+  "credentialSubject": {
+    "id": "${DID_WEB}"
+  }
+}
+EOF
+
+VERIFICATION_METHOD=$(jq -r '.assertionMethod[0]' < did.json)
+didkit vc-issue-credential -k key.jwk -v "${VERIFICATION_METHOD}" < credential.json > credential_signed.json
+```
+
+6. Verify credential: `didkit vc-verify-credential < credential_signed.json`
+7. Issue presentation:
+
+```bash
+cat > presentation.json <<EOF
+{
+  "@context": ["https://www.w3.org/2018/credentials/v1"],
+  "type": ["VerifiablePresentation"],
+  "holder": "${DID_WEB}",
+  "verifiableCredential": [
+$(cat credential_signed.json)
+  ]
+}
+EOF
+
+VERIFICATION_METHOD=$(jq -r '.assertionMethod[0]' < did.json)
+didkit vc-issue-presentation -k key.jwk -v "${VERIFICATION_METHOD}" < presentation.json > presentation_signed.json
+```
+
+8. Verify presentation:
+   `didkit vc-verify-presentation < presentation_signed.json`
+9. Store and publish `presentation_signed.json` in the web server's root
+   directory at path `/.well-known/presentation.json`
 
 ## Development
 
