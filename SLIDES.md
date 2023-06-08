@@ -38,48 +38,49 @@ style="padding: 0; margin: 0; position: relative; top: 0.18em" />
 
 ## Motivation
 
-How to get DIDs and VCs into the hands and lives of people?
+Making Decentralized Identifiers (DIDs) and Verifiable Credentials (VCs)
+accessible to everyone.
 
 ### Approach
 
-- Set the bar for using DIDs and VCs low so that it's easy to derive value
+- Simplify the usage of DIDs and VCs for widespread adoption.
   <!-- .element: class="fragment" -->
-- Integrate DIDs and VCs into a tool that we use every day
+- Integrate DIDs and VCs into an everyday tool.
   <!-- .element: class="fragment" -->
 
 ## Project
 
-- Integrate DIDs and VCs via a browser extension
+- Browser extension integrating DIDs and VCs.
   <!-- .element: class="fragment" -->
-- Enable website owners to publish a DID document and a Verifiable Presentation
+- Enable website owners to publish DID documents and Verifiable Credentials.
   <!-- .element: class="fragment" -->
-- Verify and display DID and VC data to visitors
+- Verifies and displays DID and VC data to visitors.
   <!-- .element: class="fragment" -->
 
 ### How it Works
 
 <ol>
-<li class="fragment"><i class="fa-duotone fa-user" style="color: #039BE5"></i> visits website
-   <i class="fa-duotone fa-browser" style="color: #039BE5"></i>
-</li>
-<li class="fragment"><i class="fa-duotone fa-puzzle-piece-simple" style="color: #039BE5"></i>
-   retrieves did:web DID document
-   <i class="fa-duotone fa-fingerprint" style="color: #039BE5"></i>
-</li>
-<li class="fragment"><i class="fa-duotone fa-puzzle-piece-simple" style="color: #039BE5"></i>
-   retrieves Verifiable Presentation
-   <i class="fa-duotone fa-address-card" style="color: #039BE5"></i>
-</li>
-<li class="fragment"><i class="fa-duotone fa-puzzle-piece-simple" style="color: #039BE5"></i>
-   verifies data and displays status
-   <i class="fa-duotone fa-shield-slash" style="color: #039BE5"></i>
-   <i class="fa-duotone fa-shield-check" style="color: #039BE5"></i>
-   <i class="fa-duotone fa-shield-plus" style="color: #039BE5"></i>
-   <i class="fa-duotone fa-shield-xmark" style="color: #039BE5"></i>
-</li>
-<li class="fragment"><i class="fa-duotone fa-user" style="color: #039BE5"></i> reviews details
-   <i class="fa-duotone fa-puzzle-piece-simple" style="color: #039BE5"></i>
-</li>
+  <li class="fragment">Visitor <i class="fa-duotone fa-user" style="color: #039BE5"></i> enters a website
+     <i class="fa-duotone fa-browser" style="color: #039BE5"></i>
+  </li>
+  <li class="fragment">Plugin <i class="fa-duotone fa-puzzle-piece-simple" style="color: #039BE5"></i>
+     retrieves the DID document
+     <i class="fa-duotone fa-fingerprint" style="color: #039BE5"></i>
+  </li>
+  <li class="fragment">Plugin <i class="fa-duotone fa-puzzle-piece-simple" style="color: #039BE5"></i>
+     retrieves the Verifiable Presentation
+     <i class="fa-duotone fa-address-card" style="color: #039BE5"></i>
+  </li>
+  <li class="fragment">Plugin <i class="fa-duotone fa-puzzle-piece-simple" style="color: #039BE5"></i>
+     verifies the data and displays the status
+     <i class="fa-duotone fa-shield-slash" style="color: #039BE5"></i>
+     <i class="fa-duotone fa-shield-check" style="color: #039BE5"></i>
+     <i class="fa-duotone fa-shield-plus" style="color: #039BE5"></i>
+     <i class="fa-duotone fa-shield-xmark" style="color: #039BE5"></i>
+  </li>
+  <li class="fragment">Visitor <i class="fa-duotone fa-user" style="color: #039BE5"></i> reviews the details
+     <i class="fa-duotone fa-puzzle-piece-simple" style="color: #039BE5"></i>
+  </li>
 </ol>
 
 |||
@@ -96,28 +97,27 @@ How to get DIDs and VCs into the hands and lives of people?
 
 ## Status
 
-- ✅ Plugin is functional
-- ✅ Firefox Extension is published
-- 💤 Chrome Extension is being reviewed
-- ☐ Plugin lacks a good UI
-- ☐ Verification of Credentials not yet implemented
+- ✅ Source code available at
+  [github.com/identinet/identinet-plugin](https://github.com/identinet/identinet-plugin).
+- ✅ Functional plugin.
+- ✅ Firefox Extension is published.
+- 💤 Chrome Extension under review.
+- ☐ Plugin lacks a good UI.
+- ☐ Verification of Credentials not yet implemented.
 
 ## Next Steps
 
-- Improve UI
-- Explore potential use cases
-- Create a web service that offers the same functionality as the browser
-  extension but doesn't require the extension
+- Improve the user interface.
+- Explore potential use cases.
+- Develop a web service with the same functionality as the browser extension,
+  making the extension optional.
 
-## Potential Use Cases
+### Potential Use Cases
 
-- Publish business information online, e.g. VAT or bank account number
-- Enhance logos and claims on websites with verifiable information, e.g.
-  customer testimonials or business partnerships
-
-## Project Information
-
-- Repository: https://github.com/identinet/identinet-plugin
+- Online publication of business information (e.g., VAT or bank account
+  numbers).
+- Enhancing website logos and claims with verifiable information (e.g., customer
+  testimonials or business partnerships).
 
 ## Contact Information
 
