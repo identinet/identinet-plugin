@@ -52,6 +52,7 @@ build:
         $"($dist_dir)/($manifest_shared.name)-($manifest_shared.version)_($browser).zip"
       }
     }
+    git archive HEAD -o $"dist/($manifest_shared.name)-($manifest_shared.version)_source.tar.gz"
 
 # Watch changes and rebuild appliaction
 watch:
