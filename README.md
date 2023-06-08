@@ -4,6 +4,16 @@
 extension that displays and verifies decentralized identity information of
 websites. The extension is a [did:hack project](https://didhack.xyz/).
 
+## Presentation
+
+<a href="https://slidesdown.github.io/?slides=github.com/slidesdown/slidesdown">Slideshow
+</a>
+
+<embed type="text/html"
+       src="https://slidesdown.github.io/?slides=github.com/slidesdown/slidesdown"
+       width="250"
+       height="200">
+
 ## Installation
 
 - Firefox:
