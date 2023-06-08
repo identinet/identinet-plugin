@@ -1,5 +1,9 @@
 import { log, S } from "../sanctuary/mod.js";
 
+/**
+ * api offers access to the browser's extension interface regardless of whether
+ * Chrome or Firefox is used.
+ */
 export let api;
 if (typeof chrome) {
   api = chrome;
