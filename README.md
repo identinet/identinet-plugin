@@ -6,11 +6,11 @@ websites. The extension is a [did:hack project](https://didhack.xyz/).
 
 ## Presentation
 
-<a href="https://slidesdown.github.io/?slides=github.com/slidesdown/slidesdown">Slideshow
+<a href="https://slidesdown.github.io/?slides=github.com/identinet/identinet-plugin">Slideshow
 </a>
 
 <embed type="text/html"
-       src="https://slidesdown.github.io/?slides=github.com/slidesdown/slidesdown"
+       src="https://slidesdown.github.io/?slides=github.com/identinet/identinet-plugin"
        width="250"
        height="200">
 
