@@ -58,7 +58,7 @@ Requirements:
 
 - [didkit CLI](https://www.spruceid.dev/didkit/didkit)
 - Website that's hosted at a custom domain name, e.g. example.com
-- `jq` or `yq`
+- `jq`
 
 Create did:web DID and issue sample credential:
 
@@ -69,9 +69,7 @@ Create did:web DID and issue sample credential:
 DOMAINNAME="<your domainname>"
 DID_WEB="did:web:${DOMAINNAME}"
 DID_KEY=$(didkit key-to-did -k key.jwk)
-DID_DOC=$(didkit did-resolve "${DID_KEY}" | sed -e "s/${DID_KEY}/${DID_WEB}/g")
-
-echo "${DID_DOC}" > did.json
+didkit did-resolve "${DID_KEY}" | sed -e "s/${DID_KEY}/${DID_WEB}/g" > did.json
 ```
 
 3. Store and publish `did.json` in the web server's root directory at path
