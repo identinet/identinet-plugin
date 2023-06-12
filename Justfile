@@ -40,17 +40,17 @@ build:
       $manifest_shared | merge (open $"src/manifest_($browser).json") | save -f $"($build_dir)/manifest.json"
       if $browser == "firefox" {
         web-ext build --overwrite-dest -s $build_dir -a $dist_dir
-        $"($dist_dir)/($manifest_shared.name)-($manifest_shared.version).zip"
+        mv $"($dist_dir)/($manifest_shared.name)-($manifest_shared.version).zip" $"($dist_dir)/($manifest_shared.name)-($manifest_shared.version)_($browser).zip"
       } else {
         # build chrome extension
         $manifest_shared | merge (open src/manifest_chrome.json) | save -f $"($build_dir)/manifest.json"
         # See https://peter.sh/experiments/chromium-command-line-switches/
         chromium $"--pack-extension=($build_dir)" --pack-extension-key=./identinet-plugin.pem
-        mv $"($build_dir).crx" $"($dist_dir)/($manifest_shared.name)-($manifest_shared.version).crx"
+        mv $"($build_dir).crx" $"($dist_dir)/($manifest_shared.name)-($manifest_shared.version)_($browser).crx"
         cd $build_dir
-        ^zip -q -0 $"../($dist_dir)/($manifest_shared.name)-($manifest_shared.version)_chrome.zip" *
-        $"($dist_dir)/($manifest_shared.name)-($manifest_shared.version)_($browser).zip"
+        ^zip -q -r -0 $"../($dist_dir)/($manifest_shared.name)-($manifest_shared.version)_chrome.zip" *
       }
+      $"($dist_dir)/($manifest_shared.name)-($manifest_shared.version)_($browser).zip"
     }
     git archive HEAD -o $"dist/($manifest_shared.name)-($manifest_shared.version)_source.tar.gz"
 
