@@ -16,7 +16,12 @@ import * as S from "sanctuary";
  * ```
  */
 export const log = (msg) => (value) => {
-  console.log(`${msg}: ${S.show(value)}`);
+  if (["Array", "Object"].includes(S.type(value).name)) {
+    // logging the value directly allows the browser to make it inspectable
+    console.log(`${msg}:`, value);
+  } else {
+    console.log(`${msg}:`, S.show(value));
+  }
   return value;
 };
 
