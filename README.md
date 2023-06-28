@@ -94,7 +94,7 @@ didkit did-resolve "${DID_KEY}" | sed -e "s/${DID_KEY}/${DID_WEB}/g" > did.json
 ```bash
 cat > credential.json <<EOF
 {
-  "@context": "https://www.w3.org/2018/credentials/v1",
+  "@context": ["https://www.w3.org/2018/credentials/v1"],
   "type": ["VerifiableCredential"],
   "issuer": "${DID_WEB}",
   "issuanceDate": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")",
@@ -105,7 +105,8 @@ cat > credential.json <<EOF
 EOF
 
 VERIFICATION_METHOD=$(jq -r '.assertionMethod[0]' < did.json)
-didkit vc-issue-credential -k key.jwk -v "${VERIFICATION_METHOD}" < credential.json > credential_signed.json
+didkit vc-issue-credential -k key.jwk -p assertionMethod -v "${VERIFICATION_METHOD}" < credential.json > credential_signed.json
+didkit vc-verify-credential < credential_signed.json
 ```
 
 6. Verify credential: `didkit vc-verify-credential < credential_signed.json`
@@ -124,7 +125,8 @@ $(cat credential_signed.json)
 EOF
 
 VERIFICATION_METHOD=$(jq -r '.assertionMethod[0]' < did.json)
-didkit vc-issue-presentation -k key.jwk -v "${VERIFICATION_METHOD}" < presentation.json > presentation_signed.json
+didkit vc-issue-presentation -k key.jwk -p assertionMethod -d "${DOMAINNAME}" -v "${VERIFICATION_METHOD}" < presentation.json > presentation_signed.json
+didkit vc-verify-presentation < presentation_signed.json
 ```
 
 8. Verify presentation:

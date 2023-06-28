@@ -130,8 +130,9 @@ dist
 .pnp.*
 
 # Web Extension
-/.build_*/
+/.build*/
 /dist/
 *.pem
 *.crx
 /manifest.json
+/demo/
