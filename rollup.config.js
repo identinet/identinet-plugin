@@ -1,9 +1,14 @@
+// Documentation: https://rollupjs.org/configuration-options/
+
 // import eslint from "@rollup/plugin-eslint";
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import nodePolyfills from "rollup-plugin-polyfill-node";
+// import json from "@rollup/plugin-json";
 
-export default [{
+const isProduction = process.env.NODE_ENV == "production";
+
+const template = {
   input: "src/background.js",
   // dest: ".build_chrome/background.js",
   // input: {
@@ -15,13 +20,14 @@ export default [{
   // },
   output: {
     file: ".build/background.js",
-    // sourcemap: "inline",
+    sourcemap: isProduction ? false : "inline",
     inlineDynamicImports: true,
     format: "iife",
   },
   plugins: [
     commonjs(),
     nodePolyfills(),
+    // json(),
     resolve(
       {
         jsnext: true,
@@ -32,25 +38,15 @@ export default [{
     ),
     // eslint(),
   ],
-}, {
-  input: "src/popup.js",
-  output: {
-    file: ".build/popup.js",
-    // sourcemap: "inline",
-    inlineDynamicImports: true,
-    format: "iife",
-  },
-  plugins: [
-    commonjs(),
-    nodePolyfills(),
-    resolve(
-      {
-        jsnext: true,
-        // main: true,
-        browser: true,
-        // preferBuiltins: false,
-      },
-    ),
-    // eslint(),
-  ],
-}];
+};
+
+console.log(["background.js", "popup.js"].map((file) => ({
+  ...template,
+  input: `src/${file}`,
+  output: { ...(template["output"]), file: `.build/${file}` },
+})));
+export default ["background.js", "popup.js"].map((file) => ({
+  ...template,
+  input: `src/${file}`,
+  output: { ...(template["output"]), file: `.build/${file}` },
+}));

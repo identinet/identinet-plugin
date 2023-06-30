@@ -1,4 +1,5 @@
-import { log, S } from "../sanctuary/mod.js";
+import { S } from "../sanctuary/mod.js";
+export { convertJWKtoMultibase } from "./conversion.js";
 
 /**
  * api offers access to the browser's extension interface regardless of whether
@@ -12,10 +13,11 @@ if (typeof chrome) {
 }
 
 /**
- * url2DID derives from a DID plus base URL from a URL object.
+ * url2DID takes a URL and derives the did:web DID and a new URL object that can
+ * be used for interacting with the DID.
  *
- * @param {URL} url - A URL object.
- * @returns {Either<Object>} - {did: string, base_url: URL}
+ * @param {URL} url - An URL object that's used to derive the did:web DID.
+ * @returns {Either<Pair<String,URL>>} - returns the DID and a new URL object.
  */
 export function url2DID(url) {
   if (url.protocol != "https:") {
@@ -24,12 +26,9 @@ export function url2DID(url) {
   const protocol = "https";
   const port = url.port ? url.port : 443;
   const base_url = new URL(`${protocol}://${url.hostname}:${port}`);
-  let domainname = base_url.hostname;
-  if (port != 443) {
-    domainname = encodeURIComponent(`${domainname}:${port}`);
-  }
+  const domainname = encodeURIComponent(base_url.host); // port is included if it isn't the default port for the protocol
   const did = `did:web:${domainname}`;
-  return S.Right({ did, base_url });
+  return S.Right(S.Pair(did)(base_url));
 }
 
 export async function getCurrentTab() {

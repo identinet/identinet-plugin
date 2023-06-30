@@ -81,8 +81,36 @@ Create did:web DID and issue sample credential:
 ```bash
 DOMAINNAME="<your domainname>"
 DID_WEB="did:web:${DOMAINNAME}"
-DID_KEY=$(didkit key-to-did -k key.jwk)
-didkit did-resolve "${DID_KEY}" | sed -e "s/${DID_KEY}/${DID_WEB}/g" > did.json
+KEY_ID=$(didkit key to did -k key.jwk | sed -ne 's/^did:key://p')
+cat <<EOF | yq > did.json
+{
+  "@context": [
+    "https://www.w3.org/ns/did/v1",
+    "https://w3id.org/security/suites/ed25519-2020/v1",
+    {
+      "publicKeyJwk": {
+        "@id": "https://w3id.org/security#publicKeyJwk",
+        "@type": "@json"
+      }
+    }
+  ],
+  "id": "${DID_WEB}",
+  "verificationMethod": [
+    {
+      "id": "${DID_WEB}#${KEY_ID}",
+      "type": "Ed25519VerificationKey2020",
+      "controller": "${DID_WEB}",
+      "publicKeyJwk": $(yq e 'del(.d)' key.jwk)
+    }
+  ],
+  "authentication": [
+    "${DID_WEB}#${KEY_ID}"
+  ],
+  "assertionMethod": [
+    "${DID_WEB}#${KEY_ID}"
+  ]
+}
+EOF
 ```
 
 3. Store and publish `did.json` in the web server's root directory at path
@@ -94,7 +122,7 @@ didkit did-resolve "${DID_KEY}" | sed -e "s/${DID_KEY}/${DID_WEB}/g" > did.json
 ```bash
 cat > credential.json <<EOF
 {
-  "@context": ["https://www.w3.org/2018/credentials/v1"],
+  "@context": ["https://www.w3.org/2018/credentials/v1", "https://w3id.org/security/suites/ed25519-2020/v1"],
   "type": ["VerifiableCredential"],
   "issuer": "${DID_WEB}",
   "issuanceDate": "$(date -u +"%Y-%m-%dT%H:%M:%SZ")",
@@ -105,8 +133,8 @@ cat > credential.json <<EOF
 EOF
 
 VERIFICATION_METHOD=$(jq -r '.assertionMethod[0]' < did.json)
-didkit vc-issue-credential -k key.jwk -p assertionMethod -v "${VERIFICATION_METHOD}" < credential.json > credential_signed.json
-didkit vc-verify-credential < credential_signed.json
+didkit credential issue -t Ed25519Signature2020 -k key.jwk -p assertionMethod -v "${VERIFICATION_METHOD}" < credential.json > credential_signed.json
+didkit credential verify < credential_signed.json
 ```
 
 6. Verify credential: `didkit vc-verify-credential < credential_signed.json`
@@ -115,7 +143,7 @@ didkit vc-verify-credential < credential_signed.json
 ```bash
 cat > presentation.json <<EOF
 {
-  "@context": ["https://www.w3.org/2018/credentials/v1"],
+  "@context": ["https://www.w3.org/2018/credentials/v1", "https://w3id.org/security/suites/ed25519-2020/v1"],
   "type": ["VerifiablePresentation"],
   "holder": "${DID_WEB}",
   "verifiableCredential": [
@@ -125,8 +153,8 @@ $(cat credential_signed.json)
 EOF
 
 VERIFICATION_METHOD=$(jq -r '.assertionMethod[0]' < did.json)
-didkit vc-issue-presentation -k key.jwk -p assertionMethod -d "${DOMAINNAME}" -v "${VERIFICATION_METHOD}" < presentation.json > presentation_signed.json
-didkit vc-verify-presentation < presentation_signed.json
+didkit presentation issue -t Ed25519Signature2020 -k key.jwk -p assertionMethod -d "${DOMAINNAME}" -v "${VERIFICATION_METHOD}" < presentation.json > presentation_signed.json
+didkit presentation verify < presentation_signed.json
 ```
 
 8. Verify presentation:
