@@ -1,5 +1,6 @@
 import { S } from "../sanctuary/mod.js";
 export { convertJWKtoMultibase } from "./conversion.js";
+export { verifyPresentation } from "./presentation.js";
 
 /**
  * api offers access to the browser's extension interface regardless of whether

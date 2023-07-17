@@ -1,21 +1,7 @@
+import { verifyPresentation } from "./lib/identinet/mod.js";
 import { $, log, S } from "./lib/sanctuary/mod.js";
-import {
-  api,
-  convertJWKtoMultibase,
-  getCurrentTab,
-  url2DID,
-} from "./lib/identinet/mod.js";
+import { api, getCurrentTab, url2DID } from "./lib/identinet/mod.js";
 import { bichain, chainRej, encaseP, promise, reject, resolve } from "fluture";
-import { defaultDocumentLoader, verify } from "@digitalbazaar/vc";
-import jsigs from "jsonld-signatures";
-import {
-  Ed25519Signature2020,
-  suiteContext as suiteContext2020,
-} from "@digitalbazaar/ed25519-signature-2020";
-import {
-  Ed25519Signature2018,
-  suiteContext as suiteContext2018,
-} from "@digitalbazaar/ed25519-signature-2018";
 
 class DIDNotFoundError extends Error {
 }
@@ -93,9 +79,37 @@ const storeDIDDoc = (did_pair) => {
 };
 
 /**
+ * storePresentation stores the Veriable Presentation from a response object in
+ * the local store.
+ *
+ * @param {string} did - The DID that the presentation shall be stored for.
+ * @param {Pair<object,object>} presentation_and_result - The presentation with
+ * a result object that shall be stored.
+ * @returns {Future<string,Error>} returns the DID that the presentation has
+ * been stored at.
+ */
+const storePresentation = (did) => (presentation_and_result) => {
+  return S.pipe([
+    encaseP((did) => api.storage.local.get(did)),
+    // S.map(log("get store")),
+    chainRej((_err) => ({})), // in case no data is in the store, fall back on an empty dataset
+    S.chain(encaseP((stored_data) =>
+      api.storage.local.set({
+        [did]: {
+          presentation: S.fst(presentation_and_result),
+          verification_result: S.snd(presentation_and_result),
+          ...stored_data[did],
+        },
+      })
+    )),
+    S.map(() => did),
+  ])(did);
+};
+
+/**
  * getDIDDocForURL retrieves the DID Document for a given URL.
  *
- * @param {URL} url - The URL that shall be spected for a DID Document.
+ * @param {URL} url - The URL that shall be inspected for a DID Document.
  * @returns {Future<Pair<URL,Pair<did,diddoc>>,Error>} - If successful, the url
  * with did and diddoc will be returned.
  */
@@ -109,7 +123,7 @@ const getDIDDocForURL =
     S.chain(
       (did_pair) =>
         S.pipe([
-          // TODO: optimize over fetching
+          // TODO: optimize overfetching
           fetchPath("/.well-known/did.json"),
           S.chain(
             S.ifElse((response) => response.ok)(resolve)(() =>
@@ -127,119 +141,26 @@ const getDIDDocForURL =
 /**
  * getPresentationForURL retrieves the presentation for a given URL.
  *
- * @param {Pair<URL,Pair<string,object>>} pair - Pair that consists of the URL
- * and the DID and DID document.
- * @returns {}
+ * @param {URL} url - The URL that shall be inspected for a Presentation.
+ * @returns {Future<object,Error>} - Returns the JSON endoced the presentation object.
  */
-const verifyPresentation = (did_pair) => (presentation) => {
-  // TODO: add support for ECDSA
-  // TODO: add support for JWS - no implementation available yet, see https://github.com/w3c/vc-jws-2020
-  const suite = [
-    new Ed25519Signature2018(),
-    new Ed25519Signature2020(),
-  ];
-  // customer loader that supports DID and verification method
-  const url = S.fst(did_pair);
-  const diddoc = S.snd(S.snd(did_pair));
-  const did = diddoc?.id;
-  const verificationMethods = S.pipe([
-    S.get(S.is($.Array($.NonEmpty($.String))))("assertionMethod"),
-    S.map(S.map((id) =>
-      S.pipe([
-        S.get(S.is($.Array($.StrMap($.Unknown))))("verificationMethod"),
-        S.fromMaybe([]),
-        S.filter((vm) => vm.id === id),
-        S.head,
-      ])(diddoc)
-    )),
-    S.map(S.filter(S.isJust)),
-    S.map(S.map(S.fromMaybe({}))),
-    S.fromMaybe([]),
-    S.reduce((acc) => (vm) => {
-      let publicKeyMultibase = vm?.publicKeyMultibase;
-      if (
-        vm.type == "Ed25519VerificationKey2020" &&
-        publicKeyMultibase === undefined &&
-        vm?.publicKeyJwk !== undefined
-      ) {
-        // convert JWK key to multibase format that's required by Ed25519VerificationKey2020
-        publicKeyMultibase = convertJWKtoMultibase(vm)?.publicKeyMultibase;
-      }
-      const vm_ld = {
-        ...vm,
-        publicKeyMultibase,
-        // @context is required in the verificationMethod to make it a valid linked data document
-        "@context": diddoc["@context"],
-      };
-      acc[vm_ld.id] = vm_ld;
-      return acc;
-    })({}),
-  ])(diddoc);
-  const documentLoader = jsigs.extendContextLoader((url) => {
-    // log("documentLoader")(url);
-    // resovle DIDDoc and verification Method via document loader
-    if (url === suiteContext2020.CONTEXT_URL) {
-      return suiteContext2020.documentLoader(url);
-    }
-    if (url === suiteContext2018.CONTEXT_URL) {
-      return suiteContext2018.documentLoader(url);
-    }
-    if (url === did) {
-      return {
-        contextUrl: null,
-        documentUrl: url,
-        document: diddoc,
-      };
-    }
-    if (verificationMethods[url]) {
-      return {
-        contextUrl: null,
-        documentUrl: url,
-        document: verificationMethods[url],
-      };
-    }
-    return defaultDocumentLoader(url);
-  });
-  return encaseP(verify)({
-    suite,
-    presentation,
-    presentationPurpose: new jsigs.purposes.AssertionProofPurpose({
-      // controller: did,
-      // domain: url.hostname, // FIXME: domain is only validated for authentication proof purposes
-    }),
-    documentLoader,
-  });
-};
-
-/**
- * getPresentationForURL retrieves the presentation for a given URL.
- *
- * @param {Pair<URL,Pair<string,object>>} did_pair - Pair that consists of the URL
- * and the DID and DID document.
- * @returns {Future<object,Error>} - Verification result.
- */
-const getPresentationForURL = (did_pair) =>
-  // [x] fetch and verify presentation
-  S.pipe([
-    // TODO: only fetch the presentation if it's referenced in the DID
-    // document - verifiable data registry
-    fetchPath("/.well-known/presentation.json"),
-    S.chain(
-      S.ifElse((response) => response.ok)(
-        resolve,
-        // (response) => {
-        //   setIconXmark(tabId);
-        //   return resolve(response);
-        // },
-      )((response) => reject(new Error("failed to fetch presentation"))),
-    ),
-    // [i] verify presentation and VCs
-    S.chain(encaseP((response) => response.json())),
-    S.chain(verifyPresentation(did_pair)),
-    S.map(log("verify")),
-    // [ ] store VC in local cache
-    // [x] update action action
-  ])(S.fst(did_pair));
+const getPresentationForURL = S.pipe([
+  // [x] fetch presentation
+  // TODO: only fetch the presentation if it's referenced in the DID
+  // document - verifiable data registry
+  fetchPath("/.well-known/presentation.json"),
+  S.chain(
+    S.ifElse((response) => response.ok)(
+      resolve,
+      // (response) => {
+      //   setIconXmark(tabId);
+      //   return resolve(response);
+      // },
+    )((response) => reject(new Error("failed to fetch presentation"))),
+  ),
+  // [i] verify presentation and VCs
+  S.chain(encaseP((response) => response.json())),
+]);
 // [ ] ui: pull in current status and display something
 
 const updateDID = (tabId) => (url) => {
@@ -266,11 +187,50 @@ const updateDID = (tabId) => (url) => {
       // icon is set at the the end of the update function, don't do it here
       console.error(err);
       return reject("An error occurred while accessing DID document");
-    })(getPresentationForURL),
+    })((did_pair) =>
+      S.pipe([
+        getPresentationForURL,
+        bichain(
+          // ignore fetch errors as they are expected, not every don't domain
+          // offers a presentation.json
+          resolve,
+        )(S.pipe([
+          // [x] verify presentation
+          verifyPresentation(did_pair),
+          // S.map(log("verified")),
+          S.chain((result_pair) =>
+            S.pipe([
+              // [x] store VP and result in local cache
+              storePresentation(S.fst(did_pair)),
+              // [x] update action icon
+              S.chain((did) => {
+                const verification_result = S.snd(result_pair);
+                if (
+                  verification_result?.error?.errors?.length >= 0 ||
+                  verification_result?.verified !== true
+                ) {
+                  return reject(verification_result);
+                } else {
+                  setIconPlus(tabId);
+                }
+                return resolve(did);
+              }),
+            ])(result_pair)
+          ),
+        ])),
+      ])(S.fst(did_pair))
+    ),
     chainRej((err) => {
       setIconXmark(tabId);
       console.error(err);
       return resolve("An error occurred"); // reconcile all errors so there are no uncaught rejected promises around
+    }),
+    bichain((err) => {
+      // log("err")(err);
+      return reject(err);
+    })((res) => {
+      // log("res")(res);
+      return resolve(res);
     }),
     promise,
   ])(url);
