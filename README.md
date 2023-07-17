@@ -21,7 +21,8 @@ websites. The extension is a [did:hack project](https://didhack.xyz/).
 
 - Firefox:
   [https://addons.mozilla.org/en-US/firefox/addon/identinet/](https://addons.mozilla.org/en-US/firefox/addon/identinet/)
-- Chrome: [review pending]()
+- Chrome:
+  [https://chrome.google.com/webstore/detail/identinet/hehmpjacggciaiknjpfkiecokomeeopm](https://chrome.google.com/webstore/detail/identinet/hehmpjacggciaiknjpfkiecokomeeopm)
 
 ## Usage
 
