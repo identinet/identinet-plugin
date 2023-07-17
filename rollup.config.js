@@ -40,11 +40,6 @@ const template = {
   ],
 };
 
-console.log(["background.js", "popup.js"].map((file) => ({
-  ...template,
-  input: `src/${file}`,
-  output: { ...(template["output"]), file: `.build/${file}` },
-})));
 export default ["background.js", "popup.js"].map((file) => ({
   ...template,
   input: `src/${file}`,
