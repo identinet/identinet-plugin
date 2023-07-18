@@ -91,7 +91,7 @@ build-prod:
 
 # Watch changes and rebuild appliaction
 watch:
-    watch src  {|| just build}
+    watch src  {|| let start = (date now); just build; notify-send -a identinet-plugin $"(date now | date format "%H:%M:%S") - build complete - it took ((date now) - $start)"}
 
 # Cleanup everything
 clean:
