@@ -98,11 +98,10 @@ export const verifyPresentation = (did_pair) => (presentation) => {
   ])({
     suite,
     presentation,
-    // TODO: change expected proof purpose to Authentication .. for the
-    // presentation
-    presentationPurpose: new jsigs.purposes.AssertionProofPurpose({
+    presentationPurpose: new jsigs.purposes.AuthenticationProofPurpose({
       // controller: did,
-      domain: url.hostname, // FIXME: domain is only validated for authentication proof purposes
+      domain: url.hostname,
+      challenge: url.hostname,
     }),
     documentLoader,
   });

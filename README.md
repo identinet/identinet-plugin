@@ -153,8 +153,8 @@ $(cat credential_signed.json)
 }
 EOF
 
-VERIFICATION_METHOD=$(jq -r '.assertionMethod[0]' < did.json)
-didkit presentation issue -t Ed25519Signature2020 -k key.jwk -p assertionMethod -d "${DOMAINNAME}" -v "${VERIFICATION_METHOD}" < presentation.json > presentation_signed.json
+VERIFICATION_METHOD=$(jq -r '.authentication[0]' < did.json)
+didkit presentation issue -t Ed25519Signature2020 -k key.jwk -p authentication -C "${DOMAINNAME}" -d "${DOMAINNAME}" -v "${VERIFICATION_METHOD}" < presentation.json > presentation_signed.json
 didkit presentation verify < presentation_signed.json
 ```
 
