@@ -1,21 +1,22 @@
 ---
 # Metadata about the presentation:
-title: identinet
+title: identinet-plugin
 author: Jan Christoph Ebersbach
 date: 2023-06-08
 keywords: firefox chrome identity extension credentials ssi did
 
 # Presentation settings:
+# URL to favicon
+# favicon: ./favicon.svg
+favicon: https://identinet.github.io/slidesdown-theme/images/favicon.svg
 # Theme, list of supported themes: https://github.com/slidesdown/slidesdown/tree/main/docs/reveal.js/dist/theme
-# theme: https://raw.githubusercontent.com/identinet/slidesdown-theme/main/identinet.css
-theme: white
+# theme: white
+theme: https://identinet.github.io/slidesdown-theme/identinet.css
 # Code highlighting theme, list of supported themes: https://github.com/slidesdown/slidesdown/tree/main/docs/reveal.js/plugin/highlight
 highlight-theme: tokyo-night-dark
 # Load font awesome pro icons (only works on domain slidesdown.github.io) free icons work everywhere. If both are enabled the pro icons are loaded
 fontawesomePro: true
 fontawesomeFree: false
-# URL to favicon
-favicon: ./favicon.svg
 
 # Show progress bar
 progress: true
