@@ -9,14 +9,14 @@ import nodePolyfills from "rollup-plugin-polyfill-node";
 const isProduction = process.env.NODE_ENV == "production";
 
 const template = {
-  input: "src/background.js",
+  input: "src-background/background.js",
   // dest: ".build_chrome/background.js",
   // input: {
-  //   "background": "src/background.js",
-  //   // "popup": "src/popup.js",
-  //   // ".build_firefox/background": "src/background.js",
-  //   // ".build_chrome/popup": "src/popup.js",
-  //   // ".build_firefox/popup": "src/popup.js",
+  //   "background": "src-background/background.js",
+  //   // "popup": "src-background/popup.js",
+  //   // ".build_firefox/background": "src-background/background.js",
+  //   // ".build_chrome/popup": "src-background/popup.js",
+  //   // ".build_firefox/popup": "src-background/popup.js",
   // },
   output: {
     file: ".build/background.js",
@@ -40,8 +40,9 @@ const template = {
   ],
 };
 
-export default ["background.js", "popup.js"].map((file) => ({
+export default ["background.js" // , "popup.js"
+].map((file) => ({
   ...template,
-  input: `src/${file}`,
+  input: `src-background/${file}`,
   output: { ...(template["output"]), file: `.build/${file}` },
 }));

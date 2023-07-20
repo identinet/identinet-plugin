@@ -27,16 +27,19 @@ lint: build
 # Build extension
 _build:
     #!/usr/bin/env nu
-    let dist_dir = $env.DIST_DIR
-    rm -rf $dist_dir
-    mkdir $dist_dir
     let package = (open package.json)
-    let manifest_shared = (open src/manifest_shared.json | upsert version $package.version)
+    let manifest_shared = (open manifest/manifest_shared.json | upsert version $package.version)
     let build_dir = $env.BUILD_DIR
     rm -rf $build_dir
     mkdir $build_dir
-    cp src/*.html $build_dir
-    cp -r src/icons $build_dir
+    yarn build
+    mv dist/public/* $build_dir # solid-start always builds everything in the dist directory
+    rm $"($build_dir)/route-manifest.json" # file not needed
+    rm $"($build_dir)/ssr-manifest.json" # file not needed
+    let dist_dir = $env.DIST_DIR
+    rm -rf $dist_dir
+    mkdir $dist_dir
+    cp -r src-background/icons $build_dir
     cp LICENSE $build_dir
     # npx webpack
     # workaround the not yet existing support of package.json/browser in rollup - webpack supports it but uses eval which breaks browser plugins
@@ -56,7 +59,7 @@ _build:
       let build_dir_browser = $"($env.BUILD_DIR)_($browser)"
       rm -rf $build_dir_browser
       cp -r $build_dir $build_dir_browser
-      $manifest_shared | merge (open $"src/manifest_($browser).json") | save -f $"($build_dir_browser)/manifest.json"
+      $manifest_shared | merge (open $"manifest/manifest_($browser).json") | save -f $"($build_dir_browser)/manifest.json"
       if $browser == "firefox" {
         let res = (do {web-ext build --overwrite-dest -s $build_dir_browser -a $dist_dir} | complete)
         if $res.exit_code != 0 {
@@ -66,7 +69,7 @@ _build:
         mv $"($dist_dir)/($manifest_shared.name)-($manifest_shared.version).zip" $"($dist_dir)/($manifest_shared.name)-($manifest_shared.version)_($browser).zip"
       } else {
         # build chrome extension
-        $manifest_shared | merge (open src/manifest_chrome.json) | save -f $"($build_dir_browser)/manifest.json"
+        $manifest_shared | merge (open manifest/manifest_chrome.json) | save -f $"($build_dir_browser)/manifest.json"
         # See https://peter.sh/experiments/chromium-command-line-switches/
         chromium $"--pack-extension=($build_dir_browser)" --pack-extension-key=./identinet-plugin.pem
         mv $"($build_dir_browser).crx" $"($dist_dir)/($manifest_shared.name)-($manifest_shared.version)_($browser).crx"
@@ -90,8 +93,8 @@ build-prod:
     NODE_ENV=production just _build
 
 # Watch changes and rebuild appliaction
-watch:
-    watch src  {|| let start = (date now); just build; notify-send -a identinet-plugin $"(date now | date format "%H:%M:%S") - build complete - it took ((date now) - $start)"}
+build-watch:
+    watch src {|| let start = (date now); just build; notify-send -a identinet-plugin $"(date now | date format "%H:%M:%S") - build complete - it took ((date now) - $start)"}
 
 # Cleanup everything
 clean:
