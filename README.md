@@ -196,6 +196,11 @@ Steps to start development:
 5. Manually reload extension by clicking reload (Firefox) or update (Chrome) to
    include changes
 
+## Publish Updates
+
+- [Firefox Add-on Developer Hub](https://addons.mozilla.org/en-US/developers/addon/identinet)
+- [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole/)
+
 ## Resources
 
 - [Firefox browser extension documentation](https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions)
