@@ -63,7 +63,7 @@ export default function Home() {
             ? "icons/shield-xmark.svg"
             : ssi_data()?.verification_result?.verified === true
             ? "icons/shield-plus.svg"
-            : ssi_data()?.diddoc?.id !== ""
+            : S.type(ssi_data()?.diddoc?.id).name === "String"
             ? "icons/shield-check.svg"
             : "icons/shield-slash.svg"}
         />
