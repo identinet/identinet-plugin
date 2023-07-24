@@ -9,7 +9,7 @@ import nodePolyfills from "rollup-plugin-polyfill-node";
 const isProduction = process.env.NODE_ENV == "production";
 
 const template = {
-  input: "src-background/background.js",
+  input: "background.js",
   // dest: ".build_chrome/background.js",
   // input: {
   //   "background": "src-background/background.js",
@@ -40,9 +40,8 @@ const template = {
   ],
 };
 
-export default ["background.js" // , "popup.js"
-].map((file) => ({
+export default ["background.js"].map((file) => ({
   ...template,
-  input: `src-background/${file}`,
-  output: { ...(template["output"]), file: `.build/${file}` },
+  input: `${file}`,
+  output: { ...(template["output"]), file: `.build_${file}` },
 }));

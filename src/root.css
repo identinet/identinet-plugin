@@ -1,40 +1,99 @@
+[data-theme="light"],
+:root:not([data-theme="dark"]) {
+  --primary: #03a9f4;
+  --primary-hover: #63ccff;
+  --primary-focus: #006db3;
+  --primary-inverse: #fff;
+}
+
+/* Pink Dark scheme (Auto) */
+/* Automatically enabled if user has Dark mode enabled */
+@media only screen and (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --primary: #03a9f4;
+    --primary-hover: #63ccff;
+    --primary-focus: #006db3;
+    --primary-inverse: #fff;
+  }
+}
+
+/* Pink (Common styles) */
+:root {
+  --font-family: "Inter", system-ui, -apple-system, "Segoe UI", "Roboto",
+    "Ubuntu", "Cantarell", "Noto Sans", sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --form-element-active-border-color: var(--primary);
+  --form-element-focus-color: var(--primary-focus);
+  --switch-color: var(--primary-inverse);
+  --switch-checked-background-color: var(--primary);
+}
+
+nav {
+  padding-right: var(--spacing);
+  padding-left: var(--spacing);
+}
+
+nav * a.active {
+  text-decoration: underline;
+}
+
+nav * a,
+nav * a:hover,
+nav * a:active,
+nav * a:focus {
+  background-color: none !important;
+  --background-color: none !important;
+}
+
 body {
-  font-family: Gordita, Roboto, Oxygen, Ubuntu, Cantarell,
-    'Open Sans', 'Helvetica Neue', sans-serif;
+  /* fix window size */
+  width: 300px;
+  height: 400px;
+  min-height: 400px;
+  max-width: 300px;
+  display: flex;
+  flex-direction: column;
 }
 
-a {
-  margin-right: 1rem;
+body > main {
+  flex-grow: 1;
 }
 
-main {
-  text-align: center;
-  padding: 1em;
-  margin: 0 auto;
+body > footer {
+  flex-grow: 0;
 }
 
-h1 {
-  color: #335d92;
-  text-transform: uppercase;
-  font-size: 4rem;
-  font-weight: 100;
-  line-height: 1.1;
-  margin: 4rem auto;
-  max-width: 14rem;
-}
-
-p {
-  max-width: 14rem;
-  margin: 2rem auto;
-  line-height: 1.35;
-}
-
-@media (min-width: 480px) {
-  h1 {
-    max-width: none;
-  }
-
-  p {
-    max-width: none;
-  }
-}
+/* a { */
+/*   margin-right: 1rem; */
+/* } */
+/**/
+/* main { */
+/*   text-align: center; */
+/*   padding: 1em; */
+/*   margin: 0 auto; */
+/* } */
+/**/
+/* h1 { */
+/*   color: #03a9f4; */
+/*   text-transform: uppercase; */
+/*   font-size: 3rem; */
+/*   font-weight: 100; */
+/*   line-height: 1.1; */
+/*   margin: 3rem auto; */
+/*   max-width: 14rem; */
+/* } */
+/**/
+/* p { */
+/*   max-width: 14rem; */
+/*   margin: 2rem auto; */
+/*   line-height: 1.35; */
+/* } */
+/**/
+/* @media (min-width: 480px) { */
+/*   h1 { */
+/*     max-width: none; */
+/*   } */
+/*   p { */
+/*     max-width: none; */
+/*   } */
+/* } */

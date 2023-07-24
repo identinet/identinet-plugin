@@ -1489,6 +1489,11 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
+"@picocss/pico@^1.5.10":
+  version "1.5.10"
+  resolved "https://registry.yarnpkg.com/@picocss/pico/-/pico-1.5.10.tgz#94f813f5de6206d5a4492b801337eadf6dfcc889"
+  integrity sha512-+LafMsrwPxXQMk6sI///TmSInCwwZmq+K7SikyL3N/4GhhwzyPC+TQLUEqmrLyjluR+uIpFFcqjty30Rtr6GxQ==
+
 "@pnpm/config.env-replace@^1.1.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@pnpm/config.env-replace/-/config.env-replace-1.1.0.tgz#ab29da53df41e8948a00f2433f085f54de8b3a4c"

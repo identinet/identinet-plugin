@@ -26,19 +26,22 @@
   "devDependencies": {
     "@rollup/plugin-commonjs": "^25.0.2",
     "@rollup/plugin-node-resolve": "^15.1.0",
-    "rollup": "^3.25.3",
-    "rollup-plugin-polyfill-node": "^0.12.0",
-    "web-ext": "^7.6.2",
     "esbuild": "^0.14.54",
     "postcss": "^8.4.21",
+    "rollup": "^3.25.3",
+    "rollup-plugin-polyfill-node": "^0.12.0",
     "solid-start-node": "^0.2.19",
-    "vite": "^4.1.4"
+    "vite": "^4.1.4",
+    "web-ext": "^7.6.2"
   },
   "browser": true,
   "dependencies": {
     "@digitalbazaar/ed25519-signature-2018": "^4.0.0",
     "@digitalbazaar/ed25519-signature-2020": "^5.2.0",
     "@digitalbazaar/vc": "^6.0.1",
+    "@picocss/pico": "^1.5.10",
+    "@solidjs/meta": "^0.28.2",
+    "@solidjs/router": "^0.8.2",
     "base58-universal": "^2.0.0",
     "base64url-universal": "^2.0.0",
     "fluture": "^14.0.0",
@@ -46,8 +49,6 @@
     "jsonld-signatures": "^11.2.1",
     "sanctuary": "^3.1.0",
     "sanctuary-def": "^0.22.0",
-    "@solidjs/meta": "^0.28.2",
-    "@solidjs/router": "^0.8.2",
     "solid-js": "^1.7.2",
     "solid-start": "^0.2.26",
     "undici": "^5.15.1"

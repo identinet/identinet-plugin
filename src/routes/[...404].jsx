@@ -6,12 +6,10 @@ export default function NotFound() {
       <Title>Not Found</Title>
       <HttpStatusCode code={404} />
       <h1>Page Not Found</h1>
+      <p>{document.URL}</p>
       <p>
-        Visit{" "}
-        <a href="https://start.solidjs.com" target="_blank">
-          start.solidjs.com
-        </a>{" "}
-        to learn how to build SolidStart apps.
+        Visit <a href="https://identinet.io" target="_blank">identinet.io</a>
+        to learn how to use Decentralized Identity.
       </p>
     </main>
   );

@@ -12,6 +12,8 @@ import {
   Scripts,
   Title,
 } from "solid-start";
+import Nav from "~/components/Nav.jsx";
+import "@picocss/pico/css/pico.min.css";
 import "./root.css";
 export default function Root() {
   return (
@@ -24,11 +26,14 @@ export default function Root() {
       <Body>
         <Suspense>
           <ErrorBoundary>
-            <A href="/">Index</A>
-            <A href="/about">About</A>
-            <Routes>
-              <FileRoutes />
-            </Routes>
+            <main class="container">
+              <Routes>
+                <FileRoutes />
+              </Routes>
+            </main>
+            <footer>
+              <Nav />
+            </footer>
           </ErrorBoundary>
         </Suspense>
         <Scripts />

@@ -1,6 +1,6 @@
-import { verifyPresentation } from "./lib/identinet/mod.js";
-import { $, log, S } from "./lib/sanctuary/mod.js";
-import { api, getCurrentTab, url2DID } from "./lib/identinet/mod.js";
+import { verifyPresentation } from "./src/lib/identinet/mod.js";
+import { $, log, S } from "./src/lib/sanctuary/mod.js";
+import { api, getCurrentTab, url2DID } from "./src/lib/identinet/mod.js";
 import { bichain, chainRej, encaseP, promise, reject, resolve } from "fluture";
 
 class DIDNotFoundError extends Error {
@@ -67,13 +67,14 @@ const storeDIDDoc = (did_pair) => {
   }
   return S.pipe([
     encaseP((did) => api.storage.local.get(did)),
-    // S.map(log("get store")),
+    // S.map(log("get did store")),
     chainRej((_err) => ({})), // in case no data is in the store, fall back on an empty dataset
     S.chain(encaseP((stored_data) =>
       api.storage.local.set({
         [did]: { diddoc, ...stored_data[did] },
       })
     )),
+    // S.map(log("result did?")),
     S.map(() => did),
   ])(did);
 };
@@ -102,6 +103,7 @@ const storePresentation = (did) => (presentation_and_result) => {
         },
       })
     )),
+    // S.map(log("result?")),
     S.map(() => did),
   ])(did);
 };
@@ -187,7 +189,7 @@ const updateDID = (tabId) => (url) => {
       // icon is set at the the end of the update function, don't do it here
       console.error(err);
       return reject("An error occurred while accessing DID document");
-    })((did_pair) =>
+    })((url_did_pair) =>
       S.pipe([
         getPresentationForURL,
         bichain(
@@ -196,12 +198,12 @@ const updateDID = (tabId) => (url) => {
           resolve,
         )(S.pipe([
           // [x] verify presentation
-          verifyPresentation(did_pair),
+          verifyPresentation(url_did_pair),
           // S.map(log("verified")),
           S.chain((result_pair) =>
             S.pipe([
               // [x] store VP and result in local cache
-              storePresentation(S.fst(did_pair)),
+              storePresentation(S.fst(S.snd(url_did_pair))),
               // [x] update action icon
               S.chain((did) => {
                 const verification_result = S.snd(result_pair);
@@ -218,7 +220,7 @@ const updateDID = (tabId) => (url) => {
             ])(result_pair)
           ),
         ])),
-      ])(S.fst(did_pair))
+      ])(S.fst(url_did_pair))
     ),
     chainRej((err) => {
       setIconXmark(tabId);
