@@ -1,6 +1,6 @@
 {
   "name": "identinet-plugin",
-  "version": "0.1.3",
+  "version": "0.2.0",
   "description": "Displays and verifies decentralized identity information of websites",
   "type": "module",
   "scripts": {
