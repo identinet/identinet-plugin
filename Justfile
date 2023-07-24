@@ -104,6 +104,10 @@ build-prod:
 build-watch:
     watch src {|| let start = (date now); just build; notify-send -a identinet-plugin $"(date now | date format "%H:%M:%S") - build complete - it took ((date now) - $start)"}
 
+# Update changelog
+changelog:
+    git cliff | save -f CHANGELOG.md
+
 # Cleanup everything
 clean:
     rm -rf  $env.DIST_DIR $env.BUILD_DIR
