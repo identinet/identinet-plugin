@@ -47,10 +47,10 @@ nav * a:focus {
 
 body {
   /* fix window size */
-  width: 300px;
+  width: 400px;
   height: 400px;
   min-height: 400px;
-  max-width: 300px;
+  max-width: 400px;
   display: flex;
   flex-direction: column;
 }

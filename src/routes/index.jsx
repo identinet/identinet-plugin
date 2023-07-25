@@ -3,6 +3,7 @@ import { api, getCurrentTab, url2DID } from "~/lib/identinet/mod.js";
 import { chainRej, encaseP, promise, reject, resolve } from "fluture";
 import { createResource, For } from "solid-js";
 import { Title, useRouteData } from "solid-start";
+import ExternalLink from "~/components/ExternalLink.jsx";
 
 /**
  * fetchWebsiteData retrieves the stored data for the currently selected tab.
@@ -10,18 +11,17 @@ import { Title, useRouteData } from "solid-start";
  */
 function fetchWebsiteData(params) {
   return S.pipe([
-    log("params"),
     url2DID,
     S.map(S.fst),
     S.either(reject)(resolve),
-    S.map(log("did")),
+    /* S.map(log("did")), */
     S.chain((did) =>
       S.pipe([
         encaseP((did) => api.storage.local.get(did)),
         S.map((res) => res[did]), // drop outer object
       ])(did)
     ),
-    S.map(log("getres")),
+    /* S.map(log("getres")), */
     /* chainRej((err) => { */
     /*   // Maybe it's a good idea to actually let the rejected promise through so that the UI can react to it */
     /*   console.log("reject", err); */
@@ -70,9 +70,25 @@ export default function Home() {
       </h3>
       <div class="grid" style="grid-template: auto / 5em auto;">
         <p>Page:</p>
-        <p>{url()?.hostname || "No Hostname."}</p>
+        <p>
+          <ExternalLink
+            url={`https://${url()?.hostname}`}
+            title="Visit website"
+            text={url()?.hostname}
+            fallback="No Hostname."
+          />
+        </p>
         <p>DID:</p>
-        <p>{ssi_data()?.diddoc?.id || "No DID."}</p>
+        <p>
+          <ExternalLink
+            url={`https://didlint.ownyourdata.eu/validate?did=${
+              encodeURIComponent(ssi_data()?.diddoc?.id)
+            }`}
+            title="Inspect DID"
+            text={ssi_data()?.diddoc?.id}
+            fallback="No DID."
+          />
+        </p>
         <p>Claims:</p>
         <div>
           <ul>

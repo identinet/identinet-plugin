@@ -1,5 +1,6 @@
 // Documentation: https://vitejs.dev/config/
 import solid from "solid-start/vite";
+import solidSvg from "vite-plugin-solid-svg"; // Documentation: https://github.com/jfgodoy/vite-plugin-solid-svg
 import { defineConfig } from "vite";
 // import resolve from "@rollup/plugin-node-resolve";
 // import commonjs from "@rollup/plugin-commonjs";
@@ -36,6 +37,26 @@ export default defineConfig({
       ssr: false,
       islands: false,
       islandsRouter: false,
+    }),
+    solidSvg({
+      svgo: {
+        enabled: true,
+        svgoConfig: {
+          plugins: [
+            {
+              name: "preset-default",
+              params: {
+                overrides: {
+                  // viewBox is required to resize SVGs with CSS.
+                  // @see https://github.com/svg/svgo/issues/1128
+                  // @see https://github.com/jfgodoy/vite-plugin-solid-svg/issues/26
+                  removeViewBox: false,
+                },
+              },
+            },
+          ],
+        },
+      },
     }),
   ],
 });

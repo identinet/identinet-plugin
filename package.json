@@ -32,6 +32,7 @@
     "rollup-plugin-polyfill-node": "^0.12.0",
     "solid-start-node": "^0.2.19",
     "vite": "^4.1.4",
+    "vite-plugin-solid-svg": "^0.6.4",
     "web-ext": "^7.6.2"
   },
   "browser": true,
