@@ -57,6 +57,7 @@ _build:
       yarn run rollup -c
       # ls *.js | par-each {|it| yarn run rollup -i $it.name --file $"($build_dir)/($it.name | path basename)" --format iife --inlineDynamicImports -p @rollup/plugin-commonjs -p rollup-plugin-polyfill-node -p @rollup/plugin-node-resolve}
     }}
+    rmdir $"($build_dir)/.solid"
     mv .build_background.js .build/background.js
     # prepare additional files
     let dist_dir = $env.DIST_DIR
