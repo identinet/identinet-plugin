@@ -32,25 +32,25 @@ extension to the browser bar so that it is permanently visible.
 The availability of a DID document and additional credentials for the website is
 displayed with the following icons:
 
-- <img style="height: 1em" alt="No DID document available" src="./src/icons/shield-slash.svg" />
+- <img style="height: 1em" alt="No DID document available" src="./public/icons/shield-slash.svg" />
   No DID document is available.
-- <img style="height: 1em" alt="DID document available" src="./src/icons/shield-check.svg" />
+- <img style="height: 1em" alt="DID document available" src="./public/icons/shield-check.svg" />
   DID document is available, no credentials are available.
-- <img style="height: 1em" alt="DID document and credentials available" src="./src/icons/shield-plus.svg" />
+- <img style="height: 1em" alt="DID document and credentials available" src="./public/icons/shield-plus.svg" />
   DID and credentials are available, the credentials have been successfully
   verified.
-- <img style="height: 1em" alt="DID document and credentials available but broken" src="./src/icons/shield-xmark.svg" />
+- <img style="height: 1em" alt="DID document and credentials available but broken" src="./public/icons/shield-xmark.svg" />
   DID document incorrect or verification of credentials of failed.
 
 Examples:
 
-- <img style="height: 1em" alt="No DID document available" src="./src/icons/shield-slash.svg" />
+- <img style="height: 1em" alt="No DID document available" src="./public/icons/shield-slash.svg" />
   <a href="https://no-id-example.identinet.io/">https://no-id-example.identinet.io/</a>
-- <img style="height: 1em" alt="DID document available" src="./src/icons/shield-check.svg" />
+- <img style="height: 1em" alt="DID document available" src="./public/icons/shield-check.svg" />
   <a href="https://id-example.identinet.io/">https://id-example.identinet.io/</a>
-- <img style="height: 1em" alt="DID document and credentials available" src="./src/icons/shield-plus.svg" />
+- <img style="height: 1em" alt="DID document and credentials available" src="./public/icons/shield-plus.svg" />
   <a href="https://id-plus-example.identinet.io/">https://id-plus-example.identinet.io/</a>
-- <img style="height: 1em" alt="DID document and credentials available but broken" src="./src/icons/shield-xmark.svg" />
+- <img style="height: 1em" alt="DID document and credentials available but broken" src="./public/icons/shield-xmark.svg" />
   <a href="https://broken-example.identinet.io/">https://broken-example.identinet.io/</a>
 
 ## How it Works
