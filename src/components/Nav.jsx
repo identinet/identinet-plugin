@@ -7,9 +7,10 @@ export default function Nav() {
         <li>
           <img
             alt="logo"
-            src="/figures/identinet_long_background_white.svg"
-            height="1em"
-            style="top: -0.2em; position: relative"
+            src={window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "/figures/identinet_long_background_dark.svg"
+              : "/figures/identinet_long_background_transparent.svg"}
+            style="height: 1em; top: -0.2em; position: relative"
           />
         </li>
       </ul>

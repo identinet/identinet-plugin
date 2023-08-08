@@ -45,14 +45,43 @@ nav * a:focus {
   --background-color: none !important;
 }
 
+div {
+  /* make fonts in div elements the same a in p elements */
+  font-style: normal;
+  font-weight: var(--font-weight);
+  font-size: var(--font-size);
+}
+
 body {
   /* fix window size */
   width: 400px;
-  height: 400px;
+  height: 500px;
   min-height: 400px;
   max-width: 400px;
   display: flex;
   flex-direction: column;
+  overflow-y: hidden;
+}
+
+body > footer,
+body > header,
+body > main {
+  /* reduce padding */
+  padding: 0 0 !important;
+}
+
+body > hearder {
+  padding-top: 0.3rem;
+  padding-bottom: 0.15rem;
+}
+
+body > footer {
+  padding-top: 0.15rem;
+  padding-bottom: 0.3rem;
+}
+
+body > main {
+  padding: 0.15em var(--spacing) !important;
 }
 
 body > main {

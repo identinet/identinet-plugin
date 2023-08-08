@@ -1,9 +1,10 @@
-import { log, S } from "~/lib/sanctuary/mod.js";
+import { S } from "~/lib/sanctuary/mod.js";
 import { api, getCurrentTab, url2DID } from "~/lib/identinet/mod.js";
-import { chainRej, encaseP, promise, reject, resolve } from "fluture";
+import { encaseP, promise, reject, resolve } from "fluture";
 import { createResource, For } from "solid-js";
 import { Title, useRouteData } from "solid-start";
 import ExternalLink from "~/components/ExternalLink.jsx";
+import Credential from "~/components/Credential.jsx";
 
 /**
  * fetchWebsiteData retrieves the stored data for the currently selected tab.
@@ -52,7 +53,7 @@ export function routeData({ _params }) {
 export default function Home() {
   const [url, ssi_data] = useRouteData();
   return (
-    <main>
+    <>
       <Title>Self-Sovereign Identity Information</Title>
       <h3>
         SSI Information{" "}
@@ -68,18 +69,18 @@ export default function Home() {
             : "icons/shield-slash.svg"}
         />
       </h3>
-      <div class="grid" style="grid-template: auto / 5em auto;">
-        <p>Page:</p>
-        <p>
+      <div class="grid" style="grid-template-columns: 5.6em 1fr; gap: 0.3em;">
+        <div>Page:</div>
+        <div>
           <ExternalLink
             url={`https://${url()?.hostname}`}
             title="Visit website"
             text={url()?.hostname}
             fallback="No Hostname."
           />
-        </p>
-        <p>DID:</p>
-        <p>
+        </div>
+        <div>DID:</div>
+        <div>
           <ExternalLink
             url={`https://didlint.ownyourdata.eu/validate?did=${
               encodeURIComponent(ssi_data()?.diddoc?.id)
@@ -88,23 +89,17 @@ export default function Home() {
             text={ssi_data()?.diddoc?.id}
             fallback="No DID."
           />
-        </p>
-        <p>Claims:</p>
+        </div>
+        <div>Credentials:</div>
         <div>
-          <ul>
-            <For
-              each={ssi_data()?.presentation?.verifiableCredential || []}
-              fallback={<li>No claims.</li>}
-            >
-              {(credential, index) => (
-                <li>
-                  {credential?.type?.join(" ")} ({credential?.id || "No ID."})
-                </li>
-              )}
-            </For>
-          </ul>
+          <For
+            each={ssi_data()?.presentation?.verifiableCredential || []}
+            fallback={<div>No claims.</div>}
+          >
+            {(credential, index) => <Credential credential={credential} />}
+          </For>
         </div>
       </div>
-    </main>
+    </>
   );
 }

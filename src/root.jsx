@@ -26,14 +26,14 @@ export default function Root() {
       <Body>
         <Suspense>
           <ErrorBoundary>
+            <header>
+              <Nav />
+            </header>
             <main class="container">
               <Routes>
                 <FileRoutes />
               </Routes>
             </main>
-            <footer>
-              <Nav />
-            </footer>
           </ErrorBoundary>
         </Suspense>
         <Scripts />

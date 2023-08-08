@@ -34,9 +34,9 @@ _build:
     # See: https://docs.npmjs.com/cli/v6/configuring-npm/package-json#browser
     # See: https://github.com/rollup/rollup/issues/185
     # See: https://github.com/webpack/webpack/issues/5627
-    let platform_bak = ./node_modules/jsonld/lib/platform.js.bak
-    let platform = ./node_modules/jsonld/lib/platform.js
-    let platform_browser = ./node_modules/jsonld/lib/platform-browser.js
+    let platform_bak = './node_modules/jsonld/lib/platform.js.bak'
+    let platform = './node_modules/jsonld/lib/platform.js'
+    let platform_browser = './node_modules/jsonld/lib/platform-browser.js'
     if ($platform_browser | path exists) {
       mv $platform $platform_bak
       mv $platform_browser $platform
