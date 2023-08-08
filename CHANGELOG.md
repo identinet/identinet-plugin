@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.1] - 2023-08-08
+
+### Documentation
+
+- Add changelog
+- Add reference to web stores
+
+### Features
+
+- Add references to external services
+- Diplay credential details
+
+### Miscellaneous Tasks
+
+- Remove empty .solid directory from build
+
 ## [0.2.0] - 2023-07-24
 
 ### Bug Fixes
