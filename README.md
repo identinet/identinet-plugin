@@ -21,6 +21,15 @@ websites. The extension is a [did:hack project](https://didhack.xyz/).
 
 - Firefox:
   [https://addons.mozilla.org/en-US/firefox/addon/identinet/](https://addons.mozilla.org/en-US/firefox/addon/identinet/)
+
+  Attention: after installing the add-on, it's currently necessary to grant the
+  plugin access to websites. Firefox doesn't prompt the user during installation
+  to grant these permissions.
+
+  Navigate to Tools -> Add-ons and Themes. Select the identinet add-on and
+  switch to the "Permissions" tab. Then grant the optional permission "Access
+  your data for all websites".
+
 - Chrome:
   [https://chrome.google.com/webstore/detail/identinet/hehmpjacggciaiknjpfkiecokomeeopm](https://chrome.google.com/webstore/detail/identinet/hehmpjacggciaiknjpfkiecokomeeopm)
 
