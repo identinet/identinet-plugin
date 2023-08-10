@@ -5,13 +5,15 @@ export default function Nav() {
     <nav>
       <ul>
         <li>
-          <img
-            alt="logo"
-            src={window.matchMedia("(prefers-color-scheme: dark)").matches
-              ? "/figures/identinet_long_background_dark.svg"
-              : "/figures/identinet_long_background_transparent.svg"}
-            style="height: 1em; top: -0.2em; position: relative"
-          />
+          <a href="https://identinet.io/" target="_blank">
+            <img
+              alt="logo"
+              src={window.matchMedia("(prefers-color-scheme: dark)").matches
+                ? "/figures/identinet_long_background_dark.svg"
+                : "/figures/identinet_long_background_transparent.svg"}
+              style="height: 1em; top: -0.2em; position: relative"
+            />
+          </a>
         </li>
       </ul>
       <ul>
