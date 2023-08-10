@@ -4,6 +4,8 @@
 extension that displays and verifies decentralized identity information of
 websites. The extension is a [did:hack project](https://didhack.xyz/).
 
+![DID Details](./images/6_did_details.png)
+
 ## Presentation
 
 <div style="display: flex; gap: 1em;">

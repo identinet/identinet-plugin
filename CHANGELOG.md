@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.2] - 2023-08-10
+
+### Documentation
+
+- Correct references to icons
+- Add additional installation instructions
+
+### Features
+
+- Add link to logo
+
+### Miscellaneous Tasks
+
+- Update screenshots
+
 ## [0.2.1] - 2023-08-08
 
 ### Documentation
