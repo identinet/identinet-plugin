@@ -4,7 +4,7 @@
 extension that displays and verifies decentralized identity information of
 websites. The extension is a [did:hack project](https://didhack.xyz/).
 
-![DID Details](./images/6_did_details.png)
+[![DID Details](./images/6_did_details.png)](https://id-plus-example.identinet.io/)
 
 ## Presentation
 
@@ -211,6 +211,12 @@ Steps to start development:
 
 - [Firefox Add-on Developer Hub](https://addons.mozilla.org/en-US/developers/addon/identinet)
 - [Chrome Web Store Developer Dashboard](https://chrome.google.com/webstore/devconsole/)
+
+## Use of did:web in the Wild
+
+### LikedIn
+
+[![Linkedin DID Details](./images/8_did_linkedin_details.png)](https://linkedin.com)
 
 ## Resources
 
