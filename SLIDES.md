@@ -86,15 +86,15 @@ accessible to everyone.
 
 |||
 
-![](./images/1_no_did_information.jpeg)
+![](./images/3_no_did_details.png)
 
 |||
 
-![](./images/2_did_information_available.jpeg)
+![](./images/5_did_closeup.png)
 
 |||
 
-![](./images/3_did_details.jpeg)
+![](./images/6_did_details.png)
 
 ## Status
 
@@ -102,10 +102,10 @@ accessible to everyone.
   [github.com/identinet/identinet-plugin](https://github.com/identinet/identinet-plugin).
 - ✅ Functional plugin.
 - ✅ Firefox Extension is published.
-- 💤 Chrome Extension under review.
+- ✅ Chrome Extension under review.
 - ☐ Plugin fetches data too often.
 - ☐ Plugin lacks a good UI.
-- ☐ Verification of Credentials not yet implemented.
+- ✅ Verification of Credentials.
 
 ## Next Steps
 
