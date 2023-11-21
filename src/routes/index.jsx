@@ -94,9 +94,9 @@ export default function Home() {
         <div>
           <For
             each={ssi_data()?.presentation?.verifiableCredential || []}
-            fallback={<div>No claims.</div>}
+            fallback={<div>No published claims exist.</div>}
           >
-            {(credential, index) => <Credential credential={credential} />}
+            {(credential, _index) => <Credential credential={credential} />}
           </For>
         </div>
       </div>
