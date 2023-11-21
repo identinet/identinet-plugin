@@ -2,13 +2,18 @@
 {
   description = "Dependencies";
 
+  # Due to bug in version 119 https://bugs.chromium.org/p/chromium/issues/detail?id=1498558&q=pack-extension&can=2
+  inputs.nixpkgs_oldchromium.url =
+    "github:NixOS/nixpkgs?rev=e49c28b3baa3a93bdadb8966dd128f9985ea0a09";
   inputs.nixpkgs_unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
   inputs.flake-utils.url = "github:numtide/flake-utils";
 
-  outputs = { self, nixpkgs, nixpkgs_unstable, flake-utils }:
+  outputs =
+    { self, nixpkgs_oldchromium, nixpkgs, nixpkgs_unstable, flake-utils }:
     flake-utils.lib.eachDefaultSystem (system:
       let
+        oldChromium = nixpkgs_oldchromium.legacyPackages.${system};
         pkgs = nixpkgs.legacyPackages.${system};
         unstable = nixpkgs_unstable.legacyPackages.${system};
         allOsPackages = with pkgs; [
@@ -21,8 +26,7 @@
           yq-go # YAML and JSON CLI processor https://mikefarah.gitbook.io/yq/
           jq # JSON CLI processor https://github.com/jqlang/jq
           firefox # Firefox browser
-          chromium # Chromium browser
-
+          oldChromium.chromium # Chromium browser
         ];
         linuxOnlyPackages = with pkgs;
           [
