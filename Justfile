@@ -103,7 +103,10 @@ build-prod:
 
 # Watch changes and rebuild appliaction
 build-watch:
-    watch src {|| let start = (date now); just build; notify-send -a identinet-plugin $"(date now | date format "%H:%M:%S") - build complete - it took ((date now) - $start)"}
+    # FIXME: this isn't optimal - not all files are being watched,
+    # ./background.js and ./public are missing. Furthermore, it would be great
+    # to perform the build when the task is started
+    watch src {|| let start = (date now); just build; notify-send -a identinet-plugin $"(date now | format date "%H:%M:%S") - build complete - it took ((date now) - $start)"}
 
 # Update changelog
 changelog:
