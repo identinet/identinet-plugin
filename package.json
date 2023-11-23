@@ -31,6 +31,7 @@
     "rollup": "^3.25.3",
     "rollup-plugin-polyfill-node": "^0.12.0",
     "solid-start-node": "^0.2.19",
+    "unocss": "^0.57.7",
     "vite": "^4.1.4",
     "vite-plugin-solid-svg": "^0.6.4",
     "web-ext": "^7.6.2"
@@ -70,22 +71,10 @@
       "sourceType": "module"
     },
     "rules": {
-      "indent": [
-        "error",
-        2
-      ],
-      "linebreak-style": [
-        "error",
-        "unix"
-      ],
-      "quotes": [
-        "error",
-        "single"
-      ],
-      "semi": [
-        "error",
-        "always"
-      ]
+      "indent": ["error", 2],
+      "linebreak-style": ["error", "unix"],
+      "quotes": ["error", "single"],
+      "semi": ["error", "always"]
     }
   }
 }

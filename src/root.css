@@ -41,9 +41,20 @@ nav * a,
 nav * a:hover,
 nav * a:active,
 nav * a:focus {
-  background-color: none !important;
-  --background-color: none !important;
+  color: initial;
 }
+
+nav ul {
+  list-style: none;
+  display: inline;
+  padding: 0
+}
+nav ul li {
+    display: inline;
+    margin-left: 5px;
+}
+nav ul li:first {margin-left: 0}
+
 
 div {
   /* make fonts in div elements the same a in p elements */

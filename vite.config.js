@@ -2,6 +2,7 @@
 import solid from "solid-start/vite";
 import solidSvg from "vite-plugin-solid-svg"; // Documentation: https://github.com/jfgodoy/vite-plugin-solid-svg
 import { defineConfig } from "vite";
+import UnoCSS from "unocss/vite";
 // import resolve from "@rollup/plugin-node-resolve";
 // import commonjs from "@rollup/plugin-commonjs";
 // import nodePolyfills from "rollup-plugin-polyfill-node";
@@ -33,6 +34,7 @@ export default defineConfig({
     // },
   },
   plugins: [
+    UnoCSS(),
     solid({
       ssr: false,
       islands: false,
