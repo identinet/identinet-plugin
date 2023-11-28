@@ -12,8 +12,12 @@ import {
   Title,
 } from "solid-start";
 import Nav from "~/components/Nav.jsx";
+
+// CSS imports
+import "@unocss/reset/tailwind.css";
 import "virtual:uno.css";
 import "./root.css";
+
 export default function Root() {
   return (
     <Html lang="en">
@@ -27,13 +31,13 @@ export default function Root() {
           <ErrorBoundary>
             <header>
               <Nav />
-              <hr />
+              <hr class="pb-3" />
             </header>
-            <main class="container">
+            <div class="container px-3">
               <Routes>
                 <FileRoutes />
               </Routes>
-            </main>
+            </div>
           </ErrorBoundary>
         </Suspense>
         <Scripts />
