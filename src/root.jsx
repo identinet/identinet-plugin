@@ -13,8 +13,8 @@ import {
   Title,
 } from "solid-start";
 import Nav from "~/components/Nav.jsx";
-import "@picocss/pico/css/pico.min.css";
 import "./root.css";
+import "virtual:uno.css";
 export default function Root() {
   return (
     <Html lang="en">
