@@ -1,0 +1,41 @@
+# Documentation: https://caddyserver.com/docs/caddyfile/directives
+{
+	http_port 8080
+	https_port 8443
+}
+
+id-broken.example.com {
+	file_server {
+      root ./test/websites/id-broken.example.com
+	}
+	tls {
+		load ./test/website-certificates/id-broken.example.com.pem
+	}
+}
+
+id-plus.example.com {
+	file_server {
+      root ./test/websites/id-plus.example.com
+	}
+	tls {
+		load ./test/website-certificates/id-plus.example.com.pem
+	}
+}
+
+id.example.com {
+	file_server {
+      root ./test/websites/id.example.com
+	}
+	tls {
+		load ./test/website-certificates/id.example.com.pem
+	}
+}
+
+no-id.example.com {
+	file_server {
+      root ./test/websites/no-id.example.com
+	}
+	tls {
+		load ./test/website-certificates/no-id.example.com.pem
+	}
+}
