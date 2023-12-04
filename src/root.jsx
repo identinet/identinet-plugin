@@ -30,11 +30,11 @@ export default function Root() {
               <Nav />
               <hr class="pb-3" />
             </header>
-            <main class="container px-3">
+            <div class="container px-3">
               <Routes>
                 <FileRoutes />
               </Routes>
-            </main>
+            </div>
           </ErrorBoundary>
         </Suspense>
         <Scripts />
