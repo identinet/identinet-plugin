@@ -18,7 +18,11 @@
     "extension",
     "ssi",
     "did",
+    "verifiable",
+    "credential",
     "credentials",
+    "presentation",
+    "presentations",
     "identity"
   ],
   "author": "Jan Christoph Ebersbach",
