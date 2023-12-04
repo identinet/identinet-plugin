@@ -2,39 +2,46 @@ import { A } from "solid-start";
 
 export default function Nav() {
   return (
-    <nav class="flex">
-      <ul class="flex-1">
-        <li>
-          <a href="https://identinet.io/" target="_blank">
-            <img
-              alt="logo"
-              src={
-                window.matchMedia("(prefers-color-scheme: dark)").matches
-                  ? "/figures/identinet_long_background_dark.svg"
-                  : "/figures/identinet_long_background_transparent.svg"
-              }
-              style="height: 1em; vertical-align: text-bottom"
-            />
-          </a>
-        </li>
-      </ul>
-      <ul class="flex-none">
-        <li>
-          <A href="/" activeClass="active" end="true">
-            Page
-          </A>
-        </li>
-        <li>
-          <A href="/privacy" activeClass="active" end="true">
-            Privacy
-          </A>
-        </li>
-        <li>
-          <A href="/about" activeClass="active" end="true">
-            About
-          </A>
-        </li>
-      </ul>
-    </nav>
+    <div className="navbar bg-base-100 py-0 px-3 min-h-0">
+      <div className="navbar-start" />
+      <div className="navbar-center">
+        <a
+          className="btn btn-ghost"
+          href="https://identinet.io/"
+          target="_blank"
+        >
+          <img
+            alt="logo"
+            src={
+              window.matchMedia("(prefers-color-scheme: dark)").matches
+                ? "/figures/identinet_long_background_dark.svg"
+                : "/figures/identinet_long_background_transparent.svg"
+            }
+            style="height: 1em; vertical-align: text-bottom"
+          />
+        </a>
+      </div>
+      <div className="navbar-end">
+        <div className="dropdown dropdown-end">
+          <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+            <div class="i-mdi-information-outline" />
+          </label>
+          <ul
+            tabIndex={0}
+            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+          >
+            <li>
+              <A href="/">Page</A>
+            </li>
+            <li>
+              <A href="/privacy">Privacy</A>
+            </li>
+            <li>
+              <A href="/about">About</A>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
   );
 }
