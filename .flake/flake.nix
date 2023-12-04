@@ -18,15 +18,18 @@
         unstable = nixpkgs_unstable.legacyPackages.${system};
         allOsPackages = with pkgs; [
           # Nix packages: https://search.nixos.org/packages
-          # Shared dependencies
-          nodejs_20 # node used for husky installation https://nodejs.org/en/
-          unstable.nushell # Nu Shell https://www.nushell.sh/
-          bashInteractive # bash used in scripts
+          # Development dependencies
+          firefox # Firefox browser
           just # Simple make replacement https://just.systems/
+          nodejs_20 # node used for husky installation https://nodejs.org/en/
+          oldChromium.chromium # Chromium browser
+          unstable.nushell # Nu Shell https://www.nushell.sh/
+          watchexec # Generic file watcher and command executor https://github.com/watchexec/watchexec
+
+          # Interactive dependencies
+          bashInteractive # bash used in scripts
           yq-go # YAML and JSON CLI processor https://mikefarah.gitbook.io/yq/
           jq # JSON CLI processor https://github.com/jqlang/jq
-          firefox # Firefox browser
-          oldChromium.chromium # Chromium browser
         ];
         linuxOnlyPackages = with pkgs;
           [

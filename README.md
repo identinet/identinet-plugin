@@ -180,7 +180,8 @@ Requirements:
 
 - [just](https://just.systems/) - Task runner like make
 - [nu](https://nushell.sh/) - Versatile shell (developed on version 0.80.0)
-- [NodeJS](https://nodejs.org/) - (developed on version 18.16.0)
+- [watchexec](https://github.com/watchexec/watchexec) - File watcher
+- [NodeJS](https://nodejs.org/) - (version 20)
 - [Google Chrome](https://www.google.com/chrome/index.html) or
   [Firefox](https://www.mozilla.org/en-US/firefox/)
 

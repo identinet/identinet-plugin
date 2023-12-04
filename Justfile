@@ -101,12 +101,19 @@ build:
 build-prod:
     NODE_ENV=production just _build
 
+_build-notify:
+    #!/usr/bin/env nu
+    let start = (date now)
+    just build
+    notify-send -a $"(date now | format date "%H:%M") - built identinet-plugin, duration: ((date now) - $start)"
+
 # Watch changes and rebuild appliaction
 build-watch:
     # FIXME: this isn't optimal - not all files are being watched,
     # ./background.js and ./public are missing. Furthermore, it would be great
     # to perform the build when the task is started
-    watch src {|| let start = (date now); just build; notify-send -a identinet-plugin $"(date now | format date "%H:%M:%S") - build complete - it took ((date now) - $start)"}
+    # watch src {|| let start = (date now); just build; notify-send -a identinet-plugin $"(date now | format date "%H:%M:%S") - build complete - it took ((date now) - $start)"}
+    watchexec -r -w src -w ./Justfile -w ./background.js -w ./public -w ./package.json -w ./vite.config.js -w ./rollup.config.js -w ./uno.config.ts -w ./manifest just _build-notify
 
 # Update changelog
 changelog:
