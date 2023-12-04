@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "identinet",
-  "description": "Displays and verifies decentralized identity information of websites",
+  "description": "Displays and verifies decentralized identity information of visited websites",
   "version": "SET VIA PACKAGE.JSON/version",
   "homepage_url": "https://github.com/identinet/identinet-plugin",
   "icons": {
@@ -12,7 +12,7 @@
     "128": "icons/favicon_128.png"
   },
   "action": {
-    "default_title": "identinet Decentralized Identity information",
+    "default_title": "identinet Decentralized Identity Information",
     "default_popup": "index.html",
     "default_icon": "icons/favicon_48.png"
   },

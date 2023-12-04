@@ -46,13 +46,13 @@ _build:
     let manifest_shared = (open manifest/manifest_shared.json | upsert version $package.version)
     # compile code
     let build_dir = $env.BUILD_DIR
-    rm -rf $build_dir
+    rm -rpf $build_dir
     mkdir $build_dir
     seq 1 2 | par-each {|it| if $it == 1 {
       yarn build
       mv dist/public/* $build_dir # solid-start always builds everything in the dist directory
-      rm $"($build_dir)/route-manifest.json" # file not needed
-      rm $"($build_dir)/ssr-manifest.json" # file not needed
+      rm -p $"($build_dir)/route-manifest.json" # file not needed
+      rm -p $"($build_dir)/ssr-manifest.json" # file not needed
     } else {
       yarn run rollup -c
       # ls *.js | par-each {|it| yarn run rollup -i $it.name --file $"($build_dir)/($it.name | path basename)" --format iife --inlineDynamicImports -p @rollup/plugin-commonjs -p rollup-plugin-polyfill-node -p @rollup/plugin-node-resolve}
@@ -61,13 +61,13 @@ _build:
     mv .build_background.js .build/background.js
     # prepare additional files
     let dist_dir = $env.DIST_DIR
-    rm -rf $dist_dir
+    rm -rpf $dist_dir
     mkdir $dist_dir
     cp LICENSE $build_dir
     # package plugin
     [firefox chrome source] | par-each {|browser|
       let build_dir_browser = $"($env.BUILD_DIR)_($browser)"
-      rm -rf $build_dir_browser
+      rm -rpf $build_dir_browser
       cp -r $build_dir $build_dir_browser
       if ($"manifest/manifest_($browser).json" | path exists) {$manifest_shared | merge (open $"manifest/manifest_($browser).json") | save -f $"($build_dir_browser)/manifest.json"}
       if $browser == "firefox" {
@@ -103,7 +103,10 @@ build-prod:
 
 # Watch changes and rebuild appliaction
 build-watch:
-    watch src {|| let start = (date now); just build; notify-send -a identinet-plugin $"(date now | date format "%H:%M:%S") - build complete - it took ((date now) - $start)"}
+    # FIXME: this isn't optimal - not all files are being watched,
+    # ./background.js and ./public are missing. Furthermore, it would be great
+    # to perform the build when the task is started
+    watch src {|| let start = (date now); just build; notify-send -a identinet-plugin $"(date now | format date "%H:%M:%S") - build complete - it took ((date now) - $start)"}
 
 # Update changelog
 changelog:
@@ -111,5 +114,5 @@ changelog:
 
 # Cleanup everything
 clean:
-    rm -rf  $env.DIST_DIR $env.BUILD_DIR
-    glob $"($env.BUILD_DIR)_*" | each {|it| rm -rf $it}
+    rm -rpf  $env.DIST_DIR $env.BUILD_DIR
+    glob $"($env.BUILD_DIR)_*" | each {|it| rm -rpf $it}

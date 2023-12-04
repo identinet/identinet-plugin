@@ -1,6 +1,7 @@
 // Documentation: https://vitejs.dev/config/
 import solid from "solid-start/vite";
 import solidSvg from "vite-plugin-solid-svg"; // Documentation: https://github.com/jfgodoy/vite-plugin-solid-svg
+import UnoCSS from "unocss/vite";
 import { defineConfig } from "vite";
 import UnoCSS from "unocss/vite";
 // import resolve from "@rollup/plugin-node-resolve";
@@ -34,7 +35,9 @@ export default defineConfig({
     // },
   },
   plugins: [
-    UnoCSS(),
+    UnoCSS({
+      injectReset: true,
+    }),
     solid({
       ssr: false,
       islands: false,
