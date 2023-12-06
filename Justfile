@@ -120,7 +120,7 @@ test-websites:
     #!/usr/bin/env nu
     let directory = "./test/website-certificates"
     mkdir $directory
-    let domains = ["id-broken.example.com", "id-plus.example.com", "id.example.com", "no-id.example.com"]
+    let domains = ["id-broken.example.com", "id-plus.example.com", "id-did-documentation.example.com", "id-web.example.com", "no-id.example.com"]
     $domains | each {|domain|
       if not ($"($directory)/($domain).pem" | path exists) {
         mkcert -cert-file $"($directory)/($domain).pem" -key-file $"($directory)/($domain).pem" $domain
