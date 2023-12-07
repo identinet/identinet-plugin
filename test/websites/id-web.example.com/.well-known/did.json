@@ -1,0 +1,32 @@
+{
+  "@context":
+  [
+    "https://www.w3.org/ns/did/v1",
+    "https://www.w3.org/ns/security/jwk/v1"
+  ],
+  "id": "did:web:id-web.example.com%3A8443",
+  "verificationMethod":
+  [
+    {
+      "id": "did:web:id-web.example.com%3A8443#SnRH-_DnOrKR597KXHgt6javP6bPeJZi9U1DoOXAyg4",
+      "type": "JsonWebKey",
+      "controller": "did:web:id-web.example.com%3A8443",
+      "publicKeyJwk":
+      {
+        "kty": "OKP",
+        "kid": "SnRH-_DnOrKR597KXHgt6javP6bPeJZi9U1DoOXAyg4",
+        "crv": "Ed25519",
+        "alg": "EdDSA",
+        "x": "KGHwynsaPOvF8e1bKysDRh9ege-QNoK2u9a5oA8l8go"
+      }
+    }
+  ],
+  "authentication":
+  [
+    "did:web:id-web.example.com%3A8443#SnRH-_DnOrKR597KXHgt6javP6bPeJZi9U1DoOXAyg4"
+  ],
+  "assertionMethod":
+  [
+    "did:web:id-web.example.com%3A8443#SnRH-_DnOrKR597KXHgt6javP6bPeJZi9U1DoOXAyg4"
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "@context":
+  [
+    "https://www.w3.org/ns/did/v1",
+    "https://www.w3.org/ns/security/jwk/v1"
+  ],
+  "id": "did:web:id-broken.example.com%3A8443",
+  "verificationMethod":
+  [
+    {
+      "id": "did:web:id-broken.example.com%3A8443#dqqkiu1wiQWE7T3MmssDV_-xiHCGu1xzzcafoXoCNUs",
+      "type": "JsonWebKey",
+      "controller": "did:web:id-broken.example.com%3A8443",
+      "publicKeyJwk":
+      {
+        "kty": "OKP",
+        "kid": "dqqkiu1wiQWE7T3MmssDV_-xiHCGu1xzzcafoXoCNUs",
+        "crv": "Ed25519",
+        "alg": "EdDSA",
+        "x": "M2RTG7I2_EMs1M4Tk1HZL_xE2fegtLkPywxs4OuO_38"
+      }
+    }
+  ],
+  "authentication":
+  [
+    "did:web:id-broken.example.com%3A8443#dqqkiu1wiQWE7T3MmssDV_-xiHCGu1xzzcafoXoCNUs"
+  ],
+  "assertionMethod":
+  [
+    "did:web:id-broken.example.com%3A8443#dqqkiu1wiQWE7T3MmssDV_-xiHCGu1xzzcafoXoCNUs"
+  ]
+}
