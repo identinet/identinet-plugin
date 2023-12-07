@@ -217,7 +217,7 @@ Dependencies for running the test websites locally:
        [instructions](https://developer.chrome.com/docs/extensions/mv3/getstarted/development-basics/#load-unpacked)
 4. Start website test server: `just test-websites`
    - Add the following entry to `/etc/hosts`:
-     `127.0.0.1 id-broken.example.com id-plus.example.com id.example.com no-id.example.com`
+     `127.0.0.1 id-broken.example.com id-plus.example.com id-web.example.com id-did-configuration.example.com no-id.example.com`
      - Then visit [id-plus.example.com](https://id-plus.example.com:8443)
 5. Start development
 6. Manually reload extension by clicking reload (Firefox) or update (Chrome) to
