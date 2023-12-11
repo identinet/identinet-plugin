@@ -34,9 +34,7 @@ export default defineConfig({
     // },
   },
   plugins: [
-    UnoCSS({
-      injectReset: true,
-    }),
+    UnoCSS(),
     solid({
       ssr: false,
       islands: false,

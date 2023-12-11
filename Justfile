@@ -65,7 +65,7 @@ _build:
     mkdir $dist_dir
     cp LICENSE $build_dir
     # package plugin
-    [firefox chrome source] | par-each {|browser|
+    [firefox source] | par-each {|browser|
       let build_dir_browser = $"($env.BUILD_DIR)_($browser)"
       rm -rpf $build_dir_browser
       cp -r $build_dir $build_dir_browser
@@ -93,7 +93,7 @@ _build:
     }
     print "done."
 
-# Build extension
+# Build extensio  n
 build:
     NODE_ENV=development just _build
 
@@ -113,7 +113,12 @@ build-watch:
     # ./background.js and ./public are missing. Furthermore, it would be great
     # to perform the build when the task is started
     # watch src {|| let start = (date now); just build; notify-send -a identinet-plugin $"(date now | format date "%H:%M:%S") - build complete - it took ((date now) - $start)"}
-    watchexec -r -w src -w ./Justfile -w ./background.js -w ./public -w ./package.json -w ./vite.config.js -w ./rollup.config.js -w ./uno.config.ts -w ./manifest just _build-notify
+    watchexec -h
+    #watchexec -r -w src -w ./Justfile -w ./background.js -w ./public -w ./package.json -w ./vite.config.js -w ./rollup.config.js -w ./uno.config.ts -w ./manifest just _build-notify
+
+# Watch changes in src/ directory (ignore hidden files) and rebuild application
+# build-watch:
+#     watch src --glob=[!.]* {|| let start = (date now); just build; notify-send -a identinet-plugin $"(date now | format date "%H:%M:%S") - build complete - it took ((date now) - $start)"}
 
 # Update changelog
 changelog:

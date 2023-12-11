@@ -12,6 +12,8 @@ import {
   Title,
 } from "solid-start";
 import Nav from "~/components/Nav.jsx";
+
+import "@unocss/reset/tailwind.css";
 import "virtual:uno.css";
 import "./root.css";
 
