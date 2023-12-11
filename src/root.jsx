@@ -17,9 +17,11 @@ import "@unocss/reset/tailwind.css";
 import "virtual:uno.css";
 import "./root.css";
 
+const isDevelopment = process.env.NODE_ENV == "development";
+
 export default function Root() {
   return (
-    <Html lang="en">
+    <Html lang="en" class={isDevelopment ? "isDev" : ""}>
       <Head>
         <Title>identinet-plugin</Title>
         <Meta charset="utf-8" />
@@ -32,11 +34,11 @@ export default function Root() {
               <Nav />
               <hr class="pb-3" />
             </header>
-            <div class="container px-3">
+            <main class="container px-3">
               <Routes>
                 <FileRoutes />
               </Routes>
-            </div>
+            </main>
           </ErrorBoundary>
         </Suspense>
         <Scripts />
