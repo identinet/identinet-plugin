@@ -35,13 +35,14 @@
     "@unocss/transformer-directives": "^0.57.7",
     "daisyui": "^3.9.4",
     "esbuild": "^0.14.54",
-    "postcss": "^8.4.21",
+    "postcss": "^8.4.28",
     "rollup": "^3.25.3",
     "rollup-plugin-polyfill-node": "^0.12.0",
-    "solid-start-node": "^0.2.19",
+    "solid-start-node": "^0.3.10",
     "unocss": "^0.57.7",
     "unocss-preset-daisy": "^7.0.0",
-    "vite": "^4.1.4",
+    "vite": "^4.4.9",
+    "vite-plugin-node-polyfills": "^0.17.0",
     "vite-plugin-solid-svg": "^0.6.4",
     "web-ext": "^7.6.2"
   },
@@ -50,8 +51,8 @@
     "@digitalbazaar/ed25519-signature-2018": "^4.0.0",
     "@digitalbazaar/ed25519-signature-2020": "^5.2.0",
     "@digitalbazaar/vc": "^6.0.1",
-    "@solidjs/meta": "^0.28.2",
-    "@solidjs/router": "^0.8.2",
+    "@solidjs/meta": "^0.29.1",
+    "@solidjs/router": "^0.8.3",
     "base58-universal": "^2.0.0",
     "base64url-universal": "^2.0.0",
     "daisyui": "^3.9.4",
@@ -60,8 +61,8 @@
     "jsonld-signatures": "^11.2.1",
     "sanctuary": "^3.1.0",
     "sanctuary-def": "^0.22.0",
-    "solid-js": "^1.7.2",
-    "solid-start": "^0.2.26",
+    "solid-js": "^1.8.5",
+    "solid-start": "^0.3.10",
     "undici": "^5.15.1",
     "unocss-preset-daisy": "^7.0.0"
   },
@@ -81,10 +82,22 @@
       "sourceType": "module"
     },
     "rules": {
-      "indent": ["error", 2],
-      "linebreak-style": ["error", "unix"],
-      "quotes": ["error", "single"],
-      "semi": ["error", "always"]
+      "indent": [
+        "error",
+        2
+      ],
+      "linebreak-style": [
+        "error",
+        "unix"
+      ],
+      "quotes": [
+        "error",
+        "single"
+      ],
+      "semi": [
+        "error",
+        "always"
+      ]
     }
   }
 }

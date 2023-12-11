@@ -7,9 +7,9 @@ export { verifyPresentation } from "./presentation.js";
  * Chrome or Firefox is used.
  */
 export let api;
-if (typeof chrome) {
+if (typeof chrome != "undefined") {
   api = chrome;
-} else {
+} else if (typeof browser != "undefined") {
   api = browser;
 }
 
@@ -33,6 +33,7 @@ export function url2DID(url) {
 }
 
 export async function getCurrentTab() {
+  if (!api) return [];
   // `tab` will either be a `tabs.Tab` instance or `undefined`.
   const [tab] = await api.tabs.query({
     active: true,

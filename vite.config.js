@@ -1,15 +1,15 @@
-// Documentation: https://vitejs.dev/config/
 import solid from "solid-start/vite";
 import solidSvg from "vite-plugin-solid-svg"; // Documentation: https://github.com/jfgodoy/vite-plugin-solid-svg
 import UnoCSS from "unocss/vite";
 import { defineConfig } from "vite";
-// import resolve from "@rollup/plugin-node-resolve";
-// import commonjs from "@rollup/plugin-commonjs";
-// import nodePolyfills from "rollup-plugin-polyfill-node";
+import { nodePolyfills } from "vite-plugin-node-polyfills";
 
 const isProduction = process.env.NODE_ENV == "production";
 
 export default defineConfig({
+  server: {
+    port: 3000,
+  },
   build: {
     sourcemap: isProduction ? false : "inline",
     // FIXME: solid-start doesn't seem to respect this setting
@@ -61,6 +61,9 @@ export default defineConfig({
           ],
         },
       },
+    }),
+    nodePolyfills({
+      include: ["utils"],
     }),
   ],
 });
