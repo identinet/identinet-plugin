@@ -74,11 +74,12 @@ body {
   overflow-y: hidden;
 }
 
+/* special styles for preview mode in HTML website during development */
 html.isDev {
   background-color: lightgray;
 }
 html.isDev body {
-  margin: auto;
+  margin: 20px auto 0;
   background-color: white;
   box-shadow: 10px 5px 5px gray;
 }

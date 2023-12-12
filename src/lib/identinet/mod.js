@@ -1,6 +1,10 @@
 import { S } from "../sanctuary/mod.js";
+import { idPlusItem } from "./fixtures/storageItems.js";
+
 export { convertJWKtoMultibase } from "./conversion.js";
 export { verifyPresentation } from "./presentation.js";
+
+const isDevelopment = process.env.NODE_ENV == "development";
 
 /**
  * api offers access to the browser's extension interface regardless of whether
@@ -11,6 +15,26 @@ if (typeof chrome != "undefined") {
   api = chrome;
 } else if (typeof browser != "undefined") {
   api = browser;
+} else {
+  api = {
+    tabs: {
+      query: async () => {
+        return [
+          {
+            id: 1,
+            url: "https://id-plus-example.identinet.io/",
+          },
+        ];
+      },
+    },
+    storage: {
+      local: {
+        get: async (did) => {
+          return idPlusItem;
+        },
+      },
+    },
+  };
 }
 
 /**
@@ -33,7 +57,6 @@ export function url2DID(url) {
 }
 
 export async function getCurrentTab() {
-  if (!api) return [];
   // `tab` will either be a `tabs.Tab` instance or `undefined`.
   const [tab] = await api.tabs.query({
     active: true,
