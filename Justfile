@@ -126,6 +126,9 @@ test-websites:
         mkcert -cert-file $"($directory)/($domain).pem" -key-file $"($directory)/($domain).pem" $domain
       }
     }
+    print "Test websites are up and running. Visit:"
+    $domains | each {|it| print $"- https://($it):8443"}
+    print ""
     caddy run
 
 # Update changelog
