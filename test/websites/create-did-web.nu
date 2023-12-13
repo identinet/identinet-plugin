@@ -17,13 +17,21 @@ def create-did-web [did: string, key: record] {
   {
     "@context": [
       "https://www.w3.org/ns/did/v1",
-      "https://www.w3.org/ns/security/jwk/v1",
+      # "https://www.w3.org/ns/security/jwk/v1",
+      "https://w3id.org/security/suites/ed25519-2020/v1",
+      {
+        "publicKeyJwk": {
+          "@id": "https://w3id.org/security#publicKeyJwk",
+          "@type": "@json"
+        }
+      }
     ],
     "id": $did,
     "verificationMethod": [
       {
         "id": $"($did)#($kid)",
-        "type": "JsonWebKey",
+        # "type": "JsonWebKey",
+        "type": "Ed25519VerificationKey2020",
         "controller": $did,
         "publicKeyJwk": ($key | default "" use | default "" d | reject d | reject use)
       }
