@@ -1,0 +1,59 @@
+{
+  "@context":
+  [
+    "https://www.w3.org/2018/credentials/v1"
+  ],
+  "type":
+  [
+    "VerifiablePresentation"
+  ],
+  "verifiableCredential":
+  [
+    {
+      "@context":
+      [
+        "https://www.w3.org/2018/credentials/v1"
+      ],
+      "type":
+      [
+        "VerifiableCredential",
+        "broken"
+      ],
+      "credentialSubject":
+      {
+        "id": "did:web:id-broken.example.com%3A8443"
+      },
+      "issuer": "did:web:id-broken.example.com%3A8443",
+      "issuanceDate": "2023-12-13T11:26:13Z",
+      "proof":
+      {
+        "@context":
+        [
+          "https://w3id.org/security/suites/jws-2020/v1"
+        ],
+        "type": "JsonWebSignature2020",
+        "proofPurpose": "assertionMethod",
+        "challenge": "8wuA5rex6USK",
+        "verificationMethod": "did:web:id-broken.example.com%3A8443#dqqkiu1wiQWE7T3MmssDV_-xiHCGu1xzzcafoXoCNUs",
+        "created": "2023-12-13T10:26:13.435462073Z",
+        "domain": "id-broken.example.com",
+        "jws": "eyJhbGciOiJFZERTQSIsImtpZCI6ImRxcWtpdTF3aVFXRTdUM01tc3NEVl8teGlIQ0d1MXh6emNhZm9Yb0NOVXMiLCJjcml0IjpbImI2NCJdLCJiNjQiOmZhbHNlfQ..20vNgUAFOwgDGGjEFwnDxUH5FaByucUSkgZKWHFJIDXgpesGry0Uf079iXq8y7AjipzGu3pORYBZtpoaQAYoBA"
+      }
+    }
+  ],
+  "proof":
+  {
+    "@context":
+    [
+      "https://w3id.org/security/suites/jws-2020/v1"
+    ],
+    "type": "JsonWebSignature2020",
+    "proofPurpose": "assertionMethod",
+    "challenge": "CCpWzPnzG1vt",
+    "verificationMethod": "did:web:id-broken.example.com%3A8443#dqqkiu1wiQWE7T3MmssDV_-xiHCGu1xzzcafoXoCNUs",
+    "created": "2023-12-13T10:26:13.609927303Z",
+    "domain": "id-broken.example.com",
+    "jws": "eyJhbGciOiJFZERTQSIsImtpZCI6ImRxcWtpdTF3aVFXRTdUM01tc3NEVl8teGlIQ0d1MXh6emNhZm9Yb0NOVXMiLCJjcml0IjpbImI2NCJdLCJiNjQiOmZhbHNlfQ..NmcI5DBSs4LH7G4aitgshHq9fEV2B_lN04Py5s1QNmRDSD3WWf3XkbNdm2UCUzmepjW9hDZYEVftRx6V4BvoDQ"
+  },
+  "holder": "did:web:id-broken.example.com%3A8443"
+}

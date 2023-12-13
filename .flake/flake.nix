@@ -3,6 +3,7 @@
   description = "Dependencies";
 
   # Due to bug in version 119 https://bugs.chromium.org/p/chromium/issues/detail?id=1498558&q=pack-extension&can=2
+  # Software versions: https://lazamar.co.uk/nix-versions/?channel=nixos-unstable&package=chromium
   inputs.nixpkgs_oldchromium.url =
     "github:NixOS/nixpkgs?rev=e49c28b3baa3a93bdadb8966dd128f9985ea0a09";
   inputs.nixpkgs_unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
