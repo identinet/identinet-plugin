@@ -14,5 +14,5 @@ Create and sign VC, pack it in a VP and sign it:
 
 ```
 $env.DID = did:web:id-plus.example.com%3A8443
-../create-vc-empty.nu $env.DID $env.DID | ../sign.nu private.jwk --challenge=8wuA5rex6USK --domain=id-plus.example.com | ../create-vp.nu $env.DID | ../sign.nu private.jwk  --challenge=CCpWzPnzG1vt --domain=id-plus.example.com
+../create-vc-empty.nu $env.DID $env.DID | ../sign.nu private.jwk | ../create-vp.nu $env.DID | ../sign.nu private.jwk  --challenge=id-plus.example.com --domain=id-plus.example.com
 ```
