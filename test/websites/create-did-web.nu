@@ -9,6 +9,7 @@ def generate-key [] {
 }
 
 # create-did-web creates a did:web DID.
+# @param {string} did - DID that will be created.
 # @param {Record} key - Key in JWK format that will be added to the DID. If present, the private key will not be added to the DID Documnent.
 # @returns {Record} - DID Document for the did:web DID.
 def create-did-web [did: string, key: record] {
@@ -36,7 +37,9 @@ def create-did-web [did: string, key: record] {
   }
 }
 
-
+# Creates a did:web DID document.
+# @param {string} did - DID that will be created.
+# @returns {string} - JSON encoded DID document.
 def main [did: string] {
   if not ($did | str starts-with "did:web:") {
     print -e "ERROR: only DID's starting with 'did:web:' are accepted."
