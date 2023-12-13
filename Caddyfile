@@ -1,51 +1,51 @@
 # Documentation: https://caddyserver.com/docs/caddyfile/directives
 
 {
-	http_port 8080
-	https_port 8443
+  http_port 8080
+  https_port 8443
 }
 
 id-broken.example.com {
-	file_server {
-      root ./test/websites/id-broken.example.com
-	}
-	tls {
-		load ./test/website-certificates/id-broken.example.com.pem
-	}
+  file_server {
+    root ./test/websites/id-broken.example.com
+  }
+  tls {
+    load ./test/website-certificates/id-broken.example.com.pem
+  }
 }
 
 id-plus.example.com {
-	file_server {
-      root ./test/websites/id-plus.example.com
-	}
-	tls {
-		load ./test/website-certificates/id-plus.example.com.pem
-	}
+  file_server {
+    root ./test/websites/id-plus.example.com
+  }
+  tls {
+    load ./test/website-certificates/id-plus.example.com.pem
+  }
 }
 
 id-web.example.com {
-	file_server {
-      root ./test/websites/id-web.example.com
-	}
-	tls {
-		load ./test/website-certificates/id-web.example.com.pem
-	}
+  file_server {
+    root ./test/websites/id-web.example.com
+  }
+  tls {
+    load ./test/website-certificates/id-web.example.com.pem
+  }
 }
 
 id-did-configuration.example.com {
-	file_server {
-      root ./test/websites/id-did-configuration.example.com
-	}
-	tls {
-		load ./test/website-certificates/id-did-configuration.example.com.pem
-	}
+  file_server {
+    root ./test/websites/id-did-configuration.example.com
+  }
+  tls {
+    load ./test/website-certificates/id-did-configuration.example.com.pem
+  }
 }
 
 no-id.example.com {
-	file_server {
-      root ./test/websites/no-id.example.com
-	}
-	tls {
-		load ./test/website-certificates/no-id.example.com.pem
-	}
+  file_server {
+    root ./test/websites/no-id.example.com
+  }
+  tls {
+    load ./test/website-certificates/no-id.example.com.pem
+  }
 }
