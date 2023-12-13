@@ -8,10 +8,12 @@ def create-vc-empty [issuer: string, subject: string] {
   {
     "@context": [
       "https://www.w3.org/2018/credentials/v1",
+      # INFO: thi context is required otherwise @digitalbazaar/vc fails
+      "https://w3id.org/security/suites/ed25519-2020/v1"
     ],
     "type": ["VerifiableCredential"],
     "issuer": $issuer,
-    "issuanceDate": (date now | format date "%Y-%m-%dT%H:%M:%SZ"),
+    "issuanceDate": (date now | date to-timezone UTC | format date "%Y-%m-%dT%H:%M:%SZ"),
     "credentialSubject": {
       "id": $subject,
     }

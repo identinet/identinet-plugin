@@ -8,6 +8,8 @@ def create-vp [holder: string, credentials: list<any>] {
   {
     "@context": [
       "https://www.w3.org/2018/credentials/v1",
+      # INFO: thi context is required otherwise @digitalbazaar/vc fails
+      "https://w3id.org/security/suites/ed25519-2020/v1"
     ],
     "type": ["VerifiablePresentation"],
     "holder": $holder,
