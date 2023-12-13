@@ -17,7 +17,9 @@ class DIDNotFoundError extends Error {
 const fetchPath = (pathname) => (url) => {
   const url_copy = new URL(url);
   url_copy.pathname = pathname;
-  return encaseP((url) => fetch(url, { mode: "no-cors" }))(url_copy);
+  return encaseP((url) => fetch(url, { mode: "no-cors", cache: "no-cache" }))(
+    url_copy,
+  );
 };
 
 /**
