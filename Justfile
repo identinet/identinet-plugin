@@ -1,3 +1,4 @@
+#!/usr/bin/env just --justfile
 # Documentation: https://just.systems/man/en/
 
 set shell := ["nu", "-c"]
@@ -105,7 +106,7 @@ _build-notify:
     #!/usr/bin/env nu
     let start = (date now)
     just build
-    notify-send -a $"(date now | format date "%H:%M") - built identinet-plugin, duration: ((date now) - $start)"
+    notify-send -a identinet-plugin $"(date now | format date "%H:%M") - built, duration: ((date now) - $start)"
 
 # Watch changes and rebuild appliaction
 build-watch:
