@@ -1,0 +1,9 @@
+{
+  "use": "sig",
+  "kty": "OKP",
+  "kid": "dqqkiu1wiQWE7T3MmssDV_-xiHCGu1xzzcafoXoCNUs",
+  "crv": "Ed25519",
+  "alg": "EdDSA",
+  "x": "M2RTG7I2_EMs1M4Tk1HZL_xE2fegtLkPywxs4OuO_38",
+  "d": "4bk7cUZ2Q6twsCmcauxOboIL0DKHoGH9mg9OFrFwjYw"
+}

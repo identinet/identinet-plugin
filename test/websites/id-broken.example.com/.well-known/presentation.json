@@ -1,0 +1,51 @@
+{
+  "@context":
+  [
+    "https://www.w3.org/2018/credentials/v1",
+    "https://w3id.org/security/suites/ed25519-2020/v1"
+  ],
+  "type":
+  [
+    "VerifiablePresentation",
+    "broken"
+  ],
+  "verifiableCredential":
+  [
+    {
+      "@context":
+      [
+        "https://www.w3.org/2018/credentials/v1",
+        "https://w3id.org/security/suites/ed25519-2020/v1"
+      ],
+      "type":
+      [
+        "VerifiableCredential"
+      ],
+      "credentialSubject":
+      {
+        "id": "did:web:id-broken.example.com%3A8443"
+      },
+      "issuer": "did:web:id-broken.example.com%3A8443",
+      "issuanceDate": "2023-12-13T16:16:29Z",
+      "proof":
+      {
+        "type": "Ed25519Signature2020",
+        "proofPurpose": "assertionMethod",
+        "proofValue": "z4BPitgMJWLJk4aKMaeDfBuKRtvTf9qw5STyqnXvDPtu5vfcbKdeeWDvmEhH21YdK6gaE3hTR7U66bVwnbG54k9Ha",
+        "verificationMethod": "did:web:id-broken.example.com%3A8443#dqqkiu1wiQWE7T3MmssDV_-xiHCGu1xzzcafoXoCNUs",
+        "created": "2023-12-13T16:16:30.099095985Z"
+      }
+    }
+  ],
+  "proof":
+  {
+    "type": "Ed25519Signature2020",
+    "proofPurpose": "authentication",
+    "proofValue": "z32Li4nR9iB2FfQBUEPpgooVF3vtkFZC5jn18fkjBqVMbXkqk8wtFPauvc8CZmjAos2crHN7RDt4EYM3wQpA9mJnp",
+    "challenge": "id-broken.example.com",
+    "verificationMethod": "did:web:id-broken.example.com%3A8443#dqqkiu1wiQWE7T3MmssDV_-xiHCGu1xzzcafoXoCNUs",
+    "created": "2023-12-13T16:16:30.274717492Z",
+    "domain": "id-broken.example.com"
+  },
+  "holder": "did:web:id-broken.example.com%3A8443"
+}

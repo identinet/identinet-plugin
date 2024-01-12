@@ -176,7 +176,7 @@ didkit presentation verify < presentation_signed.json
 
 ## Development
 
-Requirements:
+### Requirements
 
 - [just](https://just.systems/) - Task runner like make
 - [nu](https://nushell.sh/) - Versatile shell (developed on version 0.80.0)
@@ -185,13 +185,24 @@ Requirements:
 - [Google Chrome](https://www.google.com/chrome/index.html) or
   [Firefox](https://www.mozilla.org/en-US/firefox/)
 
-Steps to start development:
+Dependencies for running the test websites locally:
+
+- [mkcert](https://github.com/FiloSottile/mkcert) - Locally-trusted development
+  certificates
+  - Perform these steps manually:
+  - Install local CA: `mkcert -install`
+  - If needed, manually add the CA to
+    [Firefox](https://support.mozilla.org/en-US/kb/setting-certificate-authorities-firefox)
+    and [Chrome](https://support.google.com/chrome/a/answer/6342302?hl=en)
+- [caddy](https://caddyserver.com/) - HTTP server
+
+### Steps to start development
 
 1. Install node modules: `just deps`
-2. Build extension: `just build`
+2. Start extension builder: `just build-watch`
    - Firefox build directory: `.build_firefox`
    - Chrome build directory: `.build_chrome`
-3. Install plugin temporarily:
+3. Install browser plugin temporarily:
    - Firefox:
      - Open [about:debugging](about:debugging#/runtime/this-firefox) and select
        "This Firefox"
@@ -204,8 +215,12 @@ Steps to start development:
      - Click on "Load unpacked" and select the Chrome build directory
      - See more detailed
        [instructions](https://developer.chrome.com/docs/extensions/mv3/getstarted/development-basics/#load-unpacked)
-4. Start development
-5. Manually reload extension by clicking reload (Firefox) or update (Chrome) to
+4. Start website test server: `just test-websites`
+   - Add the following entry to `/etc/hosts`:
+     `127.0.0.1 id-broken.example.com id-plus.example.com id-web.example.com id-did-configuration.example.com no-id.example.com`
+     - Then visit [id-plus.example.com](https://id-plus.example.com:8443)
+5. Start development
+6. Manually reload extension by clicking reload (Firefox) or update (Chrome) to
    include changes
 
 ## Publish Updates

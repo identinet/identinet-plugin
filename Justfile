@@ -1,3 +1,4 @@
+#!/usr/bin/env just --justfile
 # Documentation: https://just.systems/man/en/
 
 set shell := ["nu", "-c"]
@@ -105,7 +106,7 @@ _build-notify:
     #!/usr/bin/env nu
     let start = (date now)
     just build
-    notify-send -a $"(date now | format date "%H:%M") - built identinet-plugin, duration: ((date now) - $start)"
+    notify-send -a identinet-plugin $"(date now | format date "%H:%M") - built, duration: ((date now) - $start)"
 
 # Watch changes and rebuild appliaction
 build-watch:
@@ -114,6 +115,22 @@ build-watch:
     # to perform the build when the task is started
     # watch src {|| let start = (date now); just build; notify-send -a identinet-plugin $"(date now | format date "%H:%M:%S") - build complete - it took ((date now) - $start)"}
     watchexec -r -w src -w ./Justfile -w ./background.js -w ./public -w ./package.json -w ./vite.config.js -w ./rollup.config.js -w ./uno.config.ts -w ./manifest just _build-notify
+
+# Run local test websites
+test-websites:
+    #!/usr/bin/env nu
+    let directory = "./test/website-certificates"
+    mkdir $directory
+    let domains = ["id-broken.example.com", "id-plus.example.com", "id-did-configuration.example.com", "id-web.example.com", "no-id.example.com"]
+    $domains | each {|domain|
+      if not ($"($directory)/($domain).pem" | path exists) {
+        mkcert -cert-file $"($directory)/($domain).pem" -key-file $"($directory)/($domain).pem" $domain
+      }
+    }
+    print "Test websites are up and running. Visit:"
+    $domains | each {|it| print $"- https://($it):8443"}
+    print ""
+    caddy run
 
 # Update changelog
 changelog:

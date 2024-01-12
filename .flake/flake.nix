@@ -3,6 +3,7 @@
   description = "Dependencies";
 
   # Due to bug in version 119 https://bugs.chromium.org/p/chromium/issues/detail?id=1498558&q=pack-extension&can=2
+  # Software versions: https://lazamar.co.uk/nix-versions/?channel=nixos-unstable&package=chromium
   inputs.nixpkgs_oldchromium.url =
     "github:NixOS/nixpkgs?rev=e49c28b3baa3a93bdadb8966dd128f9985ea0a09";
   inputs.nixpkgs_unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -18,12 +19,17 @@
         unstable = nixpkgs_unstable.legacyPackages.${system};
         allOsPackages = with pkgs; [
           # Nix packages: https://search.nixos.org/packages
-          # Development dependencies
+          # Build dependencies
           firefox # Firefox browser
           just # Simple make replacement https://just.systems/
           nodejs_20 # node used for husky installation https://nodejs.org/en/
           oldChromium.chromium # Chromium browser
           unstable.nushell # Nu Shell https://www.nushell.sh/
+
+          # Development dependencies
+          caddy # HTTP server https://caddyserver.com/
+          mkcert # Locally trusted development certificates https://github.com/FiloSottile/mkcert
+          step-cli # simplified certificate manager CLI https://smallstep.com/cli/
           watchexec # Generic file watcher and command executor https://github.com/watchexec/watchexec
 
           # Interactive dependencies
