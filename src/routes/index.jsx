@@ -2,7 +2,6 @@ import { S } from "~/lib/sanctuary/mod.js";
 import { api, getCurrentTab, url2DID } from "~/lib/identinet/mod.js";
 import { encaseP, promise, reject, resolve } from "fluture";
 import { createResource, For } from "solid-js";
-import { useRouteData } from "solid-start";
 import ExternalLink from "~/components/ExternalLink.jsx";
 import Credential from "~/components/Credential.jsx";
 
@@ -43,14 +42,9 @@ function getURL() {
   ])("dummy argument");
 }
 
-export function routeData({ _params }) {
+export default function Home() {
   const [url] = createResource(getURL);
   const [ssi_data] = createResource(url, fetchWebsiteData);
-  return [url, ssi_data];
-}
-
-export default function Home() {
-  const [url, ssi_data] = useRouteData();
   return (
     <>
       <h3 class="font-medium text-lg mb-2">
@@ -59,15 +53,13 @@ export default function Home() {
           class="inline"
           style="height: 1em; top: -0.1em; position: relative;"
           alt="not verified"
-          src={
-            ssi_data()?.verification_result?.verified === false
-              ? "icons/shield-xmark.svg"
-              : ssi_data()?.verification_result?.verified === true
-              ? "icons/shield-plus.svg"
-              : S.type(ssi_data()?.diddoc?.id).name === "String"
-              ? "icons/shield-check.svg"
-              : "icons/shield-slash.svg"
-          }
+          src={ssi_data()?.verification_result?.verified === false
+            ? "icons/shield-xmark.svg"
+            : ssi_data()?.verification_result?.verified === true
+            ? "icons/shield-plus.svg"
+            : S.type(ssi_data()?.diddoc?.id).name === "String"
+            ? "icons/shield-check.svg"
+            : "icons/shield-slash.svg"}
         />
       </h3>
       <div class="flex">
@@ -85,9 +77,11 @@ export default function Home() {
         <div class="w-1/5">DID:</div>
         <div class="w-4/5">
           <ExternalLink
-            url={`https:didlint.ownyourdata.eu/validate?did=${encodeURIComponent(
-              ssi_data()?.diddoc?.id
-            )}`}
+            url={`https:didlint.ownyourdata.eu/validate?did=${
+              encodeURIComponent(
+                ssi_data()?.diddoc?.id,
+              )
+            }`}
             title="Inspect DID"
             text={ssi_data()?.diddoc?.id}
             fallback="No DID."

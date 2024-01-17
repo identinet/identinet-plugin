@@ -1,5 +1,3 @@
-import { A } from "solid-start";
-
 export default function Nav() {
   return (
     <div className="navbar bg-base-100 py-0 px-3 min-h-0">
@@ -12,11 +10,9 @@ export default function Nav() {
         >
           <img
             alt="logo"
-            src={
-              window.matchMedia("(prefers-color-scheme: dark)").matches
-                ? "/figures/identinet_long_background_dark.svg"
-                : "/figures/identinet_long_background_transparent.svg"
-            }
+            src={window.matchMedia("(prefers-color-scheme: dark)").matches
+              ? "/figures/identinet_long_background_dark.svg"
+              : "/figures/identinet_long_background_transparent.svg"}
             style="height: 1em; vertical-align: text-bottom"
           />
         </a>
@@ -31,13 +27,13 @@ export default function Nav() {
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <A href="/">Page</A>
+              <a href="/">Page</a>
             </li>
             <li>
-              <A href="/privacy">Privacy</A>
+              <a href="/privacy">Privacy</a>
             </li>
             <li>
-              <A href="/about">About</A>
+              <a href="/about">About</a>
             </li>
           </ul>
         </div>

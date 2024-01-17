@@ -195,6 +195,7 @@ Dependencies for running the test websites locally:
     [Firefox](https://support.mozilla.org/en-US/kb/setting-certificate-authorities-firefox)
     and [Chrome](https://support.google.com/chrome/a/answer/6342302?hl=en)
 - [caddy](https://caddyserver.com/) - HTTP server
+- [htmlq](https://github.com/mgdm/htmlq) - Like jq, but for HTML
 
 ### Steps to start development
 
@@ -220,6 +221,8 @@ Dependencies for running the test websites locally:
      `127.0.0.1 id-broken.example.com id-plus.example.com id-web.example.com id-did-configuration.example.com no-id.example.com`
      - Then visit [id-plus.example.com](https://id-plus.example.com:8443)
 5. Start development
+   - For better debugging, read the
+     [Firefox Extension Workshop](https://extensionworkshop.com/documentation/develop/debugging/)
 6. Manually reload extension by clicking reload (Firefox) or update (Chrome) to
    include changes
 

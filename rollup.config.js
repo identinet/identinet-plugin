@@ -26,7 +26,11 @@ const template = {
   },
   plugins: [
     commonjs(),
-    nodePolyfills(),
+    nodePolyfills({
+      include: null, // null to also process internal references
+      sourceMap: isProduction ? false : "inline",
+    }),
+    // nodePolyfills({ include: ["utils", "process"] }),
     // json(),
     resolve(
       {

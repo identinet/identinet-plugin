@@ -17,6 +17,10 @@ help:
 deps:
     yarn
 
+# Start development server
+dev:
+    yarn run dev
+
 # Format Justfile
 format:
     @just --fmt --unstable
@@ -42,30 +46,33 @@ _build:
       mv $platform $platform_bak
       mv $platform_browser $platform
     }
-    # build manifest
+    ## build manifest
     let package = (open package.json)
     let manifest_shared = (open manifest/manifest_shared.json | upsert version $package.version)
-    # compile code
+    ## compile code
     let build_dir = $env.BUILD_DIR
     rm -rpf $build_dir
     mkdir $build_dir
-    seq 1 2 | par-each {|it| if $it == 1 {
-      yarn build
-      mv dist/public/* $build_dir # solid-start always builds everything in the dist directory
-      rm -p $"($build_dir)/route-manifest.json" # file not needed
-      rm -p $"($build_dir)/ssr-manifest.json" # file not needed
-    } else {
-      yarn run rollup -c
-      # ls *.js | par-each {|it| yarn run rollup -i $it.name --file $"($build_dir)/($it.name | path basename)" --format iife --inlineDynamicImports -p @rollup/plugin-commonjs -p rollup-plugin-polyfill-node -p @rollup/plugin-node-resolve}
-    }}
-    rmdir $"($build_dir)/.solid"
+    ## frontend build
+    yarn build
+    ^cp -r ./.output/public/* $build_dir # solid-start always builds everything in the dist directory
+    ^find $build_dir -name '*.gz' -exec rm -v {} +
+    ^find $build_dir -name '*.br' -exec rm -v {} +
+    # INFO: workaround for https://github.com/solidjs/solid-start/issues/1263
+    htmlq -f $"($build_dir)/index.html" -o $"($build_dir)/manifest.js" --text 'body > script:first-of-type'
+    htmlq -f $"($build_dir)/index.html" -r 'body > script:first-of-type' | sed -e 's#</div>#</div><script src="/manifest.js"></script>#' | save -f $"($build_dir)/index.html.new"
+    mv -f $"($build_dir)/index.html.new" $"($build_dir)/index.html"
+    ## backend build
+    yarn run rollup -c
+    # ls *.js | par-each {|it| yarn run rollup -i $it.name --file $"($build_dir)/($it.name | path basename)" --format iife --inlineDynamicImports -p @rollup/plugin-commonjs -p rollup-plugin-polyfill-node -p @rollup/plugin-node-resolve}
+    # rmdir $"($build_dir)/.solid"
     mv .build_background.js .build/background.js
-    # prepare additional files
+    ## prepare additional files
     let dist_dir = $env.DIST_DIR
     rm -rpf $dist_dir
     mkdir $dist_dir
     cp LICENSE $build_dir
-    # package plugin
+    ## package plugin
     [firefox chrome source] | par-each {|browser|
       let build_dir_browser = $"($env.BUILD_DIR)_($browser)"
       rm -rpf $build_dir_browser
@@ -79,7 +86,7 @@ _build:
         }
         mv $"($dist_dir)/($manifest_shared.name)-($manifest_shared.version).zip" $"($dist_dir)/($manifest_shared.name)-($manifest_shared.version)_($browser).zip"
       } else if $browser == "chrome" {
-        # build chrome extension
+        ## build chrome extension
         $manifest_shared | merge (open manifest/manifest_chrome.json) | save -f $"($build_dir_browser)/manifest.json"
         # See https://peter.sh/experiments/chromium-command-line-switches/
         chromium $"--pack-extension=($build_dir_browser)" --pack-extension-key=./identinet-plugin.pem
