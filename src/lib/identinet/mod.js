@@ -1,16 +1,40 @@
 import { S } from "../sanctuary/mod.js";
+import { idPlusItem } from "./fixtures/storageItems.js";
+
 export { convertJWKtoMultibase } from "./conversion.js";
 export { verifyPresentation } from "./presentation.js";
+
+const isDevelopment = process.env.NODE_ENV == "development";
 
 /**
  * api offers access to the browser's extension interface regardless of whether
  * Chrome or Firefox is used.
  */
 export let api;
-if (typeof chrome) {
+if (typeof chrome != "undefined") {
   api = chrome;
-} else {
+} else if (typeof browser != "undefined") {
   api = browser;
+} else {
+  api = {
+    tabs: {
+      query: async () => {
+        return [
+          {
+            id: 1,
+            url: "https://id-plus-example.identinet.io/",
+          },
+        ];
+      },
+    },
+    storage: {
+      local: {
+        get: async (did) => {
+          return idPlusItem;
+        },
+      },
+    },
+  };
 }
 
 /**

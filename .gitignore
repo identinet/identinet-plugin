@@ -158,3 +158,5 @@ gitignore
 Thumbs.db
 /.direnv/
 /test/website-certificates
+/.vinxi
+/.output
