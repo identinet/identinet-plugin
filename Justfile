@@ -17,10 +17,6 @@ help:
 deps:
     yarn
 
-# Start development server
-dev:
-    yarn run dev
-
 # Format Justfile
 format:
     @just --fmt --unstable
@@ -101,8 +97,8 @@ _build:
     }
     print "done."
 
-# Build extension
-build:
+# Build extension for development
+build-dev:
     NODE_ENV=development just _build
 
 # Build extension for production
@@ -124,7 +120,7 @@ build-watch:
     watchexec -r -w src -w ./Justfile -w ./background.js -w ./public -w ./package.json -w ./vite.config.js -w ./rollup.config.js -w ./uno.config.ts -w ./manifest just _build-notify
 
 # Run local test websites
-test-websites:
+run-websites:
     #!/usr/bin/env nu
     let directory = "./test/website-certificates"
     mkdir $directory
@@ -138,6 +134,10 @@ test-websites:
     $domains | each {|it| print $"- https://($it):8443"}
     print ""
     caddy run
+
+# Start preview server
+run-preview:
+    yarn run dev
 
 # Update changelog
 changelog:
