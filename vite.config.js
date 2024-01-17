@@ -5,7 +5,7 @@ import UnoCSS from "unocss/vite";
 import { defineConfig } from "@solidjs/start/config";
 import { nodePolyfills } from "vite-plugin-node-polyfills";
 
-const isProduction = process.env.NODE_ENV == "production";
+const isProduction = process.env.NODE_ENV === "production";
 
 const config = defineConfig({
   start: {

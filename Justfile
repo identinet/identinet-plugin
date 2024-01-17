@@ -56,8 +56,11 @@ _build:
     ## frontend build
     yarn build
     ^cp -r ./.output/public/* $build_dir # solid-start always builds everything in the dist directory
+    rm -rvpf $"($build_dir)/assets"
     ^find $build_dir -name '*.gz' -exec rm -v {} +
     ^find $build_dir -name '*.br' -exec rm -v {} +
+    ^find $build_dir -name '*.wasm' -exec rm -v {} +
+    ^find $build_dir -name '*.json' -exec rm -v {} +
     # INFO: workaround for https://github.com/solidjs/solid-start/issues/1263
     htmlq -f $"($build_dir)/index.html" -o $"($build_dir)/manifest.js" --text 'body > script:first-of-type'
     htmlq -f $"($build_dir)/index.html" -r 'body > script:first-of-type' | sed -e 's#</div>#</div><script src="/manifest.js"></script>#' | save -f $"($build_dir)/index.html.new"
