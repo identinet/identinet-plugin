@@ -91,12 +91,14 @@ export default function Home() {
       <hr class="my-3" />
       <h3 class="font-medium text-lg mb-2">Credentials</h3>
 
-      <For
-        each={ssi_data()?.presentation?.verifiableCredential || []}
-        fallback={<div>No claims.</div>}
-      >
-        {(credential, _index) => <Credential credential={credential} />}
-      </For>
+      <div class="flex flex-wrap gap-2">
+        <For
+          each={ssi_data()?.presentation?.verifiableCredential || []}
+          fallback={<div>No claims.</div>}
+        >
+          {(credential, _index) => <Credential credential={credential} />}
+        </For>
+      </div>
     </>
   );
 }

@@ -16,7 +16,7 @@ export default function App() {
         <Nav />
         <hr class="pb-3" />
       </header>
-      <main class="container px-3 font-sans">
+      <main class="container px-3 pb-3 font-sans">
         <Router root={(props) => <Suspense>{props.children}</Suspense>}>
           <ErrorBoundary
             fallback={(err, reset) => (
