@@ -70,11 +70,15 @@ body {
   overflow-y: hidden;
 }
 
+body,
 div#app {
   /* fix window size */
-  width: 400px;
-  height: 500px;
   min-height: 400px;
+  min-width: 400px;
+}
+
+div#app {
+  /* fix window size */
   max-width: 400px;
 }
 
