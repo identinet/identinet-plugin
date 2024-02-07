@@ -30,10 +30,18 @@ const fetchPath = (pathname) => (url) => {
  * @returns {number} Tab number.
  */
 const setIcon = (tabId) => (path) => {
-  api.action.setIcon({
-    path: path,
-    tabId,
-  });
+  if (!api.pageAction) {
+    // Chrome doesn't support page actions
+    api.action.setIcon({
+      path: path,
+      tabId,
+    });
+  } else {
+    api.pageAction.setIcon({
+      path: path,
+      tabId,
+    });
+  }
   return tabId;
 };
 
