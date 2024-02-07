@@ -4,9 +4,10 @@
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import nodePolyfills from "rollup-plugin-polyfill-node";
+import { terser } from "rollup-plugin-terser";
 // import json from "@rollup/plugin-json";
 
-const isProduction = process.env.NODE_ENV == "production";
+const isProduction = process.env.NODE_ENV === "production";
 
 const template = {
   input: "background.js",
@@ -22,6 +23,7 @@ const template = {
     file: ".build/background.js",
     sourcemap: isProduction ? false : "inline",
     inlineDynamicImports: true,
+    indent: false,
     format: "iife",
   },
   plugins: [
@@ -40,6 +42,7 @@ const template = {
         // preferBuiltins: false,
       },
     ),
+    terser(),
     // eslint(),
   ],
 };
