@@ -22,7 +22,7 @@ format:
     @just --fmt --unstable
 
 # Lint extension - only the firefox extension is linted at the moment
-lint: build
+lint: build-prod
     web-ext lint --source-dir=.build_firefox
 
 # Build extension
@@ -111,7 +111,7 @@ build-prod:
 _build-notify:
     #!/usr/bin/env nu
     let start = (date now)
-    just build
+    just _build
     notify-send -a identinet-plugin $"(date now | format date "%H:%M") - built, duration: ((date now) - $start)"
 
 # Watch changes and rebuild appliaction
