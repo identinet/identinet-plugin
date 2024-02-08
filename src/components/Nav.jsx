@@ -1,6 +1,7 @@
 import { A } from "@solidjs/router";
 
 export default function Nav() {
+  let menu;
   return (
     <div className="navbar bg-base-100 py-0 px-3 min-h-0">
       <div className="navbar-start" />
@@ -20,25 +21,26 @@ export default function Nav() {
         </a>
       </div>
       <div className="navbar-end">
-        <div className="dropdown dropdown-end">
-          <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-            <div class="i-mdi-information-outline" />
-          </label>
+        <details className="dropdown dropdown-end" ref={menu}>
+          <summary tabIndex={0} className="btn btn-ghost btn-circle avatar">
+            <div class="i-mdi-menu" />
+          </summary>
           <ul
+            onclick={() => menu.removeAttribute("open")}
             tabIndex={0}
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <A href="/">Page</A>
+              <A href="/" end={true}>SSI Information</A>
             </li>
             <li>
-              <A href="/privacy">Privacy</A>
+              <A href="/privacy" end={true}>Privacy</A>
             </li>
             <li>
-              <A href="/about">About</A>
+              <A href="/about" end={true}>About</A>
             </li>
           </ul>
-        </div>
+        </details>
       </div>
     </div>
   );
