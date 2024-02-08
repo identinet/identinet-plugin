@@ -9,24 +9,26 @@ import "@unocss/reset/tailwind.css";
 import "virtual:uno.css";
 import "./app.css";
 
+const Layout = (props) => (
+  <MetaProvider>
+    <header class="font-sans">
+      <Nav />
+      <hr class="pb-3" />
+    </header>
+    <main class="container px-3 font-sans">
+      <Suspense>
+        {props.children}
+      </Suspense>
+    </main>
+  </MetaProvider>
+);
+
 export default function App() {
   return (
-    <MetaProvider>
-      <header class="font-sans">
-        <Nav />
-        <hr class="pb-3" />
-      </header>
-      <main class="container px-3 font-sans">
-        <Router root={(props) => <Suspense>{props.children}</Suspense>}>
-          <ErrorBoundary
-            fallback={(err, reset) => (
-              <div onClick={reset}>Error: {err.toString()}</div>
-            )}
-          >
-            <FileRoutes />
-          </ErrorBoundary>
-        </Router>
-      </main>
-    </MetaProvider>
+    <Router
+      root={Layout}
+    >
+      <FileRoutes />
+    </Router>
   );
 }

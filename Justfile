@@ -57,6 +57,7 @@ _build:
     ^find $build_dir -name '*.br' -exec rm -v {} +
     ^find $build_dir -name '*.wasm' -exec rm -v {} +
     ^find $build_dir -name '*.json' -exec rm -v {} +
+    mv $"($build_dir)/index" $"($build_dir)/index.html"
     # INFO: workaround for https://github.com/solidjs/solid-start/issues/1263
     htmlq -f $"($build_dir)/index.html" -o $"($build_dir)/manifest.js" --text 'body > script:first-of-type'
     htmlq -f $"($build_dir)/index.html" -r 'body > script:first-of-type' | sed -e 's#</div>#</div><script src="/manifest.js"></script>#' | save -f $"($build_dir)/index.html.new"
