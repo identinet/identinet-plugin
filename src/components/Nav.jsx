@@ -1,3 +1,5 @@
+import { A } from "@solidjs/router";
+
 export default function Nav() {
   return (
     <div className="navbar bg-base-100 py-0 px-3 min-h-0">
@@ -27,13 +29,13 @@ export default function Nav() {
             className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <a href="/">Page</a>
+              <A href="/">Page</A>
             </li>
             <li>
-              <a href="/privacy">Privacy</a>
+              <A href="/privacy">Privacy</A>
             </li>
             <li>
-              <a href="/about">About</a>
+              <A href="/about">About</A>
             </li>
           </ul>
         </div>
