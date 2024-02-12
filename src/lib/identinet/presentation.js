@@ -31,7 +31,7 @@ export const verifyPresentation = (did_pair) => (presentation) => {
     new Ed25519Signature2020(),
   ];
   // customer loader that supports DID and verification method
-  const url = S.fst(did_pair);
+  // const url = S.fst(did_pair);
   const diddoc = S.snd(S.snd(did_pair));
   const did = diddoc?.id;
   const verificationMethods = S.pipe([
@@ -98,10 +98,10 @@ export const verifyPresentation = (did_pair) => (presentation) => {
   ])({
     suite,
     presentation,
-    presentationPurpose: new jsigs.purposes.AuthenticationProofPurpose({
+    presentationPurpose: new jsigs.purposes.AssertionProofPurpose({
       // controller: did,
-      domain: url.hostname,
-      challenge: url.hostname,
+      // domain: url.hostname,
+      // challenge: url.hostname,
     }),
     documentLoader,
   });
