@@ -11,29 +11,29 @@
       }
     }
   ],
-  "id": "did:web:id-plus.example.com%3A8443",
+  "id": "did:web:id-broken.localhost%3A8443",
   "verificationMethod":
   [
     {
-      "id": "did:web:id-plus.example.com%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
+      "id": "did:web:id-broken.localhost%3A8443#dqqkiu1wiQWE7T3MmssDV_-xiHCGu1xzzcafoXoCNUs",
       "type": "Ed25519VerificationKey2020",
-      "controller": "did:web:id-plus.example.com%3A8443",
+      "controller": "did:web:id-broken.localhost%3A8443",
       "publicKeyJwk":
       {
         "kty": "OKP",
-        "kid": "MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
+        "kid": "dqqkiu1wiQWE7T3MmssDV_-xiHCGu1xzzcafoXoCNUs",
         "crv": "Ed25519",
         "alg": "EdDSA",
-        "x": "6yUJruvdUvjwZpVdtxmAxoNI2UUc-LfL37cAZ09ffzs"
+        "x": "M2RTG7I2_EMs1M4Tk1HZL_xE2fegtLkPywxs4OuO_38"
       }
     }
   ],
   "authentication":
   [
-    "did:web:id-plus.example.com%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g"
+    "did:web:id-broken.localhost%3A8443#dqqkiu1wiQWE7T3MmssDV_-xiHCGu1xzzcafoXoCNUs"
   ],
   "assertionMethod":
   [
-    "did:web:id-plus.example.com%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g"
+    "did:web:id-broken.localhost%3A8443#dqqkiu1wiQWE7T3MmssDV_-xiHCGu1xzzcafoXoCNUs"
   ]
 }
