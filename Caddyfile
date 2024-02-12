@@ -5,47 +5,47 @@
   https_port 8443
 }
 
-id-broken.example.com {
+id-broken.localhost {
   file_server {
-    root ./test/websites/id-broken.example.com
+    root ./test/websites/id-broken.localhost
   }
   tls {
-    load ./test/website-certificates/id-broken.example.com.pem
+    load ./test/website-certificates/id-broken.localhost.pem
   }
 }
 
-id-plus.example.com {
+id-plus.localhost {
   file_server {
-    root ./test/websites/id-plus.example.com
+    root ./test/websites/id-plus.localhost
   }
   tls {
-    load ./test/website-certificates/id-plus.example.com.pem
+    load ./test/website-certificates/id-plus.localhost.pem
   }
 }
 
-id-web.example.com {
+id-web.localhost {
   file_server {
-    root ./test/websites/id-web.example.com
+    root ./test/websites/id-web.localhost
   }
   tls {
-    load ./test/website-certificates/id-web.example.com.pem
+    load ./test/website-certificates/id-web.localhost.pem
   }
 }
 
-id-did-configuration.example.com {
+id-did-configuration.localhost {
   file_server {
-    root ./test/websites/id-did-configuration.example.com
+    root ./test/websites/id-did-configuration.localhost
   }
   tls {
-    load ./test/website-certificates/id-did-configuration.example.com.pem
+    load ./test/website-certificates/id-did-configuration.localhost.pem
   }
 }
 
-no-id.example.com {
+no-id.localhost {
   file_server {
-    root ./test/websites/no-id.example.com
+    root ./test/websites/no-id.localhost
   }
   tls {
-    load ./test/website-certificates/no-id.example.com.pem
+    load ./test/website-certificates/no-id.localhost.pem
   }
 }
