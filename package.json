@@ -4,10 +4,10 @@
   "description": "Displays and verifies decentralized identity information of websites",
   "type": "module",
   "scripts": {
-    "dev": "vinxi dev",
+    "dev": "NODE_ENV=development vinxi dev",
     "build": "vinxi build",
     "start": "vinxi start",
-    "test": "vitest"
+    "test": "vitest --dir test"
   },
   "repository": {
     "type": "git",

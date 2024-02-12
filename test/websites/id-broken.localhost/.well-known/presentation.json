@@ -23,7 +23,7 @@
       "credentialSubject":
       {
         "id": "did:web:id-broken.localhost%3A8443",
-        "broken": "tempered attribute"
+        "broken": "tampered attribute"
       },
       "issuer": "did:web:id-broken.localhost%3A8443",
       "issuanceDate": "2024-02-12T12:39:20Z",

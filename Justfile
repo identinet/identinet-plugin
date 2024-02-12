@@ -127,7 +127,7 @@ build-watch BROWSER="all":
     # ./background.js and ./public are missing. Furthermore, it would be great
     # to perform the build when the task is started
     # watch src {|| let start = (date now); just build; notify-send -a identinet-plugin $"(date now | format date "%H:%M:%S") - build complete - it took ((date now) - $start)"}
-    watchexec -r -w src -w ./Justfile -w ./background.js -w ./public -w ./package.json -w ./vite.config.js -w ./rollup.config.js -w ./uno.config.ts -w ./manifest just _build-notify {{ BROWSER }}
+    watchexec -r -w src -w ./Justfile -w ./src-background -w ./public -w ./package.json -w ./vite.config.js -w ./rollup.config.js -w ./uno.config.ts -w ./manifest just _build-notify {{ BROWSER }}
 
 # Run local test websites
 run-websites:
@@ -144,6 +144,10 @@ run-websites:
     $domains | each {|it| print $"- https://($it):8443"}
     print ""
     caddy run
+
+# Runt tests
+test:
+    yarn run vitest --dir test
 
 # Start preview server
 run-preview:
