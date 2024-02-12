@@ -3,8 +3,7 @@ import { A } from "@solidjs/router";
 export default function Nav() {
   return (
     <div className="navbar bg-base-100 py-0 px-3 min-h-0">
-      <div className="navbar-start" />
-      <div className="navbar-center">
+      <div className="navbar-start">
         <a
           className="btn btn-ghost"
           href="https://identinet.io/"
@@ -15,9 +14,11 @@ export default function Nav() {
             src={window.matchMedia("(prefers-color-scheme: dark)").matches
               ? "/figures/identinet_long_background_dark.svg"
               : "/figures/identinet_long_background_transparent.svg"}
-            style="height: 1em; vertical-align: text-bottom"
+            class="h-1.3em"
           />
         </a>
+      </div>
+      <div className="navbar-center">
       </div>
       <div className="navbar-end">
         <div className="dropdown dropdown-end">
