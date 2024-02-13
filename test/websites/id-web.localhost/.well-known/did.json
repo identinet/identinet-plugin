@@ -11,13 +11,13 @@
       }
     }
   ],
-  "id": "did:web:id-web.example.com%3A8443",
+  "id": "did:web:id-web.localhost%3A8443",
   "verificationMethod":
   [
     {
-      "id": "did:web:id-web.example.com%3A8443#SnRH-_DnOrKR597KXHgt6javP6bPeJZi9U1DoOXAyg4",
+      "id": "did:web:id-web.localhost%3A8443#SnRH-_DnOrKR597KXHgt6javP6bPeJZi9U1DoOXAyg4",
       "type": "Ed25519VerificationKey2020",
-      "controller": "did:web:id-web.example.com%3A8443",
+      "controller": "did:web:id-web.localhost%3A8443",
       "publicKeyJwk":
       {
         "kty": "OKP",
@@ -30,10 +30,10 @@
   ],
   "authentication":
   [
-    "did:web:id-web.example.com%3A8443#SnRH-_DnOrKR597KXHgt6javP6bPeJZi9U1DoOXAyg4"
+    "did:web:id-web.localhost%3A8443#SnRH-_DnOrKR597KXHgt6javP6bPeJZi9U1DoOXAyg4"
   ],
   "assertionMethod":
   [
-    "did:web:id-web.example.com%3A8443#SnRH-_DnOrKR597KXHgt6javP6bPeJZi9U1DoOXAyg4"
+    "did:web:id-web.localhost%3A8443#SnRH-_DnOrKR597KXHgt6javP6bPeJZi9U1DoOXAyg4"
   ]
 }

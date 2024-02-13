@@ -15,24 +15,20 @@ import {
 /**
  * verifyPresentation verifies a presentation.
  *
- * @param {Pair<URL,Pair<string,object>>} pair - Pair that consists of the URL
- * and the DID and DID document.
+ * @param {DIDDoc} diddoc - W3C DID document.
  * @param {object} presentation - Presentation object that shall be verified.
- * @returns {Future<Pair<object,object>>} - Returns the presentation and the
+ * @returns {Future<Pair<object,object>,Error>} - Returns the presentation and the
  * verifcation result as a Pair otherwise an error. The verification result
  * still needs to be checked since a failure to verify the presentation will
  * not lead to a rejected Future.
  */
-export const verifyPresentation = (did_pair) => (presentation) => {
+export const verifyPresentation = (diddoc) => (presentation) => {
   // TODO: add support for ECDSA
   // TODO: add support for JWS - no implementation available yet, see https://github.com/w3c/vc-jws-2020
   const suite = [
     new Ed25519Signature2018(),
     new Ed25519Signature2020(),
   ];
-  // customer loader that supports DID and verification method
-  const url = S.fst(did_pair);
-  const diddoc = S.snd(S.snd(did_pair));
   const did = diddoc?.id;
   const verificationMethods = S.pipe([
     S.get(S.is($.Array($.NonEmpty($.String))))("assertionMethod"),
@@ -92,16 +88,18 @@ export const verifyPresentation = (did_pair) => (presentation) => {
     }
     return defaultDocumentLoader(url);
   });
+  // Verifiy presentation
+  // TODO: ensure that holder and credentialSubject.id are set to DID, otherwise fail.
   return S.pipe([
     encaseP(verify),
     S.map(S.Pair(presentation)),
   ])({
     suite,
     presentation,
-    presentationPurpose: new jsigs.purposes.AuthenticationProofPurpose({
+    presentationPurpose: new jsigs.purposes.AssertionProofPurpose({
       // controller: did,
-      domain: url.hostname,
-      challenge: url.hostname,
+      // domain: url.hostname,
+      // challenge: url.hostname,
     }),
     documentLoader,
   });

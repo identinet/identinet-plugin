@@ -1,10 +1,9 @@
 import { S } from "../sanctuary/mod.js";
-import { idPlusItem } from "./fixtures/storageItems.js";
 
 export { convertJWKtoMultibase } from "./conversion.js";
 export { verifyPresentation } from "./presentation.js";
 
-const isDevelopment = process.env.NODE_ENV == "development";
+const isDevelopment = process.env.NODE_ENV === "development";
 
 /**
  * api offers access to the browser's extension interface regardless of whether
@@ -15,37 +14,47 @@ if (typeof chrome != "undefined") {
   api = chrome;
 } else if (typeof browser != "undefined") {
   api = browser;
-} else {
-  api = {
-    tabs: {
-      query: async () => {
-        return [
-          {
-            id: 1,
-            url: "https://id-plus-example.identinet.io/",
-          },
-        ];
-      },
-    },
-    storage: {
-      local: {
-        get: async (did) => {
-          return idPlusItem;
-        },
-      },
-    },
-  };
+} else if (isDevelopment) {
+  // TODO: somehow, inject this dynamically into vinxi. Currently, it breaks plugin builds
+  // const { storage } = await import("./fixtures/storageItems.js");
+  // let did = S.keys(storage)[0];
+  // api = {
+  //   store: storage,
+  //   tabs: {
+  //     query: async () => {
+  //       return [
+  //         {
+  //           id: 1,
+  //           url: "https://id-plus.localhost:8443/",
+  //         },
+  //       ];
+  //     },
+  //   },
+  //   storage: {
+  //     local: {
+  //       get: (_did) => Promise.resolve({ [_did]: storage[did] }),
+  //       getKeys: () => S.keys(storage),
+  //       setKey: (_did) => did = _did,
+  //       getKey: () => did,
+  //     },
+  //   },
+  // };
 }
+
+/**
+ * A W3C DID.
+ * @typedef {string} DID
+ */
 
 /**
  * url2DID takes a URL and derives the did:web DID and a new URL object that can
  * be used for interacting with the DID.
  *
- * @param {URL} url - An URL object that's used to derive the did:web DID.
- * @returns {Either<Pair<String,URL>>} - returns the DID and a new URL object.
+ * @param {URL} url An URL object that's used to derive the did:web DID.
+ * @returns {Either<Pair<DID,URL>>} returns the DID and a new URL object.
  */
 export function url2DID(url) {
-  if (url.protocol != "https:") {
+  if (!isDevelopment && url.protocol != "https:") {
     return S.Left(new Error("URL protocol not support"));
   }
   const protocol = "https";

@@ -1,7 +1,18 @@
-import { verifyPresentation } from "./src/lib/identinet/mod.js";
-import { $, log, S } from "./src/lib/sanctuary/mod.js";
-import { api, getCurrentTab, url2DID } from "./src/lib/identinet/mod.js";
-import { bichain, chainRej, encaseP, promise, reject, resolve } from "fluture";
+import { $, log, S } from "../src/lib/sanctuary/mod.js";
+import { api, getCurrentTab, url2DID } from "../src/lib/identinet/mod.js";
+import {
+  bichain,
+  chainRej,
+  encaseP,
+  parallel,
+  promise,
+  reject,
+  resolve,
+} from "fluture";
+import {
+  fetchAndVerifyPresentation,
+  getLinkedPresentationURLs,
+} from "./utils.js";
 
 class DIDNotFoundError extends Error {
 }
@@ -58,31 +69,27 @@ const setIconXmark = (tabId) => {
  * store. It ensures that passed in DID matches the one in the document
  * or returns an error.
  *
- * @param {Pair<string,JSON>} did_pair - The DID and the document that shall be stored for.
- * @returns {Future<string,Error>} returns the DID that the document has been stored at.
+ * @param {Object} diddoc - The DID document that shall be stored.
+ * @returns {Future<Object,Error>} returns the DID document has been stored.
  */
-const storeDIDDoc = (did_pair) => {
-  const did = S.fst(did_pair);
-  const diddoc = S.snd(did_pair);
-  if (diddoc?.id !== did) {
-    return reject("DID document doesn't match expected DID");
-  }
+const storeDIDDoc = (diddoc) => {
+  const did = diddoc.id;
   return S.pipe([
     encaseP((did) => api.storage.local.get(did)),
     // S.map(log("get did store")),
     chainRej((_err) => ({})), // in case no data is in the store, fall back on an empty dataset
     S.chain(encaseP((stored_data) =>
       api.storage.local.set({
-        [did]: { diddoc, ...stored_data[did] },
+        [did]: { diddoc },
       })
     )),
     // S.map(log("result did?")),
-    S.map(() => did),
+    S.map(() => diddoc),
   ])(did);
 };
 
 /**
- * storePresentation stores the Veriable Presentation from a response object in
+ * storePresentations stores the Veriable Presentations from a response object in
  * the local store.
  *
  * @param {string} did - The DID that the presentation shall be stored for.
@@ -91,7 +98,8 @@ const storeDIDDoc = (did_pair) => {
  * @returns {Future<string,Error>} returns the DID that the presentation has
  * been stored at.
  */
-const storePresentation = (did) => (presentation_and_result) => {
+const storePresentations = (did) => (presentations) => {
+  console.log("storing", did, presentations);
   return S.pipe([
     encaseP((did) => api.storage.local.get(did)),
     // S.map(log("get store")),
@@ -99,8 +107,10 @@ const storePresentation = (did) => (presentation_and_result) => {
     S.chain(encaseP((stored_data) =>
       api.storage.local.set({
         [did]: {
-          presentation: S.fst(presentation_and_result),
-          verification_result: S.snd(presentation_and_result),
+          presentations: S.map((presentation_result) => ({
+            presentation: S.fst(presentation_result),
+            verification_result: S.snd(presentation_result),
+          }))(presentations),
           ...stored_data[did],
         },
       })
@@ -111,22 +121,36 @@ const storePresentation = (did) => (presentation_and_result) => {
 };
 
 /**
+ * W3C DID.
+ * @typedef {string} DID
+ */
+
+/**
+ * W3C DID Document.
+ * @typedef {object} DIDDoc
+ */
+
+/**
+ * W3C DID Document.
+ * @typedef {object} Future
+ */
+
+/**
  * getDIDDocForURL retrieves the DID Document for a given URL.
  *
- * @param {URL} url - The URL that shall be inspected for a DID Document.
- * @returns {Future<Pair<URL,Pair<did,diddoc>>,Error>} - If successful, the url
- * with did and diddoc will be returned.
+ * @param {URL} url The URL that shall be inspected for a DID Document.
+ * @returns {Future<Pair<URL,Object>,Error>} If successful, url and {did, diddoc} will be returned.
  */
-const getDIDDocForURL =
-  // TODO: migrate to https://identity.foundation/.well-known/resources/did-configuration/
-  S.pipe([
+function getDIDDocForURL(url) {
+  return S.pipe([
     // domain to DID
     url2DID,
     // fetch DID doc
     S.either(reject)(resolve),
     S.chain(
-      (did_pair) =>
+      (url_did_pair) =>
         S.pipe([
+          // TODO: add support for https://identity.foundation/.well-known/resources/did-configuration/
           // TODO: optimize overfetching
           fetchPath("/.well-known/did.json"),
           S.chain(
@@ -135,106 +159,105 @@ const getDIDDocForURL =
             ),
           ),
           S.chain(encaseP((response) => response.json())),
-          S.map((diddoc) =>
-            S.Pair(S.snd(did_pair))(S.Pair(S.fst(did_pair))(diddoc))
-          ),
-        ])(S.snd(did_pair)),
+          S.map((
+            diddoc,
+          ) => (S.Pair(url)({ did: S.fst(url_did_pair), diddoc }))),
+        ])(S.snd(url_did_pair)),
     ),
-  ]);
+  ])(url);
+}
 
 /**
- * getPresentationForURL retrieves the presentation for a given URL.
- *
+ * updateDID retrieves DID and LinkedVerifiablePresentation data for a website.
+ * @param {number} - tabId Tab number.
  * @param {URL} url - The URL that shall be inspected for a Presentation.
- * @returns {Future<object,Error>} - Returns the JSON endoced the presentation object.
+ * @returns {Promise<DID,Error>} DID for the URL/tab.
  */
-const getPresentationForURL = S.pipe([
-  // [x] fetch presentation
-  // TODO: only fetch the presentation if it's referenced in the DID
-  // document - verifiable data registry
-  fetchPath("/.well-known/presentation.json"),
-  S.chain(
-    S.ifElse((response) => response.ok)(
-      resolve,
-      // (response) => {
-      //   setIconXmark(tabId);
-      //   return resolve(response);
-      // },
-    )((response) => reject(new Error("failed to fetch presentation"))),
-  ),
-  // [i] verify presentation and VCs
-  S.chain(encaseP((response) => response.json())),
-]);
-// [ ] ui: pull in current status and display something
-
 const updateDID = (tabId) => (url) => {
-  setIconSlash(tabId);
+  let setIcon = setIconSlash;
   return S.pipe([
+    // Fetch DID document
+    // ------------------
     getDIDDocForURL,
-    // store diddoc in local cache - {did: {doc_verifed: bool, presentation: {}, persentation_verified}}
-    S.chain((did_pair) =>
-      S.pipe([
-        S.snd,
-        storeDIDDoc,
-        // update action icon
-        S.map(() => {
-          setIconCheck(tabId);
-          return did_pair;
-        }),
-      ])(did_pair)
-    ),
-    bichain((err) => {
-      if (err instanceof DIDNotFoundError) {
-        setIconSlash(tabId);
-        return resolve("DID document not found");
+    S.chain((url_did_pair) => {
+      const { did, diddoc } = S.snd(url_did_pair);
+      if (diddoc?.id !== did) {
+        return reject("DID document doesn't match expected DID");
       }
-      // icon is set at the the end of the update function, don't do it here
-      console.error(err);
-      return reject("An error occurred while accessing DID document");
-    })((url_did_pair) =>
+      return resolve(diddoc);
+    }),
+    // store diddoc in local cache - {did: {doc_verifed: bool, presentation: {}, persentation_verified}}
+    S.chain(
       S.pipe([
-        getPresentationForURL,
-        bichain(
-          // ignore fetch errors as they are expected, not every don't domain
-          // offers a presentation.json
-          resolve,
-        )(S.pipe([
-          // [x] verify presentation
-          verifyPresentation(url_did_pair),
-          // S.map(log("verified")),
-          S.chain((result_pair) =>
-            S.pipe([
+        storeDIDDoc,
+        S.map((diddoc) => {
+          console.log("stored diddoc", diddoc);
+          // update action icon
+          setIcon = setIconCheck;
+          return diddoc;
+        }),
+      ]),
+    ),
+    // Fetch linked presentations
+    // --------------------------
+    bichain(
+      (err) => {
+        if (err instanceof DIDNotFoundError) {
+          return resolve("DID document not found");
+        }
+        // icon is set at the the end of the update function, don't do it here
+        console.error(err);
+        return reject("An error occurred while accessing DID document");
+      },
+    )(
+      (diddoc) =>
+        S.pipe([
+          getLinkedPresentationURLs,
+          S.map(log("getLinkedPresentationURLs")),
+          S.map(fetchAndVerifyPresentation(diddoc)),
+          parallel(5),
+          S.map(log("results")),
+          S.chain((presentations) => {
+            if (presentations.length === 0) {
+              // DID has no linked presentations
+              return resolve(diddoc.id);
+            }
+            return S.pipe([
               // [x] store VP and result in local cache
-              storePresentation(S.fst(S.snd(url_did_pair))),
+              storePresentations(diddoc.id),
               // [x] update action icon
               S.chain((did) => {
-                const verification_result = S.snd(result_pair);
-                if (
-                  verification_result?.error?.errors?.length >= 0 ||
-                  verification_result?.verified !== true
-                ) {
-                  return reject(verification_result);
+                const verified = S.map((presentation_result) => {
+                  const result = S.snd(presentation_result);
+                  return result?.error?.errors?.length >= 0 ||
+                    result?.verified !== true;
+                })(presentations);
+                if (S.all((v) => v === true)(verified)) {
+                  return reject(presentations);
                 } else {
-                  setIconPlus(tabId);
+                  setIcon = setIconPlus;
                 }
                 return resolve(did);
               }),
-            ])(result_pair)
-          ),
-        ])),
-      ])(S.fst(url_did_pair))
+            ])(presentations);
+          }),
+        ])(diddoc),
     ),
+    // Error handling
+    // --------------------------
     chainRej((err) => {
-      setIconXmark(tabId);
+      setIcon = setIconXmark;
       console.error(err);
       return resolve("An error occurred"); // reconcile all errors so there are no uncaught rejected promises around
     }),
-    bichain((err) => {
+    S.bimap((err) => {
       // log("err")(err);
-      return reject(err);
+      setIcon(tabId);
+      return err;
     })((res) => {
       // log("res")(res);
-      return resolve(res);
+      setIcon(tabId);
+      return res;
     }),
     promise,
   ])(url);
