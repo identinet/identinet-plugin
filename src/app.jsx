@@ -18,25 +18,28 @@ const Layout = (props) => {
     <MetaProvider>
       <header class="font-sans">
         <Show when={isDevelopment}>
-          Select DIDs from storage:
-          <ul class="list-circle list-inside">
-            <For each={api.storage.local.getKeys()}>
-              {(did) => (
-                <li>
-                  <a
-                    class="link"
-                    href={`#`}
-                    onclick={() => {
-                      api.storage.local.setKey(did);
-                      forceRefetch(!fetchStatus());
-                    }}
-                  >
-                    {did}
-                  </a>
-                </li>
-              )}
-            </For>
-          </ul>
+          <div class="p-3 bg-#eee opacity-80">
+            Dev mode! Select DIDs:
+            <ul class="list-circle list-inside">
+              <For each={api.storage.local.getKeys()}>
+                {(did) => (
+                  <li>
+                    <a
+                      class="link"
+                      href={`#`}
+                      onclick={() => {
+                        api.storage.local.setKey(did);
+                        forceRefetch(!fetchStatus());
+                      }}
+                    >
+                      {did}
+                    </a>
+                  </li>
+                )}
+              </For>
+            </ul>
+          </div>
+          <hr />
         </Show>
         <Nav />
         <hr />
