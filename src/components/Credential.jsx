@@ -9,15 +9,28 @@ export default function Credential(props) {
     minute: "numeric",
     second: "numeric",
   };
+  let checked = false;
   const formatter = Intl.DateTimeFormat(navigator.language, options);
   return (
-    <div className="collapse collapse-arrow border border-base-300">
-      <input type="radio" name="credential-accordion-1" />
-      <div className="collapse-title text-lg font-medium">
+    <div class="collapse collapse-arrow border border-base-300">
+      <input
+        type="radio"
+        name="credential-accordion"
+        onclick={(e) => {
+          // close accordion upon click
+          if (checked) {
+            checked = e.target.checked = !checked;
+          }
+        }}
+        onchange={(e) => {
+          checked = e.target.checked;
+        }}
+      />
+      <div class="collapse-title text-lg font-medium">
         {props.credential?.issuer || "No Issuer."}
       </div>
-      <div className="collapse-content grid">
-        <div style="grid-template-columns: 25% 75%;" className="text-sm grid">
+      <div class="collapse-content grid">
+        <div style="grid-template-columns: 25% 75%;" class="text-sm grid">
           <div>Type:</div>
           <div>{props.credential?.type?.join(", ")}</div>
           <div>Issuer:</div>
@@ -34,21 +47,21 @@ export default function Credential(props) {
             <div>{formatter.format(new Date(props.credential?.validFrom))}</div>
           </Show>
         </div>
-        <div className="divider">Claims</div>
+        <div class="divider">Claims</div>
         <For
           each={S.pipe([
             S.ifElse((claims) => S.type(claims).name === "Undefined")(() => [])(
-              (claims) => (S.type(claims).name === "Array" ? claims : [claims])
+              (claims) => (S.type(claims).name === "Array" ? claims : [claims]),
             ),
           ])(props.credential?.credentialSubject)}
         >
           {(claim, _index) => (
-            <div className="flex gap-2 overflow-x-scroll">
+            <div class="flex gap-2 overflow-x-scroll">
               <For each={Object.keys(claim)}>
                 {(key, index) => (
-                  <div className="card card-compact w-36 bg-base-200">
-                    <div className="card-body">
-                      <h2 className="card-title text-sm">{key}</h2>
+                  <div class="card card-compact w-36 bg-base-200">
+                    <div class="card-body">
+                      <h2 class="card-title text-sm">{key}</h2>
                       <p class="text-ellipsis overflow-hidden">{claim[key]}</p>
                     </div>
                   </div>
