@@ -10,9 +10,11 @@ const isDevelopment = process.env.NODE_ENV === "development";
  * Chrome or Firefox is used.
  */
 export let api;
-if (typeof chrome != "undefined") {
+if (typeof chrome !== "undefined" && typeof chrome?.storage !== "undefined") {
   api = chrome;
-} else if (typeof browser != "undefined") {
+} else if (
+  typeof browser !== "undefined" && typeof browser?.storage !== "undefined"
+) {
   api = browser;
 } else if (isDevelopment) {
   // TODO: somehow, inject this dynamically into vinxi. Currently, it breaks plugin builds
