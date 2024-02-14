@@ -7,5 +7,14 @@
       "id": "extension@identinet.io",
       "strict_min_version": "109.0"
     }
+  },
+  "page_action": {
+    "default_title": "identinet Decentralized Identity Information",
+    "default_popup": "index.html",
+    "default_icon": {
+      "19": "icons/favicon_19.png",
+      "38": "icons/favicon_38.png"
+    },
+    "show_matches": ["https://*/*"]
   }
 }

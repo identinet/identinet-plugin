@@ -1,7 +1,15 @@
 {
+  "author": {
+    "email": "janchristoph.ebersbach@gmail.com"
+  },
   "background": {
     "service_worker": "background.js",
     "type": "module"
   },
-  "minimum_chrome_version": "92"
+  "minimum_chrome_version": "92",
+  "action": {
+    "default_title": "identinet Decentralized Identity Information",
+    "default_popup": "index.html",
+    "default_icon": "icons/favicon_48.png"
+  }
 }

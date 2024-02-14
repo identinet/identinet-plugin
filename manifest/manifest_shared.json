@@ -11,11 +11,6 @@
     "96": "icons/favicon_96.png",
     "128": "icons/favicon_128.png"
   },
-  "action": {
-    "default_title": "identinet Decentralized Identity Information",
-    "default_popup": "index.html",
-    "default_icon": "icons/favicon_48.png"
-  },
   "permissions": [
     "activeTab",
     "tabs",
