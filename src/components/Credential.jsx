@@ -1,9 +1,15 @@
 import { S } from "~/lib/sanctuary/mod.js";
 import { Show } from "solid-js";
 export default function Credential(props) {
+  if (!props.credential) {
+    console.warn("Bad credential", props);
+    return <div class="badge badge-error badge-outline">Something is wrong with this credential</div>;
+  }
+
+  const credential = props.credential;
   const options = {
     year: "numeric",
-    month: "long",
+    month: "short",
     day: "numeric",
     hour: "numeric",
     minute: "numeric",
@@ -11,6 +17,7 @@ export default function Credential(props) {
   };
   let checked = false;
   const formatter = Intl.DateTimeFormat(navigator.language, options);
+
   return (
     <div class="collapse collapse-arrow border border-base-300">
       <input
@@ -26,34 +33,36 @@ export default function Credential(props) {
           checked = e.target.checked;
         }}
       />
-      <div class="collapse-title text-lg font-medium">
-        {props.credential?.issuer || "No Issuer."}
+      <div class="collapse-title text-lg font-medium flex flex-col">
+        {credential.type?.join(", ") || "Credential"}
+        <span class="text-xs font-light -mt-2">{credential.credentialSubject.id || "No subject ID."}</span>
       </div>
       <div class="collapse-content grid">
         <div style="grid-template-columns: 25% 75%;" class="text-sm grid">
-          <div>Type:</div>
-          <div>{props.credential?.type?.join(", ")}</div>
-          <div>Issuer:</div>
-          <div>{props.credential?.issuer || "No Issuer."}</div>
-          <div>Created:</div>
-          <div>
-            {formatter.format(new Date(props.credential?.proof?.created)) ||
-              "No creation Date."}
-          </div>
           <div>Id:</div>
-          <div>{props.credential?.id || "No credential ID."}</div>
-          <Show when={typeof props.credential?.validFrom !== "undefined"}>
+          <div>{credential.id || "No credential ID."}</div>
+          <div>SubjectId:</div>
+          <div>{credential.credentialSubject.id || "No subject ID."}</div>
+          <div>Issuer:</div>
+          <div>{credential.issuer || "No Issuer."}</div>
+          <div>Issued:</div>
+          <div>{formatter.format(new Date(credential.issuanceDate || credential.issued)) || "No issuance date."}</div>
+          <Show when={typeof credential.validFrom !== "undefined"}>
             <div>Valid From:</div>
-            <div>{formatter.format(new Date(props.credential?.validFrom))}</div>
+            <div>{formatter.format(new Date(credential.validFrom))}</div>
+          </Show>
+          <Show when={typeof credential.validUntil !== "undefined" || typeof credential.expirationDate !== "undefined"}>
+            <div>Valid Until:</div>
+            <div>{formatter.format(new Date(credential.expirationDate || credential.validUntil))}</div>
           </Show>
         </div>
         <div class="divider">Claims</div>
         <For
           each={S.pipe([
-            S.ifElse((claims) => S.type(claims).name === "Undefined")(() => [])(
-              (claims) => (S.type(claims).name === "Array" ? claims : [claims]),
+            S.ifElse((claims) => S.type(claims).name === "Undefined")(() => [])((claims) =>
+              S.type(claims).name === "Array" ? claims : [claims]
             ),
-          ])(props.credential?.credentialSubject)}
+          ])(credential.credentialSubject)}
         >
           {(claim, _index) => (
             <div class="flex gap-2 overflow-x-scroll">

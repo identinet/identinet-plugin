@@ -10,6 +10,9 @@ import "@unocss/reset/tailwind.css";
 import "virtual:uno.css";
 import "./app.css";
 import { fetchStatus, forceRefetch } from "./refetch-force.js";
+// if dev: allow to try out things
+// import 'uno.css'
+// import 'virtual:unocss-devtools'
 
 const isDevelopment = process.env.NODE_ENV === "development";
 
@@ -45,9 +48,7 @@ const Layout = (props) => {
         <hr />
       </header>
       <main class="container p-3 font-sans">
-        <Suspense>
-          {props.children}
-        </Suspense>
+        <Suspense>{props.children}</Suspense>
       </main>
     </MetaProvider>
   );

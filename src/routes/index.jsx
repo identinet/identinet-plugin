@@ -48,18 +48,11 @@ function getURL() {
 export default function Home() {
   const [url] = createResource(getURL);
   const [isVerified, setVerified] = createSignal(false);
-  const [ssiData, { refetch: refetchSSIData }] = createResource(
-    url,
-    fetchWebsiteData,
-  );
-  const verify = (presentation) =>
-    presentation?.verification_result?.verified === true;
+  const [ssiData, { refetch: refetchSSIData }] = createResource(url, fetchWebsiteData);
+  const verify = (presentation) => presentation?.verification_result?.verified === true;
   const all = (fn) => (data) => {
     if (data !== undefined) {
-      return S.pipe([
-        S.map(fn),
-        S.all((r) => Boolean(r)),
-      ])(data);
+      return S.pipe([S.map(fn), S.all((r) => Boolean(r))])(data);
     }
     return undefined;
   };
@@ -73,19 +66,22 @@ export default function Home() {
   return (
     <>
       <Title>SSI Information</Title>
-      <article class="prose">
-        <h3 class="my-2">
-          SSI Information&nbsp;<img
+      <article>
+        <h3 class="font-bold text-lg mb-2">
+          SSI Information&nbsp;
+          <img
             class="inline"
             style="height: 1em; top: -0.1em; position: relative;"
             alt="not verified"
-            src={isVerified() === false
-              ? "icons/shield-xmark.svg"
-              : isVerified() === true
-              ? "icons/shield-plus.svg"
-              : S.type(ssiData()?.diddoc?.id).name === "String"
-              ? "icons/shield-check.svg"
-              : "icons/shield-slash.svg"}
+            src={
+              isVerified() === false
+                ? "icons/shield-xmark.svg"
+                : isVerified() === true
+                ? "icons/shield-plus.svg"
+                : S.type(ssiData()?.diddoc?.id).name === "String"
+                ? "icons/shield-check.svg"
+                : "icons/shield-slash.svg"
+            }
           />
         </h3>
         <div class="flex">
@@ -103,12 +99,10 @@ export default function Home() {
           <div class="w-1/5">DID:</div>
           <div class="w-4/5">
             <ExternalLink
-              url={ssiData()?.diddoc?.id &&
-                `https:didlint.ownyourdata.eu/validate?did=${
-                  encodeURIComponent(
-                    ssiData()?.diddoc?.id,
-                  )
-                }`}
+              url={
+                ssiData()?.diddoc?.id &&
+                `https:didlint.ownyourdata.eu/validate?did=${encodeURIComponent(ssiData()?.diddoc?.id)}`
+              }
               title="Inspect DID"
               text={ssiData()?.diddoc?.id}
               fallback="No DID."
@@ -118,22 +112,14 @@ export default function Home() {
 
         <hr class="my-3" />
 
-        <h4 class="my-2">Linked Presentations</h4>
+        <h4 class="font-bold text-lg my-2">Linked Presentations</h4>
         <div class="flex flex-col gap-2 py-2">
-          <For
-            each={ssiData()?.presentations || []}
-            fallback={<div>No linked presentations.</div>}
-          >
+          <For each={ssiData()?.presentations || []} fallback={<div>No linked presentations.</div>}>
             {(presentation, _index) => (
               <div class="flex flex-col gap-2 py-1">
                 <span>Presentation: TODO URL</span>
-                <For
-                  each={presentation?.presentation?.verifiableCredential || []}
-                  fallback={<div>No claims.</div>}
-                >
-                  {(credential, _index) => (
-                    <Credential credential={credential} />
-                  )}
+                <For each={presentation?.presentation?.verifiableCredential || []} fallback={<div>No claims.</div>}>
+                  {(credential, _index) => <Credential credential={credential} />}
                 </For>
               </div>
             )}
