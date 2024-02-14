@@ -6,20 +6,22 @@ export default function ExternalLink(props) {
   return (
     <Show
       when={S.type(props.url).name === "String"}
-      fallback={"No fallback."}
+      fallback={props.fallback || "No fallback."}
     >
-      {props.text || "No text."}{" "}
-      <a
-        href={props.url}
-        title={props.title || ""}
-        target="_blank"
-        style="color: var(--primary);"
-      >
-        <LinkIcon
-          height="0.8em"
-          width="0.8em"
-        />
-      </a>
+      <div class="flex flex-items-center">
+        {props.text || "No text."}&nbsp;
+        <a
+          href={props.url}
+          title={props.title || ""}
+          target="_blank"
+          style="color: var(--primary);"
+        >
+          <LinkIcon
+            height="0.8em"
+            width="0.8em"
+          />
+        </a>
+      </div>
     </Show>
   );
 }

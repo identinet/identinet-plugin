@@ -1,171 +1,6 @@
-export const idPlusItem = {
-  "did:web:id-plus-example.identinet.io": {
-    "presentation": {
-      "@context": [
-        "https://www.w3.org/2018/credentials/v1",
-        "https://w3id.org/security/suites/ed25519-2020/v1"
-      ],
-      "type": [
-        "VerifiablePresentation"
-      ],
-      "verifiableCredential": [
-        {
-          "@context": [
-            "https://www.w3.org/2018/credentials/v1",
-            "https://w3id.org/security/suites/ed25519-2020/v1"
-          ],
-          "type": [
-            "VerifiableCredential"
-          ],
-          "credentialSubject": {
-            "id": "did:web:id-plus-example.identinet.io"
-          },
-          "issuer": "did:web:id-plus-example.identinet.io",
-          "issuanceDate": "2023-06-30T14:51:12Z",
-          "proof": {
-            "type": "Ed25519Signature2020",
-            "proofPurpose": "assertionMethod",
-            "proofValue": "z2ds9uFScNvCGZNMuWhZgsGXEGL7WGcaBPv5WTQDwhWRn1yPmZMhxFJpTwecmUfUBAg1qKQFBkd64pFzm6mCQr1og",
-            "verificationMethod": "did:web:id-plus-example.identinet.io#z6Mknz5Gcvc4PNCQadiyspQ7j4Le9L7Fh7jmRJwT5CpunSc2",
-            "created": "2023-06-30T14:51:25.354Z"
-          }
-        }
-      ],
-      "proof": {
-        "type": "Ed25519Signature2020",
-        "proofPurpose": "authentication",
-        "proofValue": "z4cB1eZ4qKnr3PuNf69zpzCp6MVSUQVVaKVwhgA3C4nxdLGG56qDed1ooLJTqgfrBKpKGVzKiRLH8FuH4X14ADxTV",
-        "challenge": "id-plus-example.identinet.io",
-        "verificationMethod": "did:web:id-plus-example.identinet.io#z6Mknz5Gcvc4PNCQadiyspQ7j4Le9L7Fh7jmRJwT5CpunSc2",
-        "created": "2023-07-18T09:01:49.485Z",
-        "domain": "id-plus-example.identinet.io"
-      },
-      "holder": "did:web:id-plus-example.identinet.io"
-    },
-    "verification_result": {
-      "presentationResult": {
-        "verified": true,
-        "results": [
-          {
-            "proof": {
-              "@context": [
-                "https://www.w3.org/2018/credentials/v1",
-                "https://w3id.org/security/suites/ed25519-2020/v1"
-              ],
-              "type": "Ed25519Signature2020",
-              "proofPurpose": "authentication",
-              "proofValue": "z4cB1eZ4qKnr3PuNf69zpzCp6MVSUQVVaKVwhgA3C4nxdLGG56qDed1ooLJTqgfrBKpKGVzKiRLH8FuH4X14ADxTV",
-              "challenge": "id-plus-example.identinet.io",
-              "verificationMethod": "did:web:id-plus-example.identinet.io#z6Mknz5Gcvc4PNCQadiyspQ7j4Le9L7Fh7jmRJwT5CpunSc2",
-              "created": "2023-07-18T09:01:49.485Z",
-              "domain": "id-plus-example.identinet.io"
-            },
-            "verified": true,
-            "verificationMethod": {
-              "id": "did:web:id-plus-example.identinet.io#z6Mknz5Gcvc4PNCQadiyspQ7j4Le9L7Fh7jmRJwT5CpunSc2",
-              "type": "Ed25519VerificationKey2020",
-              "controller": "did:web:id-plus-example.identinet.io",
-              "publicKeyJwk": {
-                "kty": "OKP",
-                "crv": "Ed25519",
-                "x": "fsJRFotb--4E7zNB9M7Kv47eMlmSt2BFdRrltI5R0ds"
-              },
-              "publicKeyMultibase": "z6Mknz5Gcvc4PNCQadiyspQ7j4Le9L7Fh7jmRJwT5CpunSc2",
-              "@context": [
-                "https://www.w3.org/ns/did/v1",
-                "https://w3id.org/security/suites/ed25519-2020/v1",
-                {
-                  "publicKeyJwk": {
-                    "@id": "https://w3id.org/security#publicKeyJwk",
-                    "@type": "@json"
-                  }
-                }
-              ]
-            },
-            "purposeResult": {
-              "valid": true,
-              "controller": {
-                "@context": [
-                  "https://www.w3.org/ns/did/v1",
-                  "https://w3id.org/security/suites/ed25519-2020/v1",
-                  {
-                    "publicKeyJwk": {
-                      "@id": "https://w3id.org/security#publicKeyJwk",
-                      "@type": "@json"
-                    }
-                  }
-                ],
-                "id": "did:web:id-plus-example.identinet.io",
-                "verificationMethod": [
-                  {
-                    "id": "did:web:id-plus-example.identinet.io#z6Mknz5Gcvc4PNCQadiyspQ7j4Le9L7Fh7jmRJwT5CpunSc2",
-                    "type": "Ed25519VerificationKey2020",
-                    "controller": "did:web:id-plus-example.identinet.io",
-                    "publicKeyJwk": {
-                      "kty": "OKP",
-                      "crv": "Ed25519",
-                      "x": "fsJRFotb--4E7zNB9M7Kv47eMlmSt2BFdRrltI5R0ds"
-                    }
-                  }
-                ],
-                "authentication": [
-                  "did:web:id-plus-example.identinet.io#z6Mknz5Gcvc4PNCQadiyspQ7j4Le9L7Fh7jmRJwT5CpunSc2"
-                ],
-                "assertionMethod": [
-                  "did:web:id-plus-example.identinet.io#z6Mknz5Gcvc4PNCQadiyspQ7j4Le9L7Fh7jmRJwT5CpunSc2"
-                ]
-              }
-            }
-          }
-        ]
-      },
-      "verified": true,
-      "credentialResults": [
-        {
-          "verified": true,
-          "results": [
-            {
-              "proof": {
-                "@context": [
-                  "https://www.w3.org/2018/credentials/v1",
-                  "https://w3id.org/security/suites/ed25519-2020/v1"
-                ],
-                "type": "Ed25519Signature2020",
-                "proofPurpose": "assertionMethod",
-                "proofValue": "z2ds9uFScNvCGZNMuWhZgsGXEGL7WGcaBPv5WTQDwhWRn1yPmZMhxFJpTwecmUfUBAg1qKQFBkd64pFzm6mCQr1og",
-                "verificationMethod": "did:web:id-plus-example.identinet.io#z6Mknz5Gcvc4PNCQadiyspQ7j4Le9L7Fh7jmRJwT5CpunSc2",
-                "created": "2023-06-30T14:51:25.354Z"
-              },
-              "verified": true,
-              "verificationMethod": {
-                "id": "did:web:id-plus-example.identinet.io#z6Mknz5Gcvc4PNCQadiyspQ7j4Le9L7Fh7jmRJwT5CpunSc2",
-                "type": "Ed25519VerificationKey2020",
-                "controller": "did:web:id-plus-example.identinet.io",
-                "publicKeyJwk": {
-                  "kty": "OKP",
-                  "crv": "Ed25519",
-                  "x": "fsJRFotb--4E7zNB9M7Kv47eMlmSt2BFdRrltI5R0ds"
-                },
-                "publicKeyMultibase": "z6Mknz5Gcvc4PNCQadiyspQ7j4Le9L7Fh7jmRJwT5CpunSc2",
-                "@context": [
-                  "https://www.w3.org/ns/did/v1",
-                  "https://w3id.org/security/suites/ed25519-2020/v1",
-                  {
-                    "publicKeyJwk": {
-                      "@id": "https://w3id.org/security#publicKeyJwk",
-                      "@type": "@json"
-                    }
-                  }
-                ]
-              },
-              "purposeResult": {
-                "valid": true
-              }
-            }
-          ]
-        }
-      ]
-    },
+export const storage = {
+  "did:web:no-id.localhost%3A8443": {},
+  "did:web:id-web.localhost%3A8443": {
     "diddoc": {
       "@context": [
         "https://www.w3.org/ns/did/v1",
@@ -173,29 +8,561 @@ export const idPlusItem = {
         {
           "publicKeyJwk": {
             "@id": "https://w3id.org/security#publicKeyJwk",
-            "@type": "@json"
-          }
-        }
+            "@type": "@json",
+          },
+        },
       ],
-      "id": "did:web:id-plus-example.identinet.io",
-      "verificationMethod": [
-        {
-          "id": "did:web:id-plus-example.identinet.io#z6Mknz5Gcvc4PNCQadiyspQ7j4Le9L7Fh7jmRJwT5CpunSc2",
-          "type": "Ed25519VerificationKey2020",
-          "controller": "did:web:id-plus-example.identinet.io",
-          "publicKeyJwk": {
-            "kty": "OKP",
-            "crv": "Ed25519",
-            "x": "fsJRFotb--4E7zNB9M7Kv47eMlmSt2BFdRrltI5R0ds"
-          }
-        }
-      ],
+      "id": "did:web:id-web.localhost%3A8443",
+      "verificationMethod": [{
+        "id":
+          "did:web:id-web.localhost%3A8443#SnRH-_DnOrKR597KXHgt6javP6bPeJZi9U1DoOXAyg4",
+        "type": "Ed25519VerificationKey2020",
+        "controller": "did:web:id-web.localhost%3A8443",
+        "publicKeyJwk": {
+          "kty": "OKP",
+          "kid": "SnRH-_DnOrKR597KXHgt6javP6bPeJZi9U1DoOXAyg4",
+          "crv": "Ed25519",
+          "alg": "EdDSA",
+          "x": "KGHwynsaPOvF8e1bKysDRh9ege-QNoK2u9a5oA8l8go",
+        },
+      }],
       "authentication": [
-        "did:web:id-plus-example.identinet.io#z6Mknz5Gcvc4PNCQadiyspQ7j4Le9L7Fh7jmRJwT5CpunSc2"
+        "did:web:id-web.localhost%3A8443#SnRH-_DnOrKR597KXHgt6javP6bPeJZi9U1DoOXAyg4",
       ],
       "assertionMethod": [
-        "did:web:id-plus-example.identinet.io#z6Mknz5Gcvc4PNCQadiyspQ7j4Le9L7Fh7jmRJwT5CpunSc2"
-      ]
-    }
-  }
-}
+        "did:web:id-web.localhost%3A8443#SnRH-_DnOrKR597KXHgt6javP6bPeJZi9U1DoOXAyg4",
+      ],
+    },
+  },
+  "did:web:id-broken.localhost%3A8443": {
+    "presentations": [{
+      "presentation": {
+        "@context": [
+          "https://www.w3.org/2018/credentials/v1",
+          "https://w3id.org/security/suites/ed25519-2020/v1",
+        ],
+        "type": ["VerifiablePresentation"],
+        "verifiableCredential": [{
+          "@context": [
+            "https://www.w3.org/2018/credentials/v1",
+            "https://w3id.org/security/suites/ed25519-2020/v1",
+          ],
+          "type": ["VerifiableCredential"],
+          "credentialSubject": {
+            "id": "did:web:id-broken.localhost%3A8443",
+            "broken": "tampered attribute",
+          },
+          "issuer": "did:web:id-broken.localhost%3A8443",
+          "issuanceDate": "2024-02-12T12:39:20Z",
+          "proof": {
+            "type": "Ed25519Signature2020",
+            "proofPurpose": "assertionMethod",
+            "proofValue":
+              "z4RchVhDpAAaJ34XGGBiejkQ9zzrL6VCBvMjgMLWagxjj4iRc7RqmoudCXYsdn5MjrXJ6184RnYueRVCFM9vBZwHN",
+            "verificationMethod":
+              "did:web:id-broken.localhost%3A8443#dqqkiu1wiQWE7T3MmssDV_-xiHCGu1xzzcafoXoCNUs",
+            "created": "2024-02-12T12:39:20.730192986Z",
+          },
+        }],
+        "proof": {
+          "type": "Ed25519Signature2020",
+          "proofPurpose": "assertionMethod",
+          "proofValue":
+            "z58AjraH3nvCb6VxU9rLkZS1a3VyQAPc77ixKNV1PmqpYNBGznGGgZQdpJAB8WARLDFu88KkpjxKwAVKJVSpWJa6o",
+          "verificationMethod":
+            "did:web:id-broken.localhost%3A8443#dqqkiu1wiQWE7T3MmssDV_-xiHCGu1xzzcafoXoCNUs",
+          "created": "2024-02-12T12:39:20.895220443Z",
+        },
+        "holder": "did:web:id-broken.localhost%3A8443",
+      },
+      "verification_result": {
+        "presentationResult": {
+          "verified": false,
+          "results": [{
+            "proof": {
+              "@context": [
+                "https://www.w3.org/2018/credentials/v1",
+                "https://w3id.org/security/suites/ed25519-2020/v1",
+              ],
+              "type": "Ed25519Signature2020",
+              "proofPurpose": "assertionMethod",
+              "proofValue":
+                "z58AjraH3nvCb6VxU9rLkZS1a3VyQAPc77ixKNV1PmqpYNBGznGGgZQdpJAB8WARLDFu88KkpjxKwAVKJVSpWJa6o",
+              "verificationMethod":
+                "did:web:id-broken.localhost%3A8443#dqqkiu1wiQWE7T3MmssDV_-xiHCGu1xzzcafoXoCNUs",
+              "created": "2024-02-12T12:39:20.895220443Z",
+            },
+            "verified": false,
+            "error": {},
+          }],
+          "error": {},
+        },
+        "verified": false,
+        "credentialResults": [{
+          "verified": false,
+          "results": [{
+            "proof": {
+              "@context": [
+                "https://www.w3.org/2018/credentials/v1",
+                "https://w3id.org/security/suites/ed25519-2020/v1",
+              ],
+              "type": "Ed25519Signature2020",
+              "proofPurpose": "assertionMethod",
+              "proofValue":
+                "z4RchVhDpAAaJ34XGGBiejkQ9zzrL6VCBvMjgMLWagxjj4iRc7RqmoudCXYsdn5MjrXJ6184RnYueRVCFM9vBZwHN",
+              "verificationMethod":
+                "did:web:id-broken.localhost%3A8443#dqqkiu1wiQWE7T3MmssDV_-xiHCGu1xzzcafoXoCNUs",
+              "created": "2024-02-12T12:39:20.730192986Z",
+            },
+            "verified": false,
+            "error": {},
+          }],
+          "error": {},
+        }],
+        "error": {},
+      },
+    }],
+    "diddoc": {
+      "@context": [
+        "https://www.w3.org/ns/did/v1",
+        "https://identity.foundation/linked-vp/contexts/v1",
+        "https://w3id.org/security/suites/ed25519-2020/v1",
+        {
+          "publicKeyJwk": {
+            "@id": "https://w3id.org/security#publicKeyJwk",
+            "@type": "@json",
+          },
+        },
+      ],
+      "id": "did:web:id-broken.localhost%3A8443",
+      "verificationMethod": [{
+        "id":
+          "did:web:id-broken.localhost%3A8443#dqqkiu1wiQWE7T3MmssDV_-xiHCGu1xzzcafoXoCNUs",
+        "type": "Ed25519VerificationKey2020",
+        "controller": "did:web:id-broken.localhost%3A8443",
+        "publicKeyJwk": {
+          "kty": "OKP",
+          "kid": "dqqkiu1wiQWE7T3MmssDV_-xiHCGu1xzzcafoXoCNUs",
+          "crv": "Ed25519",
+          "alg": "EdDSA",
+          "x": "M2RTG7I2_EMs1M4Tk1HZL_xE2fegtLkPywxs4OuO_38",
+        },
+      }],
+      "authentication": [
+        "did:web:id-broken.localhost%3A8443#dqqkiu1wiQWE7T3MmssDV_-xiHCGu1xzzcafoXoCNUs",
+      ],
+      "assertionMethod": [
+        "did:web:id-broken.localhost%3A8443#dqqkiu1wiQWE7T3MmssDV_-xiHCGu1xzzcafoXoCNUs",
+      ],
+      "service": [{
+        "id": "did:web:id-plus.localhost%3A8443#presentation",
+        "type": "LinkedVerifiablePresentation",
+        "serviceEndpoint":
+          "https://id-broken.localhost:8443/.well-known/presentation.json",
+      }],
+    },
+  },
+  "did:web:id-plus.localhost%3A8443": {
+    "presentations": [{
+      "presentation": {
+        "@context": [
+          "https://www.w3.org/2018/credentials/v1",
+          "https://w3id.org/security/suites/ed25519-2020/v1",
+        ],
+        "type": ["VerifiablePresentation"],
+        "verifiableCredential": [{
+          "@context": [
+            "https://www.w3.org/2018/credentials/v1",
+            "https://w3id.org/security/suites/ed25519-2020/v1",
+          ],
+          "type": ["VerifiableCredential"],
+          "credentialSubject": { "id": "did:web:id-plus.localhost%3A8443" },
+          "issuer": "did:web:id-plus.localhost%3A8443",
+          "issuanceDate": "2024-02-12T12:32:43Z",
+          "proof": {
+            "type": "Ed25519Signature2020",
+            "proofPurpose": "assertionMethod",
+            "proofValue":
+              "z546i6F5zkrBtZViDsCRCThdCdzE9FajDYAyc4gXxSzf3gftxLyR39ovXVpFA3P3zeXaq452vN25wawN4LPy8uS9e",
+            "verificationMethod":
+              "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
+            "created": "2024-02-12T12:32:43.762815207Z",
+          },
+        }],
+        "proof": {
+          "type": "Ed25519Signature2020",
+          "proofPurpose": "assertionMethod",
+          "proofValue":
+            "z57mt83Y11ZQMVHGzCNg77HMEeH2fPN6D6uBraqY8qKRC4ufwfXgRGdZMqWx6GBAy9RV7tLnp4UsoHXVSqefmQcpa",
+          "verificationMethod":
+            "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
+          "created": "2024-02-12T12:32:43.929955657Z",
+        },
+        "holder": "did:web:id-plus.localhost%3A8443",
+      },
+      "verification_result": {
+        "presentationResult": {
+          "verified": true,
+          "results": [{
+            "proof": {
+              "@context": [
+                "https://www.w3.org/2018/credentials/v1",
+                "https://w3id.org/security/suites/ed25519-2020/v1",
+              ],
+              "type": "Ed25519Signature2020",
+              "proofPurpose": "assertionMethod",
+              "proofValue":
+                "z57mt83Y11ZQMVHGzCNg77HMEeH2fPN6D6uBraqY8qKRC4ufwfXgRGdZMqWx6GBAy9RV7tLnp4UsoHXVSqefmQcpa",
+              "verificationMethod":
+                "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
+              "created": "2024-02-12T12:32:43.929955657Z",
+            },
+            "verified": true,
+            "verificationMethod": {
+              "id":
+                "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
+              "type": "Ed25519VerificationKey2020",
+              "controller": "did:web:id-plus.localhost%3A8443",
+              "publicKeyJwk": {
+                "kty": "OKP",
+                "kid": "MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
+                "crv": "Ed25519",
+                "alg": "EdDSA",
+                "x": "6yUJruvdUvjwZpVdtxmAxoNI2UUc-LfL37cAZ09ffzs",
+              },
+              "publicKeyMultibase":
+                "z6MkvHAcPJP22ge8zznDUtbhYJW4PDti14tUng99xUmcALFC",
+              "@context": [
+                "https://www.w3.org/ns/did/v1",
+                "https://identity.foundation/linked-vp/contexts/v1",
+                "https://w3id.org/security/suites/ed25519-2020/v1",
+                {
+                  "publicKeyJwk": {
+                    "@id": "https://w3id.org/security#publicKeyJwk",
+                    "@type": "@json",
+                  },
+                },
+              ],
+            },
+            "purposeResult": {
+              "valid": true,
+              "controller": {
+                "@context": [
+                  "https://www.w3.org/ns/did/v1",
+                  "https://identity.foundation/linked-vp/contexts/v1",
+                  "https://w3id.org/security/suites/ed25519-2020/v1",
+                  {
+                    "publicKeyJwk": {
+                      "@id": "https://w3id.org/security#publicKeyJwk",
+                      "@type": "@json",
+                    },
+                  },
+                ],
+                "id": "did:web:id-plus.localhost%3A8443",
+                "verificationMethod": [{
+                  "id":
+                    "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
+                  "type": "Ed25519VerificationKey2020",
+                  "controller": "did:web:id-plus.localhost%3A8443",
+                  "publicKeyJwk": {
+                    "kty": "OKP",
+                    "kid": "MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
+                    "crv": "Ed25519",
+                    "alg": "EdDSA",
+                    "x": "6yUJruvdUvjwZpVdtxmAxoNI2UUc-LfL37cAZ09ffzs",
+                  },
+                }],
+                "authentication": [
+                  "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
+                ],
+                "assertionMethod": [
+                  "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
+                ],
+                "service": [{
+                  "id": "did:web:id-plus.localhost%3A8443#plain",
+                  "type": "LinkedVerifiablePresentation",
+                  "serviceEndpoint":
+                    "https://id-plus.localhost:8443/.well-known/presentation.json",
+                }, {
+                  "id": "did:web:id-plus.localhost%3A8443#business",
+                  "type": "LinkedVerifiablePresentation",
+                  "serviceEndpoint":
+                    "https://id-plus.localhost:8443/.well-known/presentation.json",
+                }],
+              },
+            },
+          }],
+        },
+        "verified": true,
+        "credentialResults": [{
+          "verified": true,
+          "results": [{
+            "proof": {
+              "@context": [
+                "https://www.w3.org/2018/credentials/v1",
+                "https://w3id.org/security/suites/ed25519-2020/v1",
+              ],
+              "type": "Ed25519Signature2020",
+              "proofPurpose": "assertionMethod",
+              "proofValue":
+                "z546i6F5zkrBtZViDsCRCThdCdzE9FajDYAyc4gXxSzf3gftxLyR39ovXVpFA3P3zeXaq452vN25wawN4LPy8uS9e",
+              "verificationMethod":
+                "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
+              "created": "2024-02-12T12:32:43.762815207Z",
+            },
+            "verified": true,
+            "verificationMethod": {
+              "id":
+                "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
+              "type": "Ed25519VerificationKey2020",
+              "controller": "did:web:id-plus.localhost%3A8443",
+              "publicKeyJwk": {
+                "kty": "OKP",
+                "kid": "MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
+                "crv": "Ed25519",
+                "alg": "EdDSA",
+                "x": "6yUJruvdUvjwZpVdtxmAxoNI2UUc-LfL37cAZ09ffzs",
+              },
+              "publicKeyMultibase":
+                "z6MkvHAcPJP22ge8zznDUtbhYJW4PDti14tUng99xUmcALFC",
+              "@context": [
+                "https://www.w3.org/ns/did/v1",
+                "https://identity.foundation/linked-vp/contexts/v1",
+                "https://w3id.org/security/suites/ed25519-2020/v1",
+                {
+                  "publicKeyJwk": {
+                    "@id": "https://w3id.org/security#publicKeyJwk",
+                    "@type": "@json",
+                  },
+                },
+              ],
+            },
+            "purposeResult": { "valid": true },
+          }],
+        }],
+      },
+    }, {
+      "presentation": {
+        "@context": [
+          "https://www.w3.org/2018/credentials/v1",
+          "https://w3id.org/security/suites/ed25519-2020/v1",
+        ],
+        "type": ["VerifiablePresentation"],
+        "verifiableCredential": [{
+          "@context": [
+            "https://www.w3.org/2018/credentials/v1",
+            "https://w3id.org/security/suites/ed25519-2020/v1",
+          ],
+          "type": ["VerifiableCredential"],
+          "credentialSubject": { "id": "did:web:id-plus.localhost%3A8443" },
+          "issuer": "did:web:id-plus.localhost%3A8443",
+          "issuanceDate": "2024-02-12T12:32:43Z",
+          "proof": {
+            "type": "Ed25519Signature2020",
+            "proofPurpose": "assertionMethod",
+            "proofValue":
+              "z546i6F5zkrBtZViDsCRCThdCdzE9FajDYAyc4gXxSzf3gftxLyR39ovXVpFA3P3zeXaq452vN25wawN4LPy8uS9e",
+            "verificationMethod":
+              "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
+            "created": "2024-02-12T12:32:43.762815207Z",
+          },
+        }],
+        "proof": {
+          "type": "Ed25519Signature2020",
+          "proofPurpose": "assertionMethod",
+          "proofValue":
+            "z57mt83Y11ZQMVHGzCNg77HMEeH2fPN6D6uBraqY8qKRC4ufwfXgRGdZMqWx6GBAy9RV7tLnp4UsoHXVSqefmQcpa",
+          "verificationMethod":
+            "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
+          "created": "2024-02-12T12:32:43.929955657Z",
+        },
+        "holder": "did:web:id-plus.localhost%3A8443",
+      },
+      "verification_result": {
+        "presentationResult": {
+          "verified": true,
+          "results": [{
+            "proof": {
+              "@context": [
+                "https://www.w3.org/2018/credentials/v1",
+                "https://w3id.org/security/suites/ed25519-2020/v1",
+              ],
+              "type": "Ed25519Signature2020",
+              "proofPurpose": "assertionMethod",
+              "proofValue":
+                "z57mt83Y11ZQMVHGzCNg77HMEeH2fPN6D6uBraqY8qKRC4ufwfXgRGdZMqWx6GBAy9RV7tLnp4UsoHXVSqefmQcpa",
+              "verificationMethod":
+                "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
+              "created": "2024-02-12T12:32:43.929955657Z",
+            },
+            "verified": true,
+            "verificationMethod": {
+              "id":
+                "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
+              "type": "Ed25519VerificationKey2020",
+              "controller": "did:web:id-plus.localhost%3A8443",
+              "publicKeyJwk": {
+                "kty": "OKP",
+                "kid": "MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
+                "crv": "Ed25519",
+                "alg": "EdDSA",
+                "x": "6yUJruvdUvjwZpVdtxmAxoNI2UUc-LfL37cAZ09ffzs",
+              },
+              "publicKeyMultibase":
+                "z6MkvHAcPJP22ge8zznDUtbhYJW4PDti14tUng99xUmcALFC",
+              "@context": [
+                "https://www.w3.org/ns/did/v1",
+                "https://identity.foundation/linked-vp/contexts/v1",
+                "https://w3id.org/security/suites/ed25519-2020/v1",
+                {
+                  "publicKeyJwk": {
+                    "@id": "https://w3id.org/security#publicKeyJwk",
+                    "@type": "@json",
+                  },
+                },
+              ],
+            },
+            "purposeResult": {
+              "valid": true,
+              "controller": {
+                "@context": [
+                  "https://www.w3.org/ns/did/v1",
+                  "https://identity.foundation/linked-vp/contexts/v1",
+                  "https://w3id.org/security/suites/ed25519-2020/v1",
+                  {
+                    "publicKeyJwk": {
+                      "@id": "https://w3id.org/security#publicKeyJwk",
+                      "@type": "@json",
+                    },
+                  },
+                ],
+                "id": "did:web:id-plus.localhost%3A8443",
+                "verificationMethod": [{
+                  "id":
+                    "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
+                  "type": "Ed25519VerificationKey2020",
+                  "controller": "did:web:id-plus.localhost%3A8443",
+                  "publicKeyJwk": {
+                    "kty": "OKP",
+                    "kid": "MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
+                    "crv": "Ed25519",
+                    "alg": "EdDSA",
+                    "x": "6yUJruvdUvjwZpVdtxmAxoNI2UUc-LfL37cAZ09ffzs",
+                  },
+                }],
+                "authentication": [
+                  "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
+                ],
+                "assertionMethod": [
+                  "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
+                ],
+                "service": [{
+                  "id": "did:web:id-plus.localhost%3A8443#plain",
+                  "type": "LinkedVerifiablePresentation",
+                  "serviceEndpoint":
+                    "https://id-plus.localhost:8443/.well-known/presentation.json",
+                }, {
+                  "id": "did:web:id-plus.localhost%3A8443#business",
+                  "type": "LinkedVerifiablePresentation",
+                  "serviceEndpoint":
+                    "https://id-plus.localhost:8443/.well-known/presentation.json",
+                }],
+              },
+            },
+          }],
+        },
+        "verified": true,
+        "credentialResults": [{
+          "verified": true,
+          "results": [{
+            "proof": {
+              "@context": [
+                "https://www.w3.org/2018/credentials/v1",
+                "https://w3id.org/security/suites/ed25519-2020/v1",
+              ],
+              "type": "Ed25519Signature2020",
+              "proofPurpose": "assertionMethod",
+              "proofValue":
+                "z546i6F5zkrBtZViDsCRCThdCdzE9FajDYAyc4gXxSzf3gftxLyR39ovXVpFA3P3zeXaq452vN25wawN4LPy8uS9e",
+              "verificationMethod":
+                "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
+              "created": "2024-02-12T12:32:43.762815207Z",
+            },
+            "verified": true,
+            "verificationMethod": {
+              "id":
+                "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
+              "type": "Ed25519VerificationKey2020",
+              "controller": "did:web:id-plus.localhost%3A8443",
+              "publicKeyJwk": {
+                "kty": "OKP",
+                "kid": "MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
+                "crv": "Ed25519",
+                "alg": "EdDSA",
+                "x": "6yUJruvdUvjwZpVdtxmAxoNI2UUc-LfL37cAZ09ffzs",
+              },
+              "publicKeyMultibase":
+                "z6MkvHAcPJP22ge8zznDUtbhYJW4PDti14tUng99xUmcALFC",
+              "@context": [
+                "https://www.w3.org/ns/did/v1",
+                "https://identity.foundation/linked-vp/contexts/v1",
+                "https://w3id.org/security/suites/ed25519-2020/v1",
+                {
+                  "publicKeyJwk": {
+                    "@id": "https://w3id.org/security#publicKeyJwk",
+                    "@type": "@json",
+                  },
+                },
+              ],
+            },
+            "purposeResult": { "valid": true },
+          }],
+        }],
+      },
+    }],
+    "diddoc": {
+      "@context": [
+        "https://www.w3.org/ns/did/v1",
+        "https://identity.foundation/linked-vp/contexts/v1",
+        "https://w3id.org/security/suites/ed25519-2020/v1",
+        {
+          "publicKeyJwk": {
+            "@id": "https://w3id.org/security#publicKeyJwk",
+            "@type": "@json",
+          },
+        },
+      ],
+      "id": "did:web:id-plus.localhost%3A8443",
+      "verificationMethod": [{
+        "id":
+          "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
+        "type": "Ed25519VerificationKey2020",
+        "controller": "did:web:id-plus.localhost%3A8443",
+        "publicKeyJwk": {
+          "kty": "OKP",
+          "kid": "MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
+          "crv": "Ed25519",
+          "alg": "EdDSA",
+          "x": "6yUJruvdUvjwZpVdtxmAxoNI2UUc-LfL37cAZ09ffzs",
+        },
+      }],
+      "authentication": [
+        "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
+      ],
+      "assertionMethod": [
+        "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
+      ],
+      "service": [{
+        "id": "did:web:id-plus.localhost%3A8443#plain",
+        "type": "LinkedVerifiablePresentation",
+        "serviceEndpoint":
+          "https://id-plus.localhost:8443/.well-known/presentation.json",
+      }, {
+        "id": "did:web:id-plus.localhost%3A8443#business",
+        "type": "LinkedVerifiablePresentation",
+        "serviceEndpoint":
+          "https://id-plus.localhost:8443/.well-known/presentation.json",
+      }],
+    },
+  },
+};

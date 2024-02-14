@@ -1,6 +1,7 @@
 // Documentation: https://rollupjs.org/configuration-options/
 
 // import eslint from "@rollup/plugin-eslint";
+import path from "node:path";
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
 import nodePolyfills from "rollup-plugin-polyfill-node";
@@ -10,7 +11,7 @@ import { terser } from "rollup-plugin-terser";
 const isProduction = process.env.NODE_ENV === "production";
 
 const template = {
-  input: "background.js",
+  input: "src-background/background.js",
   // dest: ".build_chrome/background.js",
   // input: {
   //   "background": "src-background/background.js",
@@ -47,8 +48,8 @@ const template = {
   ],
 };
 
-export default ["background.js"].map((file) => ({
+export default ["src-background/background.js"].map((file) => ({
   ...template,
   input: `${file}`,
-  output: { ...(template["output"]), file: `.build_${file}` },
+  output: { ...(template["output"]), file: `.build_${path.basename(file)}` },
 }));
