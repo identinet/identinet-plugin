@@ -115,14 +115,25 @@ export default function Home() {
         <h4 class="font-bold text-lg my-2">Linked Presentations</h4>
         <div class="flex flex-col gap-2 py-2">
           <For each={ssiData()?.presentations || []} fallback={<div>No linked presentations.</div>}>
-            {(presentation, _index) => (
-              <div class="flex flex-col gap-2 py-1">
-                <span>Presentation: TODO URL</span>
-                <For each={presentation?.presentation?.verifiableCredential || []} fallback={<div>No claims.</div>}>
-                  {(credential, _index) => <Credential credential={credential} />}
-                </For>
-              </div>
-            )}
+            {(verified_presentation, presentation_index) => {
+              const presentation = verified_presentation.presentation;
+              if (!presentation) {
+                return <div class="badge badge-error badge-outline">Something is wrong with this presentation.</div>;
+              }
+              const verification_result = verified_presentation.verification_result;
+              const credential_results = verification_result?.credentialResults;
+              return (
+                <div class="flex flex-col gap-2 py-1">
+                  <div class="divider">Presentation&nbsp;{presentation_index() + 1}</div>
+                  <For each={presentation.verifiableCredential || []} fallback={<div>No credentials.</div>}>
+                    {(credential, index) => {
+                      const credential_result = credential_results?.at(index());
+                      return <Credential credential={credential} credential_result={credential_result} />;
+                    }}
+                  </For>
+                </div>
+              );
+            }}
           </For>
         </div>
       </article>

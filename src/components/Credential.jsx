@@ -2,7 +2,7 @@ import { S } from "~/lib/sanctuary/mod.js";
 import { Show } from "solid-js";
 export default function Credential(props) {
   if (!props.credential) {
-    console.warn("Bad credential", props);
+    console.warn("No credential given", props);
     return <div class="badge badge-error badge-outline">Something is wrong with this credential</div>;
   }
 
@@ -17,6 +17,7 @@ export default function Credential(props) {
   };
   let checked = false;
   const formatter = Intl.DateTimeFormat(navigator.language, options);
+  const isVerified = props.credential_result.verified || false;
 
   return (
     <div class="collapse collapse-arrow border border-base-300">
@@ -33,7 +34,12 @@ export default function Credential(props) {
           checked = e.target.checked;
         }}
       />
-      <div class="collapse-title text-lg font-medium flex flex-col">
+      <div
+        class="collapse-title text-lg font-medium flex flex-col bg-no-repeat pl-10"
+        style={`background-size: 1rem; background-position: 1rem; background-image: url(${
+          isVerified ? "icons/shield-plus.svg" : "icons/shield-xmark.svg"
+        })`}
+      >
         {credential.type?.join(", ") || "Credential"}
         <span class="text-xs font-light -mt-2">{credential.credentialSubject.id || "No subject ID."}</span>
       </div>

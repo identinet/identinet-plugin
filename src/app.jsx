@@ -10,9 +10,6 @@ import "@unocss/reset/tailwind.css";
 import "virtual:uno.css";
 import "./app.css";
 import { fetchStatus, forceRefetch } from "./refetch-force.js";
-// if dev: allow to try out things
-// import 'uno.css'
-// import 'virtual:unocss-devtools'
 
 const isDevelopment = process.env.NODE_ENV === "development";
 

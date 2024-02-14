@@ -12,35 +12,34 @@ const isDevelopment = process.env.NODE_ENV === "development";
 export let api;
 if (typeof chrome !== "undefined" && typeof chrome?.storage !== "undefined") {
   api = chrome;
-} else if (
-  typeof browser !== "undefined" && typeof browser?.storage !== "undefined"
-) {
+} else if (typeof browser !== "undefined" && typeof browser?.storage !== "undefined") {
   api = browser;
 } else if (isDevelopment) {
-  // TODO: somehow, inject this dynamically into vinxi. Currently, it breaks plugin builds
-  // const { storage } = await import("./fixtures/storageItems.js");
-  // let did = S.keys(storage)[0];
-  // api = {
-  //   store: storage,
-  //   tabs: {
-  //     query: async () => {
-  //       return [
-  //         {
-  //           id: 1,
-  //           url: "https://id-plus.localhost:8443/",
-  //         },
-  //       ];
-  //     },
-  //   },
-  //   storage: {
-  //     local: {
-  //       get: (_did) => Promise.resolve({ [_did]: storage[did] }),
-  //       getKeys: () => S.keys(storage),
-  //       setKey: (_did) => did = _did,
-  //       getKey: () => did,
-  //     },
-  //   },
-  // };
+  (async () => {
+    const { storage } = await import("./fixtures/storageItems.js");
+    let did = S.keys(storage)[0];
+    api = {
+      store: storage,
+      tabs: {
+        query: async () => {
+          return [
+            {
+              id: 1,
+              url: "https://id-plus.localhost:8443/",
+            },
+          ];
+        },
+      },
+      storage: {
+        local: {
+          get: (_did) => Promise.resolve({ [_did]: storage[did] }),
+          getKeys: () => S.keys(storage),
+          setKey: (_did) => (did = _did),
+          getKey: () => did,
+        },
+      },
+    };
+  })();
 }
 
 /**
