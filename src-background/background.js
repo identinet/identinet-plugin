@@ -99,7 +99,7 @@ const storeDIDDoc = (diddoc) => {
  * been stored at.
  */
 const storePresentations = (did) => (presentations) => {
-  console.log("storing", did, presentations);
+  // console.log("storing", did, presentations);
   return S.pipe([
     encaseP((did) => api.storage.local.get(did)),
     // S.map(log("get store")),
@@ -191,7 +191,7 @@ const updateDID = (tabId) => (url) => {
       S.pipe([
         storeDIDDoc,
         S.map((diddoc) => {
-          console.log("stored diddoc", diddoc);
+          // console.log("stored diddoc", diddoc);
           // update action icon
           setIcon = setIconCheck;
           return diddoc;
@@ -216,10 +216,10 @@ const updateDID = (tabId) => (url) => {
       (diddoc) =>
         S.pipe([
           getLinkedPresentationURLs,
-          S.map(log("getLinkedPresentationURLs")),
+          // S.map(log("getLinkedPresentationURLs")),
           S.map(fetchAndVerifyPresentation(diddoc)),
           parallel(5),
-          S.map(log("results")),
+          // S.map(log("results")),
           S.chain((presentations) => {
             if (presentations.length === 0) {
               // DID has no linked presentations
