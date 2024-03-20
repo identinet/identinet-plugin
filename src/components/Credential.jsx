@@ -1,55 +1,108 @@
 import { S } from "~/lib/sanctuary/mod.js";
 import { Show } from "solid-js";
 export default function Credential(props) {
+  if (!props.credential) {
+    console.warn("No credential given", props);
+    return (
+      <div class="badge badge-error badge-outline">
+        Something is wrong with this credential
+      </div>
+    );
+  }
+
+  const credential = props.credential;
   const options = {
     year: "numeric",
-    month: "long",
+    month: "short",
     day: "numeric",
     hour: "numeric",
     minute: "numeric",
     second: "numeric",
   };
+  let checked = false;
   const formatter = Intl.DateTimeFormat(navigator.language, options);
+  const isVerified = props.credential_result.verified || false;
+
   return (
-    <div style="display:grid;grid-template-columns: 25% 75%; border: 1px solid lightgrey; margin-bottom: 0.3em; padding: 0.3em">
-      <div>Type:</div>
-      <div>{props.credential?.type?.join(", ")}</div>
-      <div>Issuer:</div>
-      <div>{props.credential?.issuer || "No Issuer."}</div>
-      <div>Created:</div>
-      <div>
-        {formatter.format(new Date(props.credential?.proof?.created)) ||
-          "No creation Date."}
-      </div>
-      <div>Id:</div>
-      <div>{props.credential?.id || "No credential ID."}</div>
-      <Show when={typeof props.credential?.validFrom !== "undefined"}>
-        <div>Valid From:</div>
-        <div>
-          {formatter.format(new Date(props.credential?.validFrom))}
-        </div>
-      </Show>
-      <div>Claims:</div>
-      <For
-        each={S.pipe([
-          S.ifElse((claims) => S.type(claims).name === "Undefined")(() => [])(
-            (claims) => S.type(claims).name === "Array" ? claims : [claims],
-          ),
-        ])(props.credential?.credentialSubject)}
+    <div class="collapse collapse-arrow border border-base-300">
+      <input
+        type="radio"
+        name="credential-accordion"
+        onclick={(e) => {
+          // close accordion upon click
+          if (checked) {
+            checked = e.target.checked = !checked;
+          }
+        }}
+        onchange={(e) => {
+          checked = e.target.checked;
+        }}
+      />
+      <div
+        class="collapse-title text-lg font-medium flex flex-col bg-no-repeat pl-10"
+        style={`background-size: 1rem; background-position: 1rem; background-image: url(${
+          isVerified ? "icons/shield-plus.svg" : "icons/shield-xmark.svg"
+        })`}
       >
-        {(claim, _index) => (
-          <div style="display: grid; grid-template-columns: 25% 75%; border: 1px solid lightgrey; margin-bottom: 0.3em; padding: 0.3em">
-            <For each={Object.keys(claim)}>
-              {(key, index) => (
-                <>
-                  <div>{key}:</div>
-                  <div>{claim[key]}</div>
-                </>
-              )}
-            </For>
+        {credential.type?.join(", ") || "Credential"}
+        <span class="text-xs font-light -mt-2">
+          {credential.credentialSubject.id || "No subject ID."}
+        </span>
+      </div>
+      <div class="collapse-content grid">
+        <div style="grid-template-columns: 25% 75%;" class="text-sm grid">
+          <div>Id:</div>
+          <div>{credential.id || "No credential ID."}</div>
+          <div>SubjectId:</div>
+          <div>{credential.credentialSubject.id || "No subject ID."}</div>
+          <div>Issuer:</div>
+          <div>{credential.issuer || "No Issuer."}</div>
+          <div>Issued:</div>
+          <div>
+            {formatter.format(
+              new Date(credential.issuanceDate || credential.issued),
+            ) || "No issuance date."}
           </div>
-        )}
-      </For>
+          <Show when={typeof credential.validFrom !== "undefined"}>
+            <div>Valid From:</div>
+            <div>{formatter.format(new Date(credential.validFrom))}</div>
+          </Show>
+          <Show
+            when={typeof credential.validUntil !== "undefined" ||
+              typeof credential.expirationDate !== "undefined"}
+          >
+            <div>Valid Until:</div>
+            <div>
+              {formatter.format(
+                new Date(credential.expirationDate || credential.validUntil),
+              )}
+            </div>
+          </Show>
+        </div>
+        <div class="divider">Claims</div>
+        <For
+          each={S.pipe([
+            S.ifElse((claims) => S.type(claims).name === "Undefined")(() => [])(
+              (claims) => S.type(claims).name === "Array" ? claims : [claims]
+            ),
+          ])(credential.credentialSubject)}
+        >
+          {(claim, _index) => (
+            <div class="flex gap-2 overflow-x-auto">
+              <For each={Object.keys(claim)}>
+                {(key, index) => (
+                  <div class="card card-compact w-36 bg-base-200">
+                    <div class="card-body">
+                      <h2 class="card-title text-sm">{key}</h2>
+                      <p class="text-ellipsis overflow-hidden">{claim[key]}</p>
+                    </div>
+                  </div>
+                )}
+              </For>
+            </div>
+          )}
+        </For>
+      </div>
     </div>
   );
 }

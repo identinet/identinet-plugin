@@ -18,33 +18,34 @@ const Layout = (props) => {
     <MetaProvider>
       <header class="font-sans">
         <Show when={isDevelopment}>
-          Select DIDs from storage:
-          <ul class="list-circle list-inside">
-            <For each={api.storage.local.getKeys()}>
-              {(did) => (
-                <li>
-                  <a
-                    class="link"
-                    href={`#`}
-                    onclick={() => {
-                      api.storage.local.setKey(did);
-                      forceRefetch(!fetchStatus());
-                    }}
-                  >
-                    {did}
-                  </a>
-                </li>
-              )}
-            </For>
-          </ul>
+          <div class="p-3 bg-#eee dark:bg-blue opacity-80">
+            Dev mode! Select DIDs:
+            <ul class="list-circle list-inside">
+              <For each={api.storage.local.getKeys()}>
+                {(did) => (
+                  <li>
+                    <a
+                      class="link"
+                      href={`#`}
+                      onclick={() => {
+                        api.storage.local.setKey(did);
+                        forceRefetch(!fetchStatus());
+                      }}
+                    >
+                      {did}
+                    </a>
+                  </li>
+                )}
+              </For>
+            </ul>
+          </div>
+          <hr />
         </Show>
         <Nav />
         <hr />
       </header>
       <main class="container p-3 font-sans">
-        <Suspense>
-          {props.children}
-        </Suspense>
+        <Suspense>{props.children}</Suspense>
       </main>
     </MetaProvider>
   );
@@ -52,9 +53,7 @@ const Layout = (props) => {
 
 export default function App() {
   return (
-    <Router
-      root={Layout}
-    >
+    <Router root={Layout}>
       <FileRoutes />
     </Router>
   );

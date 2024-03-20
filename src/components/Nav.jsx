@@ -3,10 +3,9 @@ import { A } from "@solidjs/router";
 export default function Nav() {
   let menu;
   return (
-    <div className="navbar bg-base-100 py-0 px-3 min-h-0">
-      <div className="navbar-start">
+    <div class="navbar bg-base-100 py-0 px-3 min-h-0">
+      <div class="navbar-start">
         <a
-          className="btn btn-ghost"
           href="https://identinet.io/"
           target="_blank"
         >
@@ -19,17 +18,17 @@ export default function Nav() {
           />
         </a>
       </div>
-      <div className="navbar-center">
+      <div class="navbar-center">
       </div>
-      <div className="navbar-end">
-        <details className="dropdown dropdown-end" ref={menu}>
-          <summary tabIndex={0} className="btn btn-ghost btn-circle avatar">
+      <div class="navbar-end">
+        <details class="dropdown dropdown-end" ref={menu}>
+          <summary tabIndex={0} class="btn btn-ghost btn-circle avatar">
             <div class="i-mdi-menu" />
           </summary>
           <ul
             onclick={() => menu.removeAttribute("open")}
             tabIndex={0}
-            className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+            class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
               <A href="/" end={true}>SSI Information</A>

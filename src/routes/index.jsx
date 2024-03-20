@@ -56,10 +56,7 @@ export default function Home() {
     presentation?.verification_result?.verified === true;
   const all = (fn) => (data) => {
     if (data !== undefined) {
-      return S.pipe([
-        S.map(fn),
-        S.all((r) => Boolean(r)),
-      ])(data);
+      return S.pipe([S.map(fn), S.all((r) => Boolean(r))])(data);
     }
     return undefined;
   };
@@ -73,9 +70,10 @@ export default function Home() {
   return (
     <>
       <Title>SSI Information</Title>
-      <article class="prose">
-        <h3 class="my-2">
-          SSI Information&nbsp;<img
+      <article>
+        <h3 class="font-bold text-lg mb-2">
+          SSI Information&nbsp;
+          <img
             class="inline"
             style="height: 1em; top: -0.1em; position: relative;"
             alt="not verified"
@@ -105,9 +103,7 @@ export default function Home() {
             <ExternalLink
               url={ssiData()?.diddoc?.id &&
                 `https:didlint.ownyourdata.eu/validate?did=${
-                  encodeURIComponent(
-                    ssiData()?.diddoc?.id,
-                  )
+                  encodeURIComponent(ssiData()?.diddoc?.id)
                 }`}
               title="Inspect DID"
               text={ssiData()?.diddoc?.id}
@@ -115,22 +111,51 @@ export default function Home() {
             />
           </div>
         </div>
-        <h4 class="my-2">Presentations</h4>
-        <For
-          each={ssiData()?.presentations || []}
-          fallback={<div>No presentations.</div>}
-        >
-          {(presentation, _index) => (
-            <>
-              <For
-                each={presentation?.presentation?.verifiableCredential || []}
-                fallback={<div>No claims.</div>}
-              >
-                {(credential, _index) => <Credential credential={credential} />}
-              </For>
-            </>
-          )}
-        </For>
+
+        <hr class="my-3" />
+
+        <h4 class="font-bold text-lg my-2">Linked Presentations</h4>
+        <div class="flex flex-col gap-2 py-2">
+          <For
+            each={ssiData()?.presentations || []}
+            fallback={<div>No linked presentations.</div>}
+          >
+            {(verified_presentation, presentation_index) => {
+              const presentation = verified_presentation.presentation;
+              if (!presentation) {
+                return (
+                  <div class="badge badge-error badge-outline">
+                    Something is wrong with this presentation.
+                  </div>
+                );
+              }
+              const verification_result =
+                verified_presentation.verification_result;
+              const credential_results = verification_result?.credentialResults;
+              return (
+                <div class="flex flex-col gap-2 py-1">
+                  <div class="divider">
+                    Presentation&nbsp;{presentation_index() + 1}
+                  </div>
+                  <For
+                    each={presentation.verifiableCredential || []}
+                    fallback={<div>No credentials.</div>}
+                  >
+                    {(credential, index) => {
+                      const credential_result = credential_results?.at(index());
+                      return (
+                        <Credential
+                          credential={credential}
+                          credential_result={credential_result}
+                        />
+                      );
+                    }}
+                  </For>
+                </div>
+              );
+            }}
+          </For>
+        </div>
       </article>
     </>
   );

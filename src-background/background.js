@@ -1,5 +1,5 @@
 import { $, log, S } from "../src/lib/sanctuary/mod.js";
-import { api, getCurrentTab, url2DID } from "../src/lib/identinet/mod.js";
+import { api, getCurrentTab, url2DID, ProtocolError } from "../src/lib/identinet/mod.js";
 import {
   bichain,
   chainRej,
@@ -99,7 +99,7 @@ const storeDIDDoc = (diddoc) => {
  * been stored at.
  */
 const storePresentations = (did) => (presentations) => {
-  console.log("storing", did, presentations);
+  // console.log("storing", did, presentations);
   return S.pipe([
     encaseP((did) => api.storage.local.get(did)),
     // S.map(log("get store")),
@@ -191,7 +191,7 @@ const updateDID = (tabId) => (url) => {
       S.pipe([
         storeDIDDoc,
         S.map((diddoc) => {
-          console.log("stored diddoc", diddoc);
+          // console.log("stored diddoc", diddoc);
           // update action icon
           setIcon = setIconCheck;
           return diddoc;
@@ -205,6 +205,9 @@ const updateDID = (tabId) => (url) => {
         if (err instanceof DIDNotFoundError) {
           return resolve("DID document not found");
         }
+        if (err instanceof ProtocolError) {
+          return resolve(err.message);
+        }
         // icon is set at the the end of the update function, don't do it here
         console.error(err);
         return reject("An error occurred while accessing DID document");
@@ -213,10 +216,10 @@ const updateDID = (tabId) => (url) => {
       (diddoc) =>
         S.pipe([
           getLinkedPresentationURLs,
-          S.map(log("getLinkedPresentationURLs")),
+          // S.map(log("getLinkedPresentationURLs")),
           S.map(fetchAndVerifyPresentation(diddoc)),
           parallel(5),
-          S.map(log("results")),
+          // S.map(log("results")),
           S.chain((presentations) => {
             if (presentations.length === 0) {
               // DID has no linked presentations

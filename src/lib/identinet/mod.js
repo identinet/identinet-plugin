@@ -3,6 +3,9 @@ import { S } from "../sanctuary/mod.js";
 export { convertJWKtoMultibase } from "./conversion.js";
 export { verifyPresentation } from "./presentation.js";
 
+export class ProtocolError extends Error {
+}
+
 const isDevelopment = process.env.NODE_ENV === "development";
 
 /**
@@ -10,35 +13,36 @@ const isDevelopment = process.env.NODE_ENV === "development";
  * Chrome or Firefox is used.
  */
 export let api;
-if (typeof chrome != "undefined") {
+if (typeof chrome !== "undefined" && typeof chrome?.storage !== "undefined") {
   api = chrome;
-} else if (typeof browser != "undefined") {
+} else if (typeof browser !== "undefined" && typeof browser?.storage !== "undefined") {
   api = browser;
 } else if (isDevelopment) {
-  // TODO: somehow, inject this dynamically into vinxi. Currently, it breaks plugin builds
-  // const { storage } = await import("./fixtures/storageItems.js");
-  // let did = S.keys(storage)[0];
-  // api = {
-  //   store: storage,
-  //   tabs: {
-  //     query: async () => {
-  //       return [
-  //         {
-  //           id: 1,
-  //           url: "https://id-plus.localhost:8443/",
-  //         },
-  //       ];
-  //     },
-  //   },
-  //   storage: {
-  //     local: {
-  //       get: (_did) => Promise.resolve({ [_did]: storage[did] }),
-  //       getKeys: () => S.keys(storage),
-  //       setKey: (_did) => did = _did,
-  //       getKey: () => did,
-  //     },
-  //   },
-  // };
+  (async () => {
+    const { storage } = await import("./fixtures/storageItems.js");
+    let did = S.keys(storage)[0];
+    api = {
+      store: storage,
+      tabs: {
+        query: async () => {
+          return [
+            {
+              id: 1,
+              url: "https://id-plus.localhost:8443/",
+            },
+          ];
+        },
+      },
+      storage: {
+        local: {
+          get: (_did) => Promise.resolve({ [_did]: storage[did] }),
+          getKeys: () => S.keys(storage),
+          setKey: (_did) => (did = _did),
+          getKey: () => did,
+        },
+      },
+    };
+  })();
 }
 
 /**
@@ -55,7 +59,7 @@ if (typeof chrome != "undefined") {
  */
 export function url2DID(url) {
   if (!isDevelopment && url.protocol != "https:") {
-    return S.Left(new Error("URL protocol not support"));
+    return S.Left(new ProtocolError("URL protocol not support"));
   }
   const protocol = "https";
   const port = url.port ? url.port : 443;
