@@ -3,7 +3,11 @@ import { Show } from "solid-js";
 export default function Credential(props) {
   if (!props.credential) {
     console.warn("No credential given", props);
-    return <div class="badge badge-error badge-outline">Something is wrong with this credential</div>;
+    return (
+      <div class="badge badge-error badge-outline">
+        Something is wrong with this credential
+      </div>
+    );
   }
 
   const credential = props.credential;
@@ -41,7 +45,9 @@ export default function Credential(props) {
         })`}
       >
         {credential.type?.join(", ") || "Credential"}
-        <span class="text-xs font-light -mt-2">{credential.credentialSubject.id || "No subject ID."}</span>
+        <span class="text-xs font-light -mt-2">
+          {credential.credentialSubject.id || "No subject ID."}
+        </span>
       </div>
       <div class="collapse-content grid">
         <div style="grid-template-columns: 25% 75%;" class="text-sm grid">
@@ -52,26 +58,37 @@ export default function Credential(props) {
           <div>Issuer:</div>
           <div>{credential.issuer || "No Issuer."}</div>
           <div>Issued:</div>
-          <div>{formatter.format(new Date(credential.issuanceDate || credential.issued)) || "No issuance date."}</div>
+          <div>
+            {formatter.format(
+              new Date(credential.issuanceDate || credential.issued),
+            ) || "No issuance date."}
+          </div>
           <Show when={typeof credential.validFrom !== "undefined"}>
             <div>Valid From:</div>
             <div>{formatter.format(new Date(credential.validFrom))}</div>
           </Show>
-          <Show when={typeof credential.validUntil !== "undefined" || typeof credential.expirationDate !== "undefined"}>
+          <Show
+            when={typeof credential.validUntil !== "undefined" ||
+              typeof credential.expirationDate !== "undefined"}
+          >
             <div>Valid Until:</div>
-            <div>{formatter.format(new Date(credential.expirationDate || credential.validUntil))}</div>
+            <div>
+              {formatter.format(
+                new Date(credential.expirationDate || credential.validUntil),
+              )}
+            </div>
           </Show>
         </div>
         <div class="divider">Claims</div>
         <For
           each={S.pipe([
-            S.ifElse((claims) => S.type(claims).name === "Undefined")(() => [])((claims) =>
-              S.type(claims).name === "Array" ? claims : [claims]
+            S.ifElse((claims) => S.type(claims).name === "Undefined")(() => [])(
+              (claims) => S.type(claims).name === "Array" ? claims : [claims]
             ),
           ])(credential.credentialSubject)}
         >
           {(claim, _index) => (
-            <div class="flex gap-2 overflow-x-scroll">
+            <div class="flex gap-2 overflow-x-auto">
               <For each={Object.keys(claim)}>
                 {(key, index) => (
                   <div class="card card-compact w-36 bg-base-200">

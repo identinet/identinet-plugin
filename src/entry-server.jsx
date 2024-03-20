@@ -5,7 +5,11 @@ const isDevEnv = process.env.NODE_ENV === "development";
 export default createHandler(() => (
   <StartServer
     document={({ assets, children, scripts }) => (
-      <html lang="en" classList={{ isDev: isDevEnv }}>
+      <html
+        lang="en"
+        classList={{ isDev: isDevEnv }}
+        style="scrollbar-width: none;"
+      >
         <head>
           <meta charset="utf-8" />
           <meta name="viewport" content="width=device-width, initial-scale=1" />

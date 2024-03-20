@@ -18,7 +18,7 @@ const Layout = (props) => {
     <MetaProvider>
       <header class="font-sans">
         <Show when={isDevelopment}>
-          <div class="p-3 bg-#eee opacity-80">
+          <div class="p-3 bg-#eee dark:bg-blue opacity-80">
             Dev mode! Select DIDs:
             <ul class="list-circle list-inside">
               <For each={api.storage.local.getKeys()}>
