@@ -3,6 +3,9 @@ import { S } from "../sanctuary/mod.js";
 export { convertJWKtoMultibase } from "./conversion.js";
 export { verifyPresentation } from "./presentation.js";
 
+export class ProtocolError extends Error {
+}
+
 const isDevelopment = process.env.NODE_ENV === "development";
 
 /**
@@ -56,7 +59,7 @@ if (typeof chrome !== "undefined" && typeof chrome?.storage !== "undefined") {
  */
 export function url2DID(url) {
   if (!isDevelopment && url.protocol != "https:") {
-    return S.Left(new Error("URL protocol not support"));
+    return S.Left(new ProtocolError("URL protocol not support"));
   }
   const protocol = "https";
   const port = url.port ? url.port : 443;

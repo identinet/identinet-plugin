@@ -1,5 +1,5 @@
 import { $, log, S } from "../src/lib/sanctuary/mod.js";
-import { api, getCurrentTab, url2DID } from "../src/lib/identinet/mod.js";
+import { api, getCurrentTab, url2DID, ProtocolError } from "../src/lib/identinet/mod.js";
 import {
   bichain,
   chainRej,
@@ -204,6 +204,9 @@ const updateDID = (tabId) => (url) => {
       (err) => {
         if (err instanceof DIDNotFoundError) {
           return resolve("DID document not found");
+        }
+        if (err instanceof ProtocolError) {
+          return resolve(err.message);
         }
         // icon is set at the the end of the update function, don't do it here
         console.error(err);
