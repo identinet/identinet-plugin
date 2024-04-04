@@ -170,7 +170,7 @@ function getDIDDocForURL(url) {
  * @returns {Promise<DID,Error>} DID for the URL/tab.
  */
 const updateDID = (tabId) => (url) => {
-  let setIcon = setIconSlash;
+  let _setIcon = setIconSlash;
   return S.pipe([
     // Fetch DID document
     // ------------------
@@ -189,7 +189,7 @@ const updateDID = (tabId) => (url) => {
         S.map((diddoc) => {
           // console.log("stored diddoc", diddoc);
           // update action icon
-          setIcon = setIconPlus;
+          _setIcon = setIconPlus;
           return diddoc;
         }),
       ]),
@@ -243,17 +243,17 @@ const updateDID = (tabId) => (url) => {
     // Error handling
     // --------------------------
     chainRej((err) => {
-      setIcon = setIconXmark;
+      _setIcon = setIconXmark;
       console.error(err);
       return resolve("An error occurred"); // reconcile all errors so there are no uncaught rejected promises around
     }),
     S.bimap((err) => {
       // log("err")(err);
-      setIcon(tabId);
+      _setIcon(tabId);
       return err;
     })((res) => {
       // log("res")(res);
-      setIcon(tabId);
+      _setIcon(tabId);
       return res;
     }),
     promise,
@@ -280,7 +280,7 @@ api.tabs.onActivated.addListener(async ({ tabId, _windowId }) => {
 });
 
 api.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-  if (changeInfo.status == "loading") {
+  if (changeInfo.status == "loading" && changeInfo.url) {
     // console.log("updated", tabId, changeInfo, tab, tab.url, changeInfo.status); // prints in the *background* console
     const url = new URL(tab.url);
     return updateDID(tabId)(url);
