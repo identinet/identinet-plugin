@@ -241,3 +241,5 @@ Dependencies for running the test websites locally:
 - [W3C DID Core Specification](https://w3c.github.io/did-core/)
 - [did:web method](https://w3c-ccg.github.io/did-method-web/)
 - [W3C Verifiable Credentials / Presentations](https://www.w3.org/TR/vc-data-model-1.1/)
+- [DIF Linked Verifiable Presentation](https://identity.foundation/linked-vp)
+- [DIF Well Known DID Configuration](https://identity.foundation/specs/did-configuration/)
