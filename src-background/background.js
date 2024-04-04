@@ -49,19 +49,15 @@ const setIcon = (tabId) => (path) => {
 };
 
 const setIconSlash = (tabId) => {
-  setIcon(tabId)("icons/shield-slash.svg.png");
-};
-
-const setIconCheck = (tabId) => {
-  setIcon(tabId)("icons/shield-check.svg.png");
+  setIcon(tabId)("icons/shield-slash.png");
 };
 
 const setIconPlus = (tabId) => {
-  setIcon(tabId)("icons/shield-plus.svg.png");
+  setIcon(tabId)("icons/shield-plus.png");
 };
 
 const setIconXmark = (tabId) => {
-  setIcon(tabId)("icons/shield-xmark.svg.png");
+  setIcon(tabId)("icons/shield-xmark.png");
 };
 
 /**
@@ -193,7 +189,7 @@ const updateDID = (tabId) => (url) => {
         S.map((diddoc) => {
           // console.log("stored diddoc", diddoc);
           // update action icon
-          setIcon = setIconCheck;
+          setIcon = setIconPlus;
           return diddoc;
         }),
       ]),
@@ -237,8 +233,6 @@ const updateDID = (tabId) => (url) => {
                 })(presentations);
                 if (S.all((v) => v === true)(verified)) {
                   return reject(presentations);
-                } else {
-                  setIcon = setIconPlus;
                 }
                 return resolve(did);
               }),
