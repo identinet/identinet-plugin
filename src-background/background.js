@@ -49,15 +49,15 @@ const setIcon = (tabId) => (path) => {
 };
 
 const setIconSlash = (tabId) => {
-  setIcon(tabId)("icons/shield-slash.png");
+  return setIcon(tabId)("icons/shield-slash.png");
 };
 
 const setIconPlus = (tabId) => {
-  setIcon(tabId)("icons/shield-plus.png");
+  return setIcon(tabId)("icons/shield-plus.png");
 };
 
 const setIconXmark = (tabId) => {
-  setIcon(tabId)("icons/shield-xmark.png");
+  return setIcon(tabId)("icons/shield-xmark.png");
 };
 
 /**
@@ -95,7 +95,6 @@ const storeDIDDoc = (diddoc) => {
  * been stored at.
  */
 const storePresentations = (did) => (presentations) => {
-  // console.log("storing", did, presentations);
   return S.pipe([
     encaseP((did) => api.storage.local.get(did)),
     // S.map(log("get store")),
@@ -155,6 +154,7 @@ function getDIDDocForURL(url) {
             ),
           ),
           S.chain(encaseP((response) => response.json())),
+          chainRej((err) => reject(new DIDNotFoundError(err))),
           S.map((
             diddoc,
           ) => (S.Pair(url)({ did: S.fst(url_did_pair), diddoc }))),
