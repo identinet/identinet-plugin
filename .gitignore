@@ -160,3 +160,6 @@ Thumbs.db
 /test/website-certificates
 /.vinxi
 /.output
+
+**/.gitignore
+*.bak
