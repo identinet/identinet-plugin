@@ -12,9 +12,9 @@
     "128": "icons/favicon_128.png"
   },
   "action": {
-    "default_title": "identinet Decentralized Identity Information",
+    "default_title": "identinet SSI Information",
     "default_popup": "index.html",
-    "default_icon": "icons/favicon_48.png"
+    "default_icon": "icons/favicon_128.png"
   },
   "permissions": [
     "activeTab",

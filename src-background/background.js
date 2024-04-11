@@ -49,19 +49,15 @@ const setIcon = (tabId) => (path) => {
 };
 
 const setIconSlash = (tabId) => {
-  setIcon(tabId)("icons/shield-slash.svg.png");
-};
-
-const setIconCheck = (tabId) => {
-  setIcon(tabId)("icons/shield-check.svg.png");
+  return setIcon(tabId)("icons/shield-slash.png");
 };
 
 const setIconPlus = (tabId) => {
-  setIcon(tabId)("icons/shield-plus.svg.png");
+  return setIcon(tabId)("icons/shield-plus.png");
 };
 
 const setIconXmark = (tabId) => {
-  setIcon(tabId)("icons/shield-xmark.svg.png");
+  return setIcon(tabId)("icons/shield-xmark.png");
 };
 
 /**
@@ -99,7 +95,6 @@ const storeDIDDoc = (diddoc) => {
  * been stored at.
  */
 const storePresentations = (did) => (presentations) => {
-  // console.log("storing", did, presentations);
   return S.pipe([
     encaseP((did) => api.storage.local.get(did)),
     // S.map(log("get store")),
@@ -159,6 +154,7 @@ function getDIDDocForURL(url) {
             ),
           ),
           S.chain(encaseP((response) => response.json())),
+          chainRej((err) => reject(new DIDNotFoundError(err))),
           S.map((
             diddoc,
           ) => (S.Pair(url)({ did: S.fst(url_did_pair), diddoc }))),
@@ -174,7 +170,7 @@ function getDIDDocForURL(url) {
  * @returns {Promise<DID,Error>} DID for the URL/tab.
  */
 const updateDID = (tabId) => (url) => {
-  let setIcon = setIconSlash;
+  let _setIcon = setIconSlash;
   return S.pipe([
     // Fetch DID document
     // ------------------
@@ -193,7 +189,7 @@ const updateDID = (tabId) => (url) => {
         S.map((diddoc) => {
           // console.log("stored diddoc", diddoc);
           // update action icon
-          setIcon = setIconCheck;
+          _setIcon = setIconPlus;
           return diddoc;
         }),
       ]),
@@ -237,8 +233,6 @@ const updateDID = (tabId) => (url) => {
                 })(presentations);
                 if (S.all((v) => v === true)(verified)) {
                   return reject(presentations);
-                } else {
-                  setIcon = setIconPlus;
                 }
                 return resolve(did);
               }),
@@ -249,17 +243,17 @@ const updateDID = (tabId) => (url) => {
     // Error handling
     // --------------------------
     chainRej((err) => {
-      setIcon = setIconXmark;
+      _setIcon = setIconXmark;
       console.error(err);
       return resolve("An error occurred"); // reconcile all errors so there are no uncaught rejected promises around
     }),
     S.bimap((err) => {
       // log("err")(err);
-      setIcon(tabId);
+      _setIcon(tabId);
       return err;
     })((res) => {
       // log("res")(res);
-      setIcon(tabId);
+      _setIcon(tabId);
       return res;
     }),
     promise,
@@ -286,7 +280,7 @@ api.tabs.onActivated.addListener(async ({ tabId, _windowId }) => {
 });
 
 api.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-  if (changeInfo.status == "loading") {
+  if (changeInfo.status == "loading" && changeInfo.url) {
     // console.log("updated", tabId, changeInfo, tab, tab.url, changeInfo.status); // prints in the *background* console
     const url = new URL(tab.url);
     return updateDID(tabId)(url);

@@ -45,8 +45,6 @@ displayed with the following icons:
 
 - <img style="height: 1em" alt="No DID document available" src="./public/icons/shield-slash.svg" />
   No DID document is available.
-- <img style="height: 1em" alt="DID document available" src="./public/icons/shield-check.svg" />
-  DID document is available, no credentials are available.
 - <img style="height: 1em" alt="DID document and credentials available" src="./public/icons/shield-plus.svg" />
   DID and credentials are available, the credentials have been successfully
   verified.
@@ -57,8 +55,8 @@ Examples:
 
 - <img style="height: 1em" alt="No DID document available" src="./public/icons/shield-slash.svg" />
   <a href="https://no-id-example.identinet.io/">https://no-id-example.identinet.io/</a>
-- <img style="height: 1em" alt="DID document available" src="./public/icons/shield-check.svg" />
-  <a href="https://id-example.identinet.io/">https://id-example.identinet.io/</a>
+- <img style="height: 1em" alt="DID document available" src="./public/icons/shield-plus.svg" />
+  <a href="https://id-example.identinet.io/">https://id-example.identinet.io/</a> - only a DID is avaible, no credentials.
 - <img style="height: 1em" alt="DID document and credentials available" src="./public/icons/shield-plus.svg" />
   <a href="https://id-plus-example.identinet.io/">https://id-plus-example.identinet.io/</a>
 - <img style="height: 1em" alt="DID document and credentials available but broken" src="./public/icons/shield-xmark.svg" />
@@ -243,3 +241,5 @@ Dependencies for running the test websites locally:
 - [W3C DID Core Specification](https://w3c.github.io/did-core/)
 - [did:web method](https://w3c-ccg.github.io/did-method-web/)
 - [W3C Verifiable Credentials / Presentations](https://www.w3.org/TR/vc-data-model-1.1/)
+- [DIF Linked Verifiable Presentation](https://identity.foundation/linked-vp)
+- [DIF Well Known DID Configuration](https://identity.foundation/specs/did-configuration/)

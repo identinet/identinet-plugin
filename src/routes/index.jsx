@@ -80,10 +80,10 @@ export default function Home() {
             src={isVerified() === false
               ? "icons/shield-xmark.svg"
               : isVerified() === true
-              ? "icons/shield-plus.svg"
-              : S.type(ssiData()?.diddoc?.id).name === "String"
-              ? "icons/shield-check.svg"
-              : "icons/shield-slash.svg"}
+                ? "icons/shield-plus.svg"
+                : S.type(ssiData()?.diddoc?.id).name === "String"
+                  ? "icons/shield-plus.svg"
+                  : "icons/shield-slash.svg"}
           />
         </h3>
         <div class="flex">
@@ -102,12 +102,11 @@ export default function Home() {
           <div class="w-4/5">
             <ExternalLink
               url={ssiData()?.diddoc?.id &&
-                `https:didlint.ownyourdata.eu/validate?did=${
-                  encodeURIComponent(ssiData()?.diddoc?.id)
+                `https:didlint.ownyourdata.eu/validate?did=${encodeURIComponent(ssiData()?.diddoc?.id)
                 }`}
               title="Inspect DID"
               text={ssiData()?.diddoc?.id}
-              fallback="No DID."
+              fallback="Not available."
             />
           </div>
         </div>
@@ -118,7 +117,7 @@ export default function Home() {
         <div class="flex flex-col gap-2 py-2">
           <For
             each={ssiData()?.presentations || []}
-            fallback={<div>No linked presentations.</div>}
+            fallback={<div>Not available.</div>}
           >
             {(verified_presentation, presentation_index) => {
               const presentation = verified_presentation.presentation;

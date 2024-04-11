@@ -34,6 +34,9 @@ export default function Nav() {
               <A href="/" end={true}>SSI Information</A>
             </li>
             <li>
+              <A href="https://id-plus-example.identinet.io/" end={true}>Demo Pages</A>
+            </li>
+            <li>
               <A href="/privacy" end={true}>Privacy</A>
             </li>
             <li>
