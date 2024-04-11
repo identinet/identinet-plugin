@@ -72,6 +72,7 @@ export const verifyPresentation = (diddoc) => (presentation) => {
     if (url === suiteContext2018.CONTEXT_URL) {
       return suiteContext2018.documentLoader(url);
     }
+    // Resolve DID document if requested
     if (url === did) {
       return {
         contextUrl: null,
@@ -79,6 +80,7 @@ export const verifyPresentation = (diddoc) => (presentation) => {
         document: diddoc,
       };
     }
+    // Resolve verification method
     if (verificationMethods[url]) {
       return {
         contextUrl: null,

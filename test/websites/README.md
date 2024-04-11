@@ -15,5 +15,8 @@ Create and sign VC, pack it in a VP and sign it:
 ```
 $env.DID = did:web:id-plus.localhost%3A8443
 $env.PROOF_SUITE = Ed25519Signature2020
-../create-vc-empty.nu $env.DID $env.DID | ../sign.nu private.jwk --proofSuite $env.PROOF_SUITE | ../create-vp.nu $env.DID | ../sign.nu private.jwk --proofSuite $env.PROOF_SUITE
+../create-vc-empty.nu $env.DID $env.DID | ../sign.nu private.jwk --proofSuite $env.PROOF_SUITE | ../create-vp.nu $env.DID | ../sign.nu private.jwk --proofSuite $env.PROOF_SUITE | save -f .well-known/presentation.json
+../create-vc-imprint.nu $env.DID $env.DID | ../sign.nu private.jwk --proofSuite $env.PROOF_SUITE | ../create-vp.nu $env.DID | ../sign.nu private.jwk --proofSuite $env.PROOF_SUITE | save -f .well-known/presentation.json
+../create-vc-brand.nu $env.DID $env.DID | ../sign.nu private.jwk --proofSuite $env.PROOF_SUITE | ../create-vp.nu $env.DID | ../sign.nu private.jwk --proofSuite $env.PROOF_SUITE | save -f .well-known/presentation.json
+[(../create-vc-imprint.nu $env.DID $env.DID | ../sign.nu private.jwk --proofSuite $env.PROOF_SUITE | from json) (../create-vc-brand.nu $env.DID $env.DID | ../sign.nu private.jwk --proofSuite $env.PROOF_SUITE | from json)] | to json | ../create-vp.nu $env.DID | ../sign.nu private.jwk --proofSuite $env.PROOF_SUITE | save -f .well-known/presentation.json
 ```
