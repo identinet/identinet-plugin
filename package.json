@@ -1,19 +1,22 @@
 {
   "name": "identinet-plugin",
-  "version": "0.2.2",
+  "version": "0.3.0",
   "description": "Displays and verifies decentralized identity information of websites",
   "type": "module",
-  "scripts": {
+  "scripts":
+  {
     "dev": "NODE_ENV=development vinxi dev",
     "build": "vinxi build",
     "start": "vinxi start",
     "test": "vitest --dir test"
   },
-  "repository": {
+  "repository":
+  {
     "type": "git",
     "url": "https://github.com/identinet/identinet-plugin"
   },
-  "keywords": [
+  "keywords":
+  [
     "firefox",
     "chrome",
     "extension",
@@ -28,7 +31,8 @@
   ],
   "author": "Jan Christoph Ebersbach",
   "license": "AGPL-3.0",
-  "devDependencies": {
+  "devDependencies":
+  {
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "rollup": "^4.10.0",
@@ -41,7 +45,8 @@
     "web-ext": "^7.11.0"
   },
   "browser": true,
-  "dependencies": {
+  "dependencies":
+  {
     "@digitalbazaar/ed25519-signature-2018": "^4.0.0",
     "@digitalbazaar/ed25519-signature-2020": "^5.2.0",
     "@digitalbazaar/vc": "^6.2.0",
@@ -63,35 +68,45 @@
     "unocss": "^0.58.5",
     "unocss-preset-daisy": "^7.0.0"
   },
-  "engines": {
+  "engines":
+  {
     "node": ">=18.0"
   },
-  "eslintConfig": {
-    "env": {
+  "eslintConfig":
+  {
+    "env":
+    {
       "browser": true,
       "es2020": true
     },
-    "globals": {
+    "globals":
+    {
       "ENV": true
     },
     "extends": "eslint:recommended",
-    "parserOptions": {
+    "parserOptions":
+    {
       "sourceType": "module"
     },
-    "rules": {
-      "indent": [
+    "rules":
+    {
+      "indent":
+      [
         "error",
         2
       ],
-      "linebreak-style": [
+      "linebreak-style":
+      [
         "error",
         "unix"
       ],
-      "quotes": [
+      "quotes":
+      [
         "error",
         "single"
       ],
-      "semi": [
+      "semi":
+      [
         "error",
         "always"
       ]
