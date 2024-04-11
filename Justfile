@@ -176,9 +176,32 @@ test:
 run-preview:
     yarn run dev
 
-# Update changelog
-changelog:
-    git cliff | save -f CHANGELOG.md
+# Create a new release of this module. LEVEL can be one of: major, minor, patch, premajor, preminor, prepatch, or prerelease.
+release LEVEL="patch" NEW_VERSION="":
+    #!/usr/bin/env nu
+    if (git rev-parse --abbrev-ref HEAD) != "main" {
+      print -e "ERROR: A new release can only be created on the main branch."
+      exit 1
+    }
+    if (git status --porcelain | wc -l) != "0" {
+      print -e "ERROR: Repository contains uncommited changes."
+      exit 1
+    }
+    # str replace -r "-.*" "" - strips git's automatic prerelease version
+    let package = (open package.json)
+    # let current_version = (git describe | str replace -r "-.*" "" | deno run npm:semver $in)
+    let current_version = ($package.version |  deno run npm:semver $in)
+    let new_version = if "{{ NEW_VERSION }}" == "" {$current_version | deno run npm:semver -i "{{ LEVEL }}" $in | lines | get 0} else {"{{ NEW_VERSION }}"}
+    print "\nChangelog:\n"
+    git cliff --strip all -u -t $"v($new_version)"
+    input -s $"Version will be bumped from ($current_version) to ($new_version)\nPress enter to confirm.\n"
+    open package.json | upsert version $new_version | save -f package.json; git add package.json
+    git cliff -t $"v($new_version)" -o CHANGELOG.md; git add CHANGELOG.md
+    git commit -n -m $"Bump version to ($new_version)"
+    just build-prod
+    git tag -s -m $"v($new_version)" $"v($new_version)"
+    git push --atomic origin refs/heads/main $"refs/tags/v($new_version)"
+    git cliff --strip all --current | gh release create -F - $"v($new_version)" dist/*.zip dist/*.crx
 
 # Cleanup everything
 clean:
