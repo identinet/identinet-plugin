@@ -1,8 +1,9 @@
 # identinet-plugin
 
-[identinet](https://github.com/identinet/identinet-plugin) is a browser
+[identinet-plugin](https://github.com/identinet/identinet-plugin) is a browser
 extension that displays and verifies decentralized identity information of
-websites. The extension is a [did:hack project](https://didhack.xyz/).
+websites. The extension originated as a
+[did:hack project](https://didhack.xyz/).
 
 [![DID Details](./images/6_did_details.png)](https://id-plus-example.identinet.io/)
 
