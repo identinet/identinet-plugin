@@ -40,20 +40,18 @@ export default function Credential(props) {
       />
       <div
         class="collapse-title text-lg font-medium flex flex-col bg-no-repeat pl-10"
-        style={`background-size: 1rem; background-position: 1rem; background-image: url(${
-          isVerified ? "icons/shield-plus.svg" : "icons/shield-xmark.svg"
-        })`}
+        style={`background-size: 1rem; background-position: 1rem; background-image: url(${isVerified ? "icons/shield-plus.svg" : "icons/shield-xmark.svg"
+          })`}
       >
-        {credential.type?.join(", ") || "Credential"}
-        <span class="text-xs font-light -mt-2">
-          {credential.credentialSubject.id || "No subject ID."}
-        </span>
+        {
+          ((S.type(credential.type).name === "String" && [credential.type]) || (S.type(credential.type).name === "Array" && credential.type)).filter(t => t !== "VerifiableCredential") || "Verifiable Credential"
+        }
       </div>
       <div class="collapse-content grid">
         <div style="grid-template-columns: 25% 75%;" class="text-sm grid">
-          <div>Id:</div>
+          <div>Credential Id:</div>
           <div>{credential.id || "No credential ID."}</div>
-          <div>SubjectId:</div>
+          <div>Subject:</div>
           <div>{credential.credentialSubject.id || "No subject ID."}</div>
           <div>Issuer:</div>
           <div>{credential.issuer || "No Issuer."}</div>
@@ -88,13 +86,13 @@ export default function Credential(props) {
           ])(credential.credentialSubject)}
         >
           {(claim, _index) => (
-            <div class="flex gap-2 overflow-x-auto">
-              <For each={Object.keys(claim)}>
+            <div class="flex gap-2 flex-wrap">
+              <For each={Object.keys(claim).filter(key => key !== "id")}>
                 {(key, index) => (
-                  <div class="card card-compact w-36 bg-base-200">
+                  <div class="card card-compact w-36 flex-grow flex-shrink bg-base-200">
                     <div class="card-body">
                       <h2 class="card-title text-sm">{key}</h2>
-                      <p class="text-ellipsis overflow-hidden">{claim[key]}</p>
+                      <p class="text-ellipsis overflow-hidden">{["Object", "Array"].includes(S.type(claim[key]).name) ? JSON.stringify(claim[key]) : claim[key]}</p>
                     </div>
                   </div>
                 )}
