@@ -102,8 +102,7 @@ export default function Home() {
           <div class="w-4/5">
             <ExternalLink
               url={ssiData()?.diddoc?.id &&
-                `https:didlint.ownyourdata.eu/validate?did=${encodeURIComponent(ssiData()?.diddoc?.id)
-                }`}
+                `https:${url()?.hostname}:${url()?.port}/.well-known/did.json`}
               title="Inspect DID"
               text={ssiData()?.diddoc?.id}
               fallback="Not available."
