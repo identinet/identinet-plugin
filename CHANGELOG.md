@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.1] - 2024-04-12
+
+### Bug Fixes
+
+- Correct name of credentials with a single type
+- Add titles to links and make demo pages link open in new tab
+
+### Features
+
+- Store source URL with presentation
+- Add link to presentation
+- Strip namespace and capitalize property names
+- Display claims in table
+
 ## [0.3.0] - 2024-04-11
 
 ### Bug Fixes
