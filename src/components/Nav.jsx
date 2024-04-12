@@ -1,4 +1,5 @@
 import { A } from "@solidjs/router";
+import ExternalLink from "~/components/ExternalLink.jsx";
 
 export default function Nav() {
   let menu;
@@ -31,16 +32,16 @@ export default function Nav() {
             class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
           >
             <li>
-              <A href="/" end={true}>SSI Information</A>
+              <A title="SSI Information" href="/" end={true}>SSI Information</A>
             </li>
             <li>
-              <A href="https://id-plus-example.identinet.io/" end={true}>Demo Pages</A>
+              <A title="Demo Pages" href="https://id-plus-example.identinet.io/" target="_blank" end={true}>Demo Pages</A>
             </li>
             <li>
-              <A href="/privacy" end={true}>Privacy</A>
+              <A title="Privacy" href="/privacy" end={true}>Privacy</A>
             </li>
             <li>
-              <A href="/about" end={true}>About</A>
+              <A title="About" href="/about" end={true}>About</A>
             </li>
           </ul>
         </details>
