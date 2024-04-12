@@ -79,29 +79,36 @@ export default function Credential(props) {
             </div>
           </Show>
         </div>
-        <div class="divider">Claims</div>
-        <For
-          each={S.pipe([
-            S.ifElse((claims) => S.type(claims).name === "Undefined")(() => [])(
-              (claims) => S.type(claims).name === "Array" ? claims : [claims]
-            ),
-          ])(credential.credentialSubject)}
-        >
-          {(claim, _index) => (
-            <div class="flex gap-2 flex-wrap">
-              <For each={Object.keys(claim).filter(key => key !== "id")}>
-                {(key, index) => (
-                  <div class="card card-compact w-36 flex-grow flex-shrink bg-base-200">
-                    <div class="card-body">
-                      <h2 class="card-title text-sm">{property2humanreadable(key)}</h2>
-                      <p class="text-ellipsis overflow-hidden">{["Object", "Array"].includes(S.type(claim[key]).name) ? JSON.stringify(claim[key], "", 2) : claim[key]}</p>
-                    </div>
-                  </div>
+        <div class="overflow-x-auto">
+          <table class="table table-sm table-zebra">
+            <thead>
+              <tr>
+                <th class="p-0 pt-2 pb-1 text-left">Claims</th>
+                <th class="p-0 pt-2 pb-1 text-left"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <For
+                each={S.pipe([
+                  S.ifElse((claims) => S.type(claims).name === "Undefined")(() => [])(
+                    (claims) => S.type(claims).name === "Array" ? claims : [claims]
+                  ),
+                ])(credential.credentialSubject)}
+              >
+                {(claim, _index) => (
+                  <For each={Object.keys(claim).filter(key => key !== "id")}>
+                    {(key, index) => (
+                      <tr>
+                        <td class="p-0">{property2humanreadable(key)}</td>
+                        <td class="p-0 px-2">{["Object", "Array"].includes(S.type(claim[key]).name) ? JSON.stringify(claim[key], " ", 2) : claim[key]}</td>
+                      </tr>
+                    )}
+                  </For>
                 )}
               </For>
-            </div>
-          )}
-        </For>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
