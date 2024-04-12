@@ -35,93 +35,7 @@ export const storage = {
     },
   },
   "did:web:id-broken.localhost%3A8443": {
-    "presentations": [{
-      "presentation": {
-        "@context": [
-          "https://www.w3.org/2018/credentials/v1",
-          "https://w3id.org/security/suites/ed25519-2020/v1",
-        ],
-        "type": ["VerifiablePresentation"],
-        "verifiableCredential": [{
-          "@context": [
-            "https://www.w3.org/2018/credentials/v1",
-            "https://w3id.org/security/suites/ed25519-2020/v1",
-          ],
-          "type": ["VerifiableCredential"],
-          "credentialSubject": {
-            "id": "did:web:id-broken.localhost%3A8443",
-            "broken": "tampered attribute",
-          },
-          "issuer": "did:web:id-broken.localhost%3A8443",
-          "issuanceDate": "2024-02-12T12:39:20Z",
-          "proof": {
-            "type": "Ed25519Signature2020",
-            "proofPurpose": "assertionMethod",
-            "proofValue":
-              "z4RchVhDpAAaJ34XGGBiejkQ9zzrL6VCBvMjgMLWagxjj4iRc7RqmoudCXYsdn5MjrXJ6184RnYueRVCFM9vBZwHN",
-            "verificationMethod":
-              "did:web:id-broken.localhost%3A8443#dqqkiu1wiQWE7T3MmssDV_-xiHCGu1xzzcafoXoCNUs",
-            "created": "2024-02-12T12:39:20.730192986Z",
-          },
-        }],
-        "proof": {
-          "type": "Ed25519Signature2020",
-          "proofPurpose": "assertionMethod",
-          "proofValue":
-            "z58AjraH3nvCb6VxU9rLkZS1a3VyQAPc77ixKNV1PmqpYNBGznGGgZQdpJAB8WARLDFu88KkpjxKwAVKJVSpWJa6o",
-          "verificationMethod":
-            "did:web:id-broken.localhost%3A8443#dqqkiu1wiQWE7T3MmssDV_-xiHCGu1xzzcafoXoCNUs",
-          "created": "2024-02-12T12:39:20.895220443Z",
-        },
-        "holder": "did:web:id-broken.localhost%3A8443",
-      },
-      "verification_result": {
-        "presentationResult": {
-          "verified": false,
-          "results": [{
-            "proof": {
-              "@context": [
-                "https://www.w3.org/2018/credentials/v1",
-                "https://w3id.org/security/suites/ed25519-2020/v1",
-              ],
-              "type": "Ed25519Signature2020",
-              "proofPurpose": "assertionMethod",
-              "proofValue":
-                "z58AjraH3nvCb6VxU9rLkZS1a3VyQAPc77ixKNV1PmqpYNBGznGGgZQdpJAB8WARLDFu88KkpjxKwAVKJVSpWJa6o",
-              "verificationMethod":
-                "did:web:id-broken.localhost%3A8443#dqqkiu1wiQWE7T3MmssDV_-xiHCGu1xzzcafoXoCNUs",
-              "created": "2024-02-12T12:39:20.895220443Z",
-            },
-            "verified": false,
-            "error": {},
-          }],
-          "error": {},
-        },
-        "verified": false,
-        "credentialResults": [{
-          "verified": false,
-          "results": [{
-            "proof": {
-              "@context": [
-                "https://www.w3.org/2018/credentials/v1",
-                "https://w3id.org/security/suites/ed25519-2020/v1",
-              ],
-              "type": "Ed25519Signature2020",
-              "proofPurpose": "assertionMethod",
-              "proofValue":
-                "z4RchVhDpAAaJ34XGGBiejkQ9zzrL6VCBvMjgMLWagxjj4iRc7RqmoudCXYsdn5MjrXJ6184RnYueRVCFM9vBZwHN",
-              "verificationMethod":
-                "did:web:id-broken.localhost%3A8443#dqqkiu1wiQWE7T3MmssDV_-xiHCGu1xzzcafoXoCNUs",
-              "created": "2024-02-12T12:39:20.730192986Z",
-            },
-            "verified": false,
-            "error": {},
-          }],
-          "error": {},
-        }],
-        "error": {},
-      },
-    }],
+    "presentations": [{ "url": "https://id-broken.localhost:8443/.well-known/presentation.json", "presentation": { "@context": ["https://www.w3.org/2018/credentials/v1", "https://w3id.org/security/suites/ed25519-2020/v1"], "type": ["VerifiablePresentation"], "verifiableCredential": [{ "@context": ["https://www.w3.org/2018/credentials/v1", "https://w3id.org/security/suites/ed25519-2020/v1"], "type": ["VerifiableCredential"], "credentialSubject": { "id": "did:web:id-broken.localhost%3A8443", "broken": "tampered attribute" }, "issuer": "did:web:id-broken.localhost%3A8443", "issuanceDate": "2024-02-12T12:39:20Z", "proof": { "type": "Ed25519Signature2020", "proofPurpose": "assertionMethod", "proofValue": "z4RchVhDpAAaJ34XGGBiejkQ9zzrL6VCBvMjgMLWagxjj4iRc7RqmoudCXYsdn5MjrXJ6184RnYueRVCFM9vBZwHN", "verificationMethod": "did:web:id-broken.localhost%3A8443#dqqkiu1wiQWE7T3MmssDV_-xiHCGu1xzzcafoXoCNUs", "created": "2024-02-12T12:39:20.730192986Z" } }], "proof": { "type": "Ed25519Signature2020", "proofPurpose": "assertionMethod", "proofValue": "z58AjraH3nvCb6VxU9rLkZS1a3VyQAPc77ixKNV1PmqpYNBGznGGgZQdpJAB8WARLDFu88KkpjxKwAVKJVSpWJa6o", "verificationMethod": "did:web:id-broken.localhost%3A8443#dqqkiu1wiQWE7T3MmssDV_-xiHCGu1xzzcafoXoCNUs", "created": "2024-02-12T12:39:20.895220443Z" }, "holder": "did:web:id-broken.localhost%3A8443" }, "verification_result": { "presentationResult": { "verified": false, "results": [{ "proof": { "@context": ["https://www.w3.org/2018/credentials/v1", "https://w3id.org/security/suites/ed25519-2020/v1"], "type": "Ed25519Signature2020", "proofPurpose": "assertionMethod", "proofValue": "z58AjraH3nvCb6VxU9rLkZS1a3VyQAPc77ixKNV1PmqpYNBGznGGgZQdpJAB8WARLDFu88KkpjxKwAVKJVSpWJa6o", "verificationMethod": "did:web:id-broken.localhost%3A8443#dqqkiu1wiQWE7T3MmssDV_-xiHCGu1xzzcafoXoCNUs", "created": "2024-02-12T12:39:20.895220443Z" }, "verified": false, "error": { "name": "jsonld.ValidationError", "details": { "event": { "type": ["JsonLdEvent"], "code": "invalid property", "level": "warning", "message": "Dropping property that did not expand into an absolute IRI or keyword.", "details": { "property": "broken", "expandedProperty": "broken" } } }, "message": "Safe mode validation error.", "stack": "ci@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:62:3678\nTa.safeEventHandler@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:62:23439\nIa@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:62:22317\nTa.handleEvent@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:62:22786\nxs@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:64:5055\nms.expand@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:64:16412\nxs@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:64:10941\nms.expand@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:64:16412\nasync*ms.expand@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:64:15485\nxs@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:64:10941\nasync*ms.expand@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:64:16412\nasync*Gu/e.expand@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:112:5351\nGu/e.toRDF@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:112:8055\nGu/e.canonize@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:112:7433\ncanonize@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:133:2682\ncreateVerifyData@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:133:3420\nverifyProof@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:133:2143\nverify/i<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:158:358\nverify/i<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:158:203\nasync*verify@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:158:1054\nVl.verify@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:158:2901\njy/<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:248:4213\nasync*jy@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:248:4343\ntr<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:105580\nHn</f/<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103144\nf@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103260\ny@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103309\ntr</<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:105699\npromise callback*tr<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:105672\nHn</f/<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103196\nf@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103260\ny@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103309\ntr</<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:105699\npromise callback*tr<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:105672\nHn</f/<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103144\nf@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103260\nHn<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103616\nh@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:112171\ny@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:112353\ngr<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:112371\nHn</f/<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103144\nf@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103260\ny@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103309\ntr</<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:105699\npromise callback*tr<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:105672\nHn</f/<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103196\nf@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103260\n" } }], "error": { "name": "VerificationError", "errors": [{ "name": "jsonld.ValidationError", "details": { "event": { "type": ["JsonLdEvent"], "code": "invalid property", "level": "warning", "message": "Dropping property that did not expand into an absolute IRI or keyword.", "details": { "property": "broken", "expandedProperty": "broken" } } }, "message": "Safe mode validation error.", "stack": "ci@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:62:3678\nTa.safeEventHandler@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:62:23439\nIa@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:62:22317\nTa.handleEvent@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:62:22786\nxs@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:64:5055\nms.expand@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:64:16412\nxs@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:64:10941\nms.expand@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:64:16412\nasync*ms.expand@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:64:15485\nxs@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:64:10941\nasync*ms.expand@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:64:16412\nasync*Gu/e.expand@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:112:5351\nGu/e.toRDF@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:112:8055\nGu/e.canonize@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:112:7433\ncanonize@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:133:2682\ncreateVerifyData@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:133:3420\nverifyProof@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:133:2143\nverify/i<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:158:358\nverify/i<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:158:203\nasync*verify@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:158:1054\nVl.verify@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:158:2901\njy/<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:248:4213\nasync*jy@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:248:4343\ntr<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:105580\nHn</f/<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103144\nf@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103260\ny@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103309\ntr</<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:105699\npromise callback*tr<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:105672\nHn</f/<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103196\nf@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103260\ny@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103309\ntr</<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:105699\npromise callback*tr<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:105672\nHn</f/<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103144\nf@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103260\nHn<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103616\nh@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:112171\ny@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:112353\ngr<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:112371\nHn</f/<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103144\nf@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103260\ny@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103309\ntr</<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:105699\npromise callback*tr<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:105672\nHn</f/<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103196\nf@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103260\n" }] } }, "verified": false, "credentialResults": [{ "verified": false, "results": [{ "proof": { "@context": ["https://www.w3.org/2018/credentials/v1", "https://w3id.org/security/suites/ed25519-2020/v1"], "type": "Ed25519Signature2020", "proofPurpose": "assertionMethod", "proofValue": "z4RchVhDpAAaJ34XGGBiejkQ9zzrL6VCBvMjgMLWagxjj4iRc7RqmoudCXYsdn5MjrXJ6184RnYueRVCFM9vBZwHN", "verificationMethod": "did:web:id-broken.localhost%3A8443#dqqkiu1wiQWE7T3MmssDV_-xiHCGu1xzzcafoXoCNUs", "created": "2024-02-12T12:39:20.730192986Z" }, "verified": false, "error": { "name": "jsonld.ValidationError", "details": { "event": { "type": ["JsonLdEvent"], "code": "invalid property", "level": "warning", "message": "Dropping property that did not expand into an absolute IRI or keyword.", "details": { "property": "broken", "expandedProperty": "broken" } } }, "message": "Safe mode validation error.", "stack": "ci@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:62:3678\nTa.safeEventHandler@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:62:23439\nIa@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:62:22317\nTa.handleEvent@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:62:22786\nxs@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:64:5055\nms.expand@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:64:16412\nxs@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:64:10941\nms.expand@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:64:16412\nasync*Gu/e.expand@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:112:5351\nGu/e.toRDF@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:112:8055\nGu/e.canonize@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:112:7433\ncanonize@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:133:2682\ncreateVerifyData@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:133:3420\nverifyProof@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:133:2143\nverify/i<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:158:358\nverify/i<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:158:203\nasync*verify@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:158:1054\nVl.verify@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:158:2901\njy/o</<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:248:3535\njy/o</<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:248:3701\njy/o<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:248:3788\njy/<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:248:1129\njy@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:248:4343\ntr<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:105580\nHn</f/<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103144\nf@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103260\ny@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103309\ntr</<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:105699\npromise callback*tr<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:105672\nHn</f/<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103196\nf@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103260\ny@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103309\ntr</<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:105699\npromise callback*tr<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:105672\nHn</f/<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103144\nf@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103260\nHn<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103616\nh@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:112171\ny@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:112353\ngr<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:112371\nHn</f/<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103144\nf@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103260\ny@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103309\ntr</<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:105699\npromise callback*tr<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:105672\n" } }], "error": { "name": "VerificationError", "errors": [{ "name": "jsonld.ValidationError", "details": { "event": { "type": ["JsonLdEvent"], "code": "invalid property", "level": "warning", "message": "Dropping property that did not expand into an absolute IRI or keyword.", "details": { "property": "broken", "expandedProperty": "broken" } } }, "message": "Safe mode validation error.", "stack": "ci@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:62:3678\nTa.safeEventHandler@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:62:23439\nIa@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:62:22317\nTa.handleEvent@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:62:22786\nxs@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:64:5055\nms.expand@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:64:16412\nxs@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:64:10941\nms.expand@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:64:16412\nasync*Gu/e.expand@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:112:5351\nGu/e.toRDF@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:112:8055\nGu/e.canonize@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:112:7433\ncanonize@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:133:2682\ncreateVerifyData@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:133:3420\nverifyProof@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:133:2143\nverify/i<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:158:358\nverify/i<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:158:203\nasync*verify@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:158:1054\nVl.verify@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:158:2901\njy/o</<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:248:3535\njy/o</<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:248:3701\njy/o<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:248:3788\njy/<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:248:1129\njy@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:248:4343\ntr<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:105580\nHn</f/<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103144\nf@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103260\ny@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103309\ntr</<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:105699\npromise callback*tr<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:105672\nHn</f/<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103196\nf@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103260\ny@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103309\ntr</<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:105699\npromise callback*tr<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:105672\nHn</f/<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103144\nf@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103260\nHn<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103616\nh@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:112171\ny@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:112353\ngr<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:112371\nHn</f/<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103144\nf@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103260\ny@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103309\ntr</<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:105699\npromise callback*tr<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:105672\n" }] } }], "error": { "name": "VerificationError", "errors": [{ "name": "jsonld.ValidationError", "details": { "event": { "type": ["JsonLdEvent"], "code": "invalid property", "level": "warning", "message": "Dropping property that did not expand into an absolute IRI or keyword.", "details": { "property": "broken", "expandedProperty": "broken" } } }, "message": "Safe mode validation error.", "stack": "ci@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:62:3678\nTa.safeEventHandler@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:62:23439\nIa@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:62:22317\nTa.handleEvent@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:62:22786\nxs@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:64:5055\nms.expand@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:64:16412\nxs@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:64:10941\nms.expand@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:64:16412\nasync*ms.expand@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:64:15485\nxs@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:64:10941\nasync*ms.expand@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:64:16412\nasync*Gu/e.expand@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:112:5351\nGu/e.toRDF@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:112:8055\nGu/e.canonize@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:112:7433\ncanonize@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:133:2682\ncreateVerifyData@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:133:3420\nverifyProof@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:133:2143\nverify/i<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:158:358\nverify/i<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:158:203\nasync*verify@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:158:1054\nVl.verify@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:158:2901\njy/<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:248:4213\nasync*jy@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:248:4343\ntr<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:105580\nHn</f/<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103144\nf@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103260\ny@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103309\ntr</<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:105699\npromise callback*tr<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:105672\nHn</f/<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103196\nf@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103260\ny@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103309\ntr</<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:105699\npromise callback*tr<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:105672\nHn</f/<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103144\nf@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103260\nHn<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103616\nh@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:112171\ny@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:112353\ngr<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:112371\nHn</f/<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103144\nf@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103260\ny@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103309\ntr</<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:105699\npromise callback*tr<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:105672\nHn</f/<@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103196\nf@moz-extension://0210537e-f468-49b2-aae3-410b48574008/background.js:1:103260\n" }] } } }],
     "diddoc": {
       "@context": [
         "https://www.w3.org/ns/did/v1",
@@ -163,406 +77,53 @@ export const storage = {
     },
   },
   "did:web:id-plus.localhost%3A8443": {
-    "presentations": [{
-      "presentation": {
-        "@context": [
-          "https://www.w3.org/2018/credentials/v1",
-          "https://w3id.org/security/suites/ed25519-2020/v1",
-        ],
-        "type": ["VerifiablePresentation"],
-        "verifiableCredential": [{
-          "@context": [
-            "https://www.w3.org/2018/credentials/v1",
-            "https://w3id.org/security/suites/ed25519-2020/v1",
-          ],
-          "type": ["VerifiableCredential"],
-          "credentialSubject": { "id": "did:web:id-plus.localhost%3A8443" },
-          "issuer": "did:web:id-plus.localhost%3A8443",
-          "issuanceDate": "2024-02-12T12:32:43Z",
-          "proof": {
-            "type": "Ed25519Signature2020",
-            "proofPurpose": "assertionMethod",
-            "proofValue":
-              "z546i6F5zkrBtZViDsCRCThdCdzE9FajDYAyc4gXxSzf3gftxLyR39ovXVpFA3P3zeXaq452vN25wawN4LPy8uS9e",
-            "verificationMethod":
-              "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
-            "created": "2024-02-12T12:32:43.762815207Z",
-          },
-        }],
-        "proof": {
-          "type": "Ed25519Signature2020",
-          "proofPurpose": "assertionMethod",
-          "proofValue":
-            "z57mt83Y11ZQMVHGzCNg77HMEeH2fPN6D6uBraqY8qKRC4ufwfXgRGdZMqWx6GBAy9RV7tLnp4UsoHXVSqefmQcpa",
-          "verificationMethod":
-            "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
-          "created": "2024-02-12T12:32:43.929955657Z",
-        },
-        "holder": "did:web:id-plus.localhost%3A8443",
-      },
-      "verification_result": {
-        "presentationResult": {
-          "verified": true,
-          "results": [{
-            "proof": {
-              "@context": [
-                "https://www.w3.org/2018/credentials/v1",
-                "https://w3id.org/security/suites/ed25519-2020/v1",
-              ],
-              "type": "Ed25519Signature2020",
-              "proofPurpose": "assertionMethod",
-              "proofValue":
-                "z57mt83Y11ZQMVHGzCNg77HMEeH2fPN6D6uBraqY8qKRC4ufwfXgRGdZMqWx6GBAy9RV7tLnp4UsoHXVSqefmQcpa",
-              "verificationMethod":
-                "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
-              "created": "2024-02-12T12:32:43.929955657Z",
-            },
-            "verified": true,
-            "verificationMethod": {
-              "id":
-                "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
-              "type": "Ed25519VerificationKey2020",
-              "controller": "did:web:id-plus.localhost%3A8443",
-              "publicKeyJwk": {
-                "kty": "OKP",
-                "kid": "MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
-                "crv": "Ed25519",
-                "alg": "EdDSA",
-                "x": "6yUJruvdUvjwZpVdtxmAxoNI2UUc-LfL37cAZ09ffzs",
-              },
-              "publicKeyMultibase":
-                "z6MkvHAcPJP22ge8zznDUtbhYJW4PDti14tUng99xUmcALFC",
-              "@context": [
-                "https://www.w3.org/ns/did/v1",
-                "https://identity.foundation/linked-vp/contexts/v1",
-                "https://w3id.org/security/suites/ed25519-2020/v1",
-                {
-                  "publicKeyJwk": {
-                    "@id": "https://w3id.org/security#publicKeyJwk",
-                    "@type": "@json",
-                  },
-                },
-              ],
-            },
-            "purposeResult": {
-              "valid": true,
-              "controller": {
-                "@context": [
-                  "https://www.w3.org/ns/did/v1",
-                  "https://identity.foundation/linked-vp/contexts/v1",
-                  "https://w3id.org/security/suites/ed25519-2020/v1",
-                  {
-                    "publicKeyJwk": {
-                      "@id": "https://w3id.org/security#publicKeyJwk",
-                      "@type": "@json",
-                    },
-                  },
-                ],
-                "id": "did:web:id-plus.localhost%3A8443",
-                "verificationMethod": [{
-                  "id":
-                    "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
-                  "type": "Ed25519VerificationKey2020",
-                  "controller": "did:web:id-plus.localhost%3A8443",
-                  "publicKeyJwk": {
-                    "kty": "OKP",
-                    "kid": "MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
-                    "crv": "Ed25519",
-                    "alg": "EdDSA",
-                    "x": "6yUJruvdUvjwZpVdtxmAxoNI2UUc-LfL37cAZ09ffzs",
-                  },
-                }],
-                "authentication": [
-                  "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
-                ],
-                "assertionMethod": [
-                  "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
-                ],
-                "service": [{
-                  "id": "did:web:id-plus.localhost%3A8443#plain",
-                  "type": "LinkedVerifiablePresentation",
-                  "serviceEndpoint":
-                    "https://id-plus.localhost:8443/.well-known/presentation.json",
-                }, {
-                  "id": "did:web:id-plus.localhost%3A8443#business",
-                  "type": "LinkedVerifiablePresentation",
-                  "serviceEndpoint":
-                    "https://id-plus.localhost:8443/.well-known/presentation.json",
-                }],
-              },
-            },
-          }],
-        },
-        "verified": true,
-        "credentialResults": [{
-          "verified": true,
-          "results": [{
-            "proof": {
-              "@context": [
-                "https://www.w3.org/2018/credentials/v1",
-                "https://w3id.org/security/suites/ed25519-2020/v1",
-              ],
-              "type": "Ed25519Signature2020",
-              "proofPurpose": "assertionMethod",
-              "proofValue":
-                "z546i6F5zkrBtZViDsCRCThdCdzE9FajDYAyc4gXxSzf3gftxLyR39ovXVpFA3P3zeXaq452vN25wawN4LPy8uS9e",
-              "verificationMethod":
-                "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
-              "created": "2024-02-12T12:32:43.762815207Z",
-            },
-            "verified": true,
-            "verificationMethod": {
-              "id":
-                "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
-              "type": "Ed25519VerificationKey2020",
-              "controller": "did:web:id-plus.localhost%3A8443",
-              "publicKeyJwk": {
-                "kty": "OKP",
-                "kid": "MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
-                "crv": "Ed25519",
-                "alg": "EdDSA",
-                "x": "6yUJruvdUvjwZpVdtxmAxoNI2UUc-LfL37cAZ09ffzs",
-              },
-              "publicKeyMultibase":
-                "z6MkvHAcPJP22ge8zznDUtbhYJW4PDti14tUng99xUmcALFC",
-              "@context": [
-                "https://www.w3.org/ns/did/v1",
-                "https://identity.foundation/linked-vp/contexts/v1",
-                "https://w3id.org/security/suites/ed25519-2020/v1",
-                {
-                  "publicKeyJwk": {
-                    "@id": "https://w3id.org/security#publicKeyJwk",
-                    "@type": "@json",
-                  },
-                },
-              ],
-            },
-            "purposeResult": { "valid": true },
-          }],
-        }],
-      },
-    }, {
-      "presentation": {
-        "@context": [
-          "https://www.w3.org/2018/credentials/v1",
-          "https://w3id.org/security/suites/ed25519-2020/v1",
-        ],
-        "type": ["VerifiablePresentation"],
-        "verifiableCredential": [{
-          "@context": [
-            "https://www.w3.org/2018/credentials/v1",
-            "https://w3id.org/security/suites/ed25519-2020/v1",
-          ],
-          "type": ["VerifiableCredential"],
-          "credentialSubject": { "id": "did:web:id-plus.localhost%3A8443" },
-          "issuer": "did:web:id-plus.localhost%3A8443",
-          "issuanceDate": "2024-02-12T12:32:43Z",
-          "proof": {
-            "type": "Ed25519Signature2020",
-            "proofPurpose": "assertionMethod",
-            "proofValue":
-              "z546i6F5zkrBtZViDsCRCThdCdzE9FajDYAyc4gXxSzf3gftxLyR39ovXVpFA3P3zeXaq452vN25wawN4LPy8uS9e",
-            "verificationMethod":
-              "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
-            "created": "2024-02-12T12:32:43.762815207Z",
-          },
-        }],
-        "proof": {
-          "type": "Ed25519Signature2020",
-          "proofPurpose": "assertionMethod",
-          "proofValue":
-            "z57mt83Y11ZQMVHGzCNg77HMEeH2fPN6D6uBraqY8qKRC4ufwfXgRGdZMqWx6GBAy9RV7tLnp4UsoHXVSqefmQcpa",
-          "verificationMethod":
-            "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
-          "created": "2024-02-12T12:32:43.929955657Z",
-        },
-        "holder": "did:web:id-plus.localhost%3A8443",
-      },
-      "verification_result": {
-        "presentationResult": {
-          "verified": true,
-          "results": [{
-            "proof": {
-              "@context": [
-                "https://www.w3.org/2018/credentials/v1",
-                "https://w3id.org/security/suites/ed25519-2020/v1",
-              ],
-              "type": "Ed25519Signature2020",
-              "proofPurpose": "assertionMethod",
-              "proofValue":
-                "z57mt83Y11ZQMVHGzCNg77HMEeH2fPN6D6uBraqY8qKRC4ufwfXgRGdZMqWx6GBAy9RV7tLnp4UsoHXVSqefmQcpa",
-              "verificationMethod":
-                "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
-              "created": "2024-02-12T12:32:43.929955657Z",
-            },
-            "verified": true,
-            "verificationMethod": {
-              "id":
-                "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
-              "type": "Ed25519VerificationKey2020",
-              "controller": "did:web:id-plus.localhost%3A8443",
-              "publicKeyJwk": {
-                "kty": "OKP",
-                "kid": "MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
-                "crv": "Ed25519",
-                "alg": "EdDSA",
-                "x": "6yUJruvdUvjwZpVdtxmAxoNI2UUc-LfL37cAZ09ffzs",
-              },
-              "publicKeyMultibase":
-                "z6MkvHAcPJP22ge8zznDUtbhYJW4PDti14tUng99xUmcALFC",
-              "@context": [
-                "https://www.w3.org/ns/did/v1",
-                "https://identity.foundation/linked-vp/contexts/v1",
-                "https://w3id.org/security/suites/ed25519-2020/v1",
-                {
-                  "publicKeyJwk": {
-                    "@id": "https://w3id.org/security#publicKeyJwk",
-                    "@type": "@json",
-                  },
-                },
-              ],
-            },
-            "purposeResult": {
-              "valid": true,
-              "controller": {
-                "@context": [
-                  "https://www.w3.org/ns/did/v1",
-                  "https://identity.foundation/linked-vp/contexts/v1",
-                  "https://w3id.org/security/suites/ed25519-2020/v1",
-                  {
-                    "publicKeyJwk": {
-                      "@id": "https://w3id.org/security#publicKeyJwk",
-                      "@type": "@json",
-                    },
-                  },
-                ],
-                "id": "did:web:id-plus.localhost%3A8443",
-                "verificationMethod": [{
-                  "id":
-                    "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
-                  "type": "Ed25519VerificationKey2020",
-                  "controller": "did:web:id-plus.localhost%3A8443",
-                  "publicKeyJwk": {
-                    "kty": "OKP",
-                    "kid": "MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
-                    "crv": "Ed25519",
-                    "alg": "EdDSA",
-                    "x": "6yUJruvdUvjwZpVdtxmAxoNI2UUc-LfL37cAZ09ffzs",
-                  },
-                }],
-                "authentication": [
-                  "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
-                ],
-                "assertionMethod": [
-                  "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
-                ],
-                "service": [{
-                  "id": "did:web:id-plus.localhost%3A8443#plain",
-                  "type": "LinkedVerifiablePresentation",
-                  "serviceEndpoint":
-                    "https://id-plus.localhost:8443/.well-known/presentation.json",
-                }, {
-                  "id": "did:web:id-plus.localhost%3A8443#business",
-                  "type": "LinkedVerifiablePresentation",
-                  "serviceEndpoint":
-                    "https://id-plus.localhost:8443/.well-known/presentation.json",
-                }],
-              },
-            },
-          }],
-        },
-        "verified": true,
-        "credentialResults": [{
-          "verified": true,
-          "results": [{
-            "proof": {
-              "@context": [
-                "https://www.w3.org/2018/credentials/v1",
-                "https://w3id.org/security/suites/ed25519-2020/v1",
-              ],
-              "type": "Ed25519Signature2020",
-              "proofPurpose": "assertionMethod",
-              "proofValue":
-                "z546i6F5zkrBtZViDsCRCThdCdzE9FajDYAyc4gXxSzf3gftxLyR39ovXVpFA3P3zeXaq452vN25wawN4LPy8uS9e",
-              "verificationMethod":
-                "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
-              "created": "2024-02-12T12:32:43.762815207Z",
-            },
-            "verified": true,
-            "verificationMethod": {
-              "id":
-                "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
-              "type": "Ed25519VerificationKey2020",
-              "controller": "did:web:id-plus.localhost%3A8443",
-              "publicKeyJwk": {
-                "kty": "OKP",
-                "kid": "MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
-                "crv": "Ed25519",
-                "alg": "EdDSA",
-                "x": "6yUJruvdUvjwZpVdtxmAxoNI2UUc-LfL37cAZ09ffzs",
-              },
-              "publicKeyMultibase":
-                "z6MkvHAcPJP22ge8zznDUtbhYJW4PDti14tUng99xUmcALFC",
-              "@context": [
-                "https://www.w3.org/ns/did/v1",
-                "https://identity.foundation/linked-vp/contexts/v1",
-                "https://w3id.org/security/suites/ed25519-2020/v1",
-                {
-                  "publicKeyJwk": {
-                    "@id": "https://w3id.org/security#publicKeyJwk",
-                    "@type": "@json",
-                  },
-                },
-              ],
-            },
-            "purposeResult": { "valid": true },
-          }],
-        }],
-      },
-    }],
+    "presentations": [{ "url": "https://id-plus.localhost:8443/.well-known/presentation.json", "presentation": { "@context": ["https://www.w3.org/2018/credentials/v1", "https://w3id.org/security/suites/ed25519-2020/v1"], "type": ["VerifiablePresentation"], "verifiableCredential": [{ "@context": ["https://www.w3.org/2018/credentials/v1", "https://w3id.org/security/suites/ed25519-2020/v1", { "schema": "https://schema.org/" }], "type": ["VerifiableCredential", "schema:Organization"], "credentialSubject": { "id": "did:web:id-plus.localhost%3A8443", "schema:telephone": "+123456789", "schema:leiCode": "54321", "schema:legalName": "Example Company LLC", "schema:vatID": "987654321", "schema:taxID": "132456789", "schema:location": { "schema:addressCountry": "Example Country", "schema:addressLocality": "Example City", "schema:postalCode": "12345", "schema:streetAddress": "1 Example Street", "type": "schema:PostalAddress" }, "schema:email": "support@example.com" }, "issuer": "did:web:id-plus.localhost%3A8443", "issuanceDate": "2024-04-11T12:40:24Z", "proof": { "type": "Ed25519Signature2020", "proofPurpose": "assertionMethod", "proofValue": "z3jBgFoA6Wyng5GmYGbWhLVq6gLRaVegEdpaM6kKk7mpBikgdfaPgGjtF6jwHtRG192x2Ek5aBn8Pysanxuu26Tiw", "verificationMethod": "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g", "created": "2024-04-11T12:40:24.600500274Z" } }, { "@context": ["https://www.w3.org/2018/credentials/v1", "https://w3id.org/security/suites/ed25519-2020/v1", { "schema": "https://schema.org/" }], "type": ["VerifiableCredential", "schema:Brand"], "credentialSubject": { "id": "did:web:id-plus.localhost%3A8443", "schema:name": "Example Company", "schema:url": "https://euipo.europa.eu/eSearch/#details/trademarks/1234567890", "schema:identifier": "1234567890" }, "issuer": "did:web:id-plus.localhost%3A8443", "issuanceDate": "2024-04-11T12:40:24Z", "proof": { "type": "Ed25519Signature2020", "proofPurpose": "assertionMethod", "proofValue": "z3qYVDRS6oQzyhkTRvj2Gi6JqBPSamCu5dxdBtdsqLjvfxfFSxm5JQ7cqzip4KPziZJ1h9HQB6VNY56byRrVMjxMw", "verificationMethod": "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g", "created": "2024-04-11T12:40:24.833365687Z" } }], "proof": { "type": "Ed25519Signature2020", "proofPurpose": "assertionMethod", "proofValue": "z62QKXiSwSKzTm3ghvcA5vvXTiDCYVjofEgBQkW2dDirjJbz5eZv19h8XH9RuNh4ut4RDdDBxaBDSMaqRWfpQ5e77", "verificationMethod": "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g", "created": "2024-04-11T12:40:25.082443682Z" }, "holder": "did:web:id-plus.localhost%3A8443" }, "verification_result": { "presentationResult": { "verified": true, "results": [{ "proof": { "@context": ["https://www.w3.org/2018/credentials/v1", "https://w3id.org/security/suites/ed25519-2020/v1"], "type": "Ed25519Signature2020", "proofPurpose": "assertionMethod", "proofValue": "z62QKXiSwSKzTm3ghvcA5vvXTiDCYVjofEgBQkW2dDirjJbz5eZv19h8XH9RuNh4ut4RDdDBxaBDSMaqRWfpQ5e77", "verificationMethod": "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g", "created": "2024-04-11T12:40:25.082443682Z" }, "verified": true, "verificationMethod": { "id": "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g", "type": "Ed25519VerificationKey2020", "controller": "did:web:id-plus.localhost%3A8443", "publicKeyJwk": { "kty": "OKP", "kid": "MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g", "crv": "Ed25519", "alg": "EdDSA", "x": "6yUJruvdUvjwZpVdtxmAxoNI2UUc-LfL37cAZ09ffzs" }, "publicKeyMultibase": "z6MkvHAcPJP22ge8zznDUtbhYJW4PDti14tUng99xUmcALFC", "@context": ["https://www.w3.org/ns/did/v1", "https://identity.foundation/linked-vp/contexts/v1", "https://w3id.org/security/suites/ed25519-2020/v1", { "publicKeyJwk": { "@id": "https://w3id.org/security#publicKeyJwk", "@type": "@json" } }] }, "purposeResult": { "valid": true, "controller": { "@context": ["https://www.w3.org/ns/did/v1", "https://identity.foundation/linked-vp/contexts/v1", "https://w3id.org/security/suites/ed25519-2020/v1", { "publicKeyJwk": { "@id": "https://w3id.org/security#publicKeyJwk", "@type": "@json" } }], "id": "did:web:id-plus.localhost%3A8443", "verificationMethod": [{ "id": "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g", "type": "Ed25519VerificationKey2020", "controller": "did:web:id-plus.localhost%3A8443", "publicKeyJwk": { "kty": "OKP", "kid": "MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g", "crv": "Ed25519", "alg": "EdDSA", "x": "6yUJruvdUvjwZpVdtxmAxoNI2UUc-LfL37cAZ09ffzs" } }], "authentication": ["did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g"], "assertionMethod": ["did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g"], "service": [{ "id": "did:web:id-plus.localhost%3A8443#plain", "type": "LinkedVerifiablePresentation", "serviceEndpoint": "https://id-plus.localhost:8443/.well-known/presentation.json" }] } } }] }, "verified": true, "credentialResults": [{ "verified": true, "results": [{ "proof": { "@context": ["https://www.w3.org/2018/credentials/v1", "https://w3id.org/security/suites/ed25519-2020/v1", { "schema": "https://schema.org/" }], "type": "Ed25519Signature2020", "proofPurpose": "assertionMethod", "proofValue": "z3jBgFoA6Wyng5GmYGbWhLVq6gLRaVegEdpaM6kKk7mpBikgdfaPgGjtF6jwHtRG192x2Ek5aBn8Pysanxuu26Tiw", "verificationMethod": "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g", "created": "2024-04-11T12:40:24.600500274Z" }, "verified": true, "verificationMethod": { "id": "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g", "type": "Ed25519VerificationKey2020", "controller": "did:web:id-plus.localhost%3A8443", "publicKeyJwk": { "kty": "OKP", "kid": "MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g", "crv": "Ed25519", "alg": "EdDSA", "x": "6yUJruvdUvjwZpVdtxmAxoNI2UUc-LfL37cAZ09ffzs" }, "publicKeyMultibase": "z6MkvHAcPJP22ge8zznDUtbhYJW4PDti14tUng99xUmcALFC", "@context": ["https://www.w3.org/ns/did/v1", "https://identity.foundation/linked-vp/contexts/v1", "https://w3id.org/security/suites/ed25519-2020/v1", { "publicKeyJwk": { "@id": "https://w3id.org/security#publicKeyJwk", "@type": "@json" } }] }, "purposeResult": { "valid": true } }] }, { "verified": true, "results": [{ "proof": { "@context": ["https://www.w3.org/2018/credentials/v1", "https://w3id.org/security/suites/ed25519-2020/v1", { "schema": "https://schema.org/" }], "type": "Ed25519Signature2020", "proofPurpose": "assertionMethod", "proofValue": "z3qYVDRS6oQzyhkTRvj2Gi6JqBPSamCu5dxdBtdsqLjvfxfFSxm5JQ7cqzip4KPziZJ1h9HQB6VNY56byRrVMjxMw", "verificationMethod": "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g", "created": "2024-04-11T12:40:24.833365687Z" }, "verified": true, "verificationMethod": { "id": "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g", "type": "Ed25519VerificationKey2020", "controller": "did:web:id-plus.localhost%3A8443", "publicKeyJwk": { "kty": "OKP", "kid": "MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g", "crv": "Ed25519", "alg": "EdDSA", "x": "6yUJruvdUvjwZpVdtxmAxoNI2UUc-LfL37cAZ09ffzs" }, "publicKeyMultibase": "z6MkvHAcPJP22ge8zznDUtbhYJW4PDti14tUng99xUmcALFC", "@context": ["https://www.w3.org/ns/did/v1", "https://identity.foundation/linked-vp/contexts/v1", "https://w3id.org/security/suites/ed25519-2020/v1", { "publicKeyJwk": { "@id": "https://w3id.org/security#publicKeyJwk", "@type": "@json" } }] }, "purposeResult": { "valid": true } }] }] } }],
     "diddoc": {
-      "@context": [
-        "https://www.w3.org/ns/did/v1",
-        "https://identity.foundation/linked-vp/contexts/v1",
-        "https://w3id.org/security/suites/ed25519-2020/v1",
-        {
-          "publicKeyJwk": {
-            "@id": "https://w3id.org/security#publicKeyJwk",
-            "@type": "@json",
-          },
-        },
-      ],
+      "@context":
+        [
+          "https://www.w3.org/ns/did/v1",
+          "https://identity.foundation/linked-vp/contexts/v1",
+          "https://w3id.org/security/suites/ed25519-2020/v1",
+          {
+            "publicKeyJwk":
+            {
+              "@id": "https://w3id.org/security#publicKeyJwk",
+              "@type": "@json"
+            }
+          }
+        ],
       "id": "did:web:id-plus.localhost%3A8443",
-      "verificationMethod": [{
-        "id":
-          "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
-        "type": "Ed25519VerificationKey2020",
-        "controller": "did:web:id-plus.localhost%3A8443",
-        "publicKeyJwk": {
-          "kty": "OKP",
-          "kid": "MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
-          "crv": "Ed25519",
-          "alg": "EdDSA",
-          "x": "6yUJruvdUvjwZpVdtxmAxoNI2UUc-LfL37cAZ09ffzs",
-        },
-      }],
-      "authentication": [
-        "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
-      ],
-      "assertionMethod": [
-        "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
-      ],
-      "service": [{
-        "id": "did:web:id-plus.localhost%3A8443#plain",
-        "type": "LinkedVerifiablePresentation",
-        "serviceEndpoint":
-          "https://id-plus.localhost:8443/.well-known/presentation.json",
-      }, {
-        "id": "did:web:id-plus.localhost%3A8443#business",
-        "type": "LinkedVerifiablePresentation",
-        "serviceEndpoint":
-          "https://id-plus.localhost:8443/.well-known/presentation.json",
-      }],
+      "verificationMethod":
+        [
+          {
+            "id": "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
+            "type": "Ed25519VerificationKey2020",
+            "controller": "did:web:id-plus.localhost%3A8443",
+            "publicKeyJwk":
+            {
+              "kty": "OKP",
+              "kid": "MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
+              "crv": "Ed25519",
+              "alg": "EdDSA",
+              "x": "6yUJruvdUvjwZpVdtxmAxoNI2UUc-LfL37cAZ09ffzs"
+            }
+          }
+        ],
+      "authentication":
+        [
+          "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g"
+        ],
+      "assertionMethod":
+        [
+          "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g"
+        ],
+      "service": [
+        {
+          "id": "did:web:id-plus.localhost%3A8443#plain",
+          "type": "LinkedVerifiablePresentation",
+          "serviceEndpoint": "https://id-plus.localhost:8443/.well-known/presentation.json"
+        }
+      ]
     },
   },
 };

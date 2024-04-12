@@ -1,3 +1,5 @@
+// @ts-ignore
+import * as Types from "../src/types.js";
 import { verifyPresentation } from "../src/lib/identinet/mod.js";
 import { encaseP, reject, resolve } from "fluture";
 import { S } from "../src/lib/sanctuary/mod.js";
@@ -14,8 +16,8 @@ export function getLinkedPresentationURLs(diddoc) {
   const services = S.type(diddoc?.service).name === "Object"
     ? [diddoc?.service]
     : S.type(diddoc?.service).name === "Array"
-    ? diddoc?.service
-    : [];
+      ? diddoc?.service
+      : [];
   return S.pipe([
     S.map((s) => {
       if (s?.type === "LinkedVerifiablePresentation") {
@@ -46,7 +48,7 @@ export function getLinkedPresentationURLs(diddoc) {
  *
  * @param {DIDDoc} didoc - W3C DID document.
  * @param {URL} url - URL of the presentation.
-  @returns {Future<object,Error>} Retrieved presentation and verification result `{presentation, verification_result}`.
+  @returns {Future<Types.PresentationWrapper,Error>} Retrieved presentation and verification result `{url, presentation, verification_result}`.
  */
 export const fetchAndVerifyPresentation = (diddoc) => (url) => {
   return S.pipe([
@@ -60,5 +62,6 @@ export const fetchAndVerifyPresentation = (diddoc) => (url) => {
     // [i] verify presentation and VCs
     S.chain(encaseP((response) => response.json())),
     S.chain(verifyPresentation(diddoc)),
+    S.map(pair => ({ url, presentation: S.fst(pair), verification_result: S.snd(pair) }))
   ])(url);
 };

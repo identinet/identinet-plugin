@@ -1,3 +1,5 @@
+// @ts-ignore
+import * as Types from "../src/types.js";
 import { $, log, S } from "../src/lib/sanctuary/mod.js";
 import { api, getCurrentTab, url2DID, ProtocolError } from "../src/lib/identinet/mod.js";
 import {
@@ -89,12 +91,13 @@ const storeDIDDoc = (diddoc) => {
  * the local store.
  *
  * @param {string} did - The DID that the presentation shall be stored for.
- * @param {Pair<object,object>} presentation_and_result - The presentation with
+ * @param {Array<Types.PresentationWrapper>} presentation_and_result - The presentation with
  * a result object that shall be stored.
  * @returns {Future<string,Error>} returns the DID that the presentation has
  * been stored at.
  */
 const storePresentations = (did) => (presentations) => {
+  console.log(JSON.stringify(presentations));
   return S.pipe([
     encaseP((did) => api.storage.local.get(did)),
     // S.map(log("get store")),
@@ -102,9 +105,10 @@ const storePresentations = (did) => (presentations) => {
     S.chain(encaseP((stored_data) =>
       api.storage.local.set({
         [did]: {
-          presentations: S.map((presentation_result) => ({
-            presentation: S.fst(presentation_result),
-            verification_result: S.snd(presentation_result),
+          presentations: S.map((presentation_wrapper) => ({
+            url: presentation_wrapper.url,
+            presentation: presentation_wrapper.presentation,
+            verification_result: presentation_wrapper.verification_result,
           }))(presentations),
           ...stored_data[did],
         },
@@ -226,8 +230,8 @@ const updateDID = (tabId) => (url) => {
               storePresentations(diddoc.id),
               // [x] update action icon
               S.chain((did) => {
-                const verified = S.map((presentation_result) => {
-                  const result = S.snd(presentation_result);
+                const verified = S.map((presentation_wrapper) => {
+                  const result = presentation_wrapper.verification_result;
                   return result?.error?.errors?.length >= 0 ||
                     result?.verified !== true;
                 })(presentations);

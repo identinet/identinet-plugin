@@ -39,10 +39,9 @@ function fetchWebsiteData(url) {
  */
 function getURL() {
   return S.pipe([
-    encaseP(() => getCurrentTab()),
     S.map(([_, url]) => url), // drop tabId
     promise,
-  ])("dummy argument");
+  ])(encaseP(() => getCurrentTab())());
 }
 
 export default function Home() {

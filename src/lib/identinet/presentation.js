@@ -16,8 +16,8 @@ import {
  * verifyPresentation verifies a presentation.
  *
  * @param {DIDDoc} diddoc - W3C DID document.
- * @param {object} presentation - Presentation object that shall be verified.
- * @returns {Future<Pair<object,object>,Error>} - Returns the presentation and the
+ * @param {Object} presentation - Presentation object that shall be verified.
+ * @returns {Future<Pair<Object,Object>,Error>} - Returns the presentation and the
  * verifcation result as a Pair otherwise an error. The verification result
  * still needs to be checked since a failure to verify the presentation will
  * not lead to a rejected Future.
