@@ -1,5 +1,5 @@
 import { expect, test } from "vitest";
-import { getLinkedPresentationURLs } from "../src-background/utils.js";
+import { getLinkedPresentationURLs } from "./utils.js";
 
 test("getLinkedPresentationURLs - When serviceEndpoint is a string, ensure it gets extracted.", () => {
   const urls = getLinkedPresentationURLs({

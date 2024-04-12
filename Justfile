@@ -170,7 +170,7 @@ run-websites:
 
 # Runt tests
 test:
-    yarn run vitest run --dir test
+    yarn run vitest run --dir .
 
 # Start preview server
 run-preview:

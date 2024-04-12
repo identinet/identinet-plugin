@@ -1,10 +1,10 @@
-import { log, S } from "~/lib/sanctuary/mod.js";
-import { api, getCurrentTab, url2DID } from "~/lib/identinet/mod.js";
+import { log, S } from "./sanctuary/mod.js";
+import { api, getCurrentTab, url2DID } from "./identinet/mod.js";
 import { encaseP, promise, reject, resolve } from "fluture";
 
 /**
  * fetchWebsiteData retrieves the stored data for the currently selected tab.
- * @param {URL} url URL of the current tab.
+ * @param {URL} url - URL of the current tab.
  * @returns {Future<Pair<DID,Object>,Error>}
  */
 export function fetchWebsiteData(url) {
@@ -37,5 +37,24 @@ export function getURL() {
     S.map(([_, url]) => url), // drop tabId
     promise,
   ])(encaseP(() => getCurrentTab())());
+}
+
+/**
+ * property2humanreadable makes a property human readable by stripping off an existing namespace and by makeing the
+ * first letter upper case.
+ * @param {String} propertyname - Property name.
+ * @returns {String} Human readable version of the property name.
+ */
+export function property2humanreadable(propertyname) {
+  return S.pipe([
+    str => {
+      const idx = str.indexOf(":");
+      if (idx !== -1) {
+        return str.slice(idx + 1);
+      }
+      return str;
+    },
+    str => str.slice(0, 1).toUpperCase() + str.slice(1),
+  ])(propertyname);
 }
 

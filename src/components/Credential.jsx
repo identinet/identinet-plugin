@@ -1,5 +1,7 @@
 import { S } from "~/lib/sanctuary/mod.js";
+import { property2humanreadable } from "~/lib/utils.js";
 import { Show } from "solid-js";
+
 export default function Credential(props) {
   if (!props.credential) {
     console.warn("No credential given", props);
@@ -44,12 +46,12 @@ export default function Credential(props) {
           })`}
       >
         {
-          ((S.type(credential.type).name === "String" && [credential.type]) || (S.type(credential.type).name === "Array" && credential.type)).filter(t => t !== "VerifiableCredential").join(", ") || "Verifiable Credential"
+          ((S.type(credential.type).name === "String" && [credential.type]) || (S.type(credential.type).name === "Array" && credential.type)).filter(t => t !== "VerifiableCredential").map(property2humanreadable).join(", ") || "Verifiable Credential"
         }
       </div>
       <div class="collapse-content grid">
         <div style="grid-template-columns: 25% 75%;" class="text-sm grid">
-          <div>Credential Id:</div>
+          <div>Credential:</div>
           <div>{credential.id || "No credential ID."}</div>
           <div>Subject:</div>
           <div>{credential.credentialSubject.id || "No subject ID."}</div>
@@ -91,8 +93,8 @@ export default function Credential(props) {
                 {(key, index) => (
                   <div class="card card-compact w-36 flex-grow flex-shrink bg-base-200">
                     <div class="card-body">
-                      <h2 class="card-title text-sm">{key}</h2>
-                      <p class="text-ellipsis overflow-hidden">{["Object", "Array"].includes(S.type(claim[key]).name) ? JSON.stringify(claim[key]) : claim[key]}</p>
+                      <h2 class="card-title text-sm">{property2humanreadable(key)}</h2>
+                      <p class="text-ellipsis overflow-hidden">{["Object", "Array"].includes(S.type(claim[key]).name) ? JSON.stringify(claim[key], "", 2) : claim[key]}</p>
                     </div>
                   </div>
                 )}
