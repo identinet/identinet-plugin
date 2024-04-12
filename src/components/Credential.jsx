@@ -44,7 +44,7 @@ export default function Credential(props) {
           })`}
       >
         {
-          ((S.type(credential.type).name === "String" && [credential.type]) || (S.type(credential.type).name === "Array" && credential.type)).filter(t => t !== "VerifiableCredential") || "Verifiable Credential"
+          ((S.type(credential.type).name === "String" && [credential.type]) || (S.type(credential.type).name === "Array" && credential.type)).filter(t => t !== "VerifiableCredential").join(", ") || "Verifiable Credential"
         }
       </div>
       <div class="collapse-content grid">
