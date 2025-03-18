@@ -54,16 +54,18 @@ displayed with the following icons:
 
 Examples:
 
-- <img style="height: 1em" alt="No DID document available" src="./public/icons/shield-slash.svg" />
-  <a href="https://no-id-example.identinet.io/">https://no-id-example.identinet.io/</a>
-- <img style="height: 1em" alt="DID document available, did:web DID + Well-Known DID Configuration" src="./public/icons/shield-plus.svg" />
-  <a href="https://id-well-known-example.identinet.io/">https://id-example.identinet.io/</a> - only a DID is avaible, no credentials.
-- <img style="height: 1em" alt="DID document and credentials available, did:web + Linked Verifiable Presentation + Well-Known DID Configuration" src="./public/icons/shield-plus.svg" />
-  <a href="https://id-plus-well-knwon-example.identinet.io/">https://id-plus-well-knwon-example.identinet.io/</a>
-- <img style="height: 1em" alt="DID document and credentials available but well-known DID configuration is broken, did:web + Linked Verifiable Presentation + Well-Known DID Configuration" src="./public/icons/shield-xmark.svg" />
-  <a href="https://id-plus-broken-well-known-example.identinet.io/">https://id-plus-broken-well-known-example.identinet.io/</a>
-- <img style="height: 1em" alt="DID document and credentials available but credentials are broken, did:jwk + Well-Known DID Configuratio + Linked Verifiable Presentationn" src="./public/icons/shield-xmark.svg" />
-  <a href="https://id-broken-plus-well-known-example.identinet.io/">https://broken-id-plus-example.identinet.io/</a>
+- <img style="height: 1em" alt="No ID" src="./icons/shield-slash.svg" />
+  <a href="https://no-id-example.identinet.io/">No ID</a>
+- <img style="height: 1em" alt="ID and Well-Known DID Configuration" src="./icons/shield-plus.svg" />
+  <a href="https://id-well-known-example.identinet.io/">ID and Well-Known DID Configuration</a>
+- <img style="height: 1em" alt="ID, Linked Verifiable Presentation and Well-Known DID Configuration" src="./icons/shield-plus.svg" />
+  <a href="https://id-plus-well-knwon-example.identinet.io/">ID, Linked Verifiable Presentation and Well-Known DID Configuration</a>
+- <img style="height: 1em" alt="Non-standard ID, Linked Verifiable Presentation and Well-Known DID Configuration" src="./icons/shield-plus.svg" />
+  <a href="https://id-non-standard-plus-well-knwon-example.identinet.io/">Non-standard ID, Linked Verifiable Presentation and Well-Known DID Configuration</a>
+- <img style="height: 1em" alt="Broken Linked Verifiable Presentation" src="./icons/shield-xmark.svg" />
+  <a href="https://id-plus-broken-well-known-example.identinet.io/">Broken Linked Verifiable Presentation</a>
+- <img style="height: 1em" alt="Broken Well-Known DID Configuration" src="./icons/shield-xmark.svg" />
+  <a href="https://id-broken-plus-well-known-example.identinet.io/">Broken Well-Known DID Configuration</a>
 
 ## How it Works
 
