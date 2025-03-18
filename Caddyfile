@@ -5,39 +5,39 @@
   https_port 8443
 }
 
-id-broken.localhost {
+id-broken-plus-well-known.localhost {
   file_server {
-    root ./test/websites/id-broken.localhost
+    root ./test/websites/id-broken-plus-well-known.localhost
   }
   tls {
-    load ./test/website-certificates/id-broken.localhost.pem
+    load ./test/website-certificates/id-broken-plus-well-known.localhost.pem
   }
 }
 
-id-plus.localhost {
+id-plus-broken-well-known.localhost {
   file_server {
-    root ./test/websites/id-plus.localhost
+    root ./test/websites/id-plus-broken-well-known.localhost
   }
   tls {
-    load ./test/website-certificates/id-plus.localhost.pem
+    load ./test/website-certificates/id-plus-broken-well-known.localhost.pem
   }
 }
 
-id-web.localhost {
+id-plus-well-known.localhost {
   file_server {
-    root ./test/websites/id-web.localhost
+    root ./test/websites/id-plus-well-known.localhost
   }
   tls {
-    load ./test/website-certificates/id-web.localhost.pem
+    load ./test/website-certificates/id-plus-well-known.localhost.pem
   }
 }
 
-id-did-configuration.localhost {
+id-well-known.localhost {
   file_server {
-    root ./test/websites/id-did-configuration.localhost
+    root ./test/websites/id-well-known.localhost
   }
   tls {
-    load ./test/website-certificates/id-did-configuration.localhost.pem
+    load ./test/website-certificates/id-well-known.localhost.pem
   }
 }
 

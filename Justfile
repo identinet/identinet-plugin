@@ -157,7 +157,13 @@ run-websites:
     #!/usr/bin/env nu
     let directory = "./test/website-certificates"
     mkdir $directory
-    let domains = ["id-broken.localhost", "id-plus.localhost", "id-did-configuration.localhost", "id-web.localhost", "no-id.localhost"]
+    let domains = [
+      "no-id.localhost"
+      "id-broken-plus-well-known.localhost"
+      "id-plus-broken-well-known.localhost"
+      "id-plus-well-known.localhost"
+      "id-well-known.localhost"
+    ]
     $domains | each {|domain|
       if not ($"($directory)/($domain).pem" | path exists) {
         mkcert -cert-file $"($directory)/($domain).pem" -key-file $"($directory)/($domain).pem" $domain
