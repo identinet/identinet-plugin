@@ -1,49 +1,85 @@
 {
-  "@context":
-  [
+  "@context": [
     "https://www.w3.org/2018/credentials/v1",
     "https://w3id.org/security/suites/ed25519-2020/v1"
   ],
-  "type":
-  [
+  "type": [
     "VerifiablePresentation"
   ],
-  "verifiableCredential":
-  [
+  "verifiableCredential": [
     {
-      "@context":
-      [
+      "@context": [
         "https://www.w3.org/2018/credentials/v1",
-        "https://w3id.org/security/suites/ed25519-2020/v1"
+        "https://w3id.org/security/suites/ed25519-2020/v1",
+        {
+          "schema": "https://schema.org/"
+        }
       ],
-      "type":
-      [
-        "VerifiableCredential"
+      "type": [
+        "VerifiableCredential",
+        "schema:Organization"
       ],
-      "credentialSubject":
-      {
-        "id": "did:web:id-broken.localhost%3A8443",
-        "broken": "tampered attribute"
+      "credentialSubject": {
+        "id": "did:web:id-plus-broken-well-known.localhost%3A8443",
+        "schema:vatID": "987654321",
+        "schema:location": {
+          "schema:addressCountry": "Example Country",
+          "schema:addressLocality": "Example City",
+          "schema:postalCode": "12345",
+          "schema:streetAddress": "1 Example Street",
+          "type": "schema:PostalAddress"
+        },
+        "schema:legalName": "Example Company LLC",
+        "schema:taxID": "132456789",
+        "schema:email": "support@example.com",
+        "schema:telephone": "+123456789",
+        "schema:leiCode": "54321"
       },
-      "issuer": "did:web:id-broken.localhost%3A8443",
-      "issuanceDate": "2024-02-12T12:39:20Z",
-      "proof":
-      {
+      "issuer": "did:web:id-plus-broken-well-known.localhost%3A8443",
+      "issuanceDate": "2025-03-18T10:51:21Z",
+      "proof": {
         "type": "Ed25519Signature2020",
         "proofPurpose": "assertionMethod",
-        "proofValue": "z4RchVhDpAAaJ34XGGBiejkQ9zzrL6VCBvMjgMLWagxjj4iRc7RqmoudCXYsdn5MjrXJ6184RnYueRVCFM9vBZwHN",
-        "verificationMethod": "did:web:id-broken.localhost%3A8443#dqqkiu1wiQWE7T3MmssDV_-xiHCGu1xzzcafoXoCNUs",
-        "created": "2024-02-12T12:39:20.730192986Z"
+        "proofValue": "z2XcnxofdnymBTN71NYnfsVPrqEtr77Hn7s8msQnXmUm5uDdVwuybU7qLMZUT7ngRiPccJDo55CYyAQ3SKpA2s4ZY",
+        "verificationMethod": "did:web:id-plus-broken-well-known.localhost%3A8443#jW1WpDyFWJbEUAtv2v7Ob_y1GOJLjpOeFgi90PXO_sI",
+        "created": "2025-03-18T10:51:21.251056190Z"
+      }
+    },
+    {
+      "@context": [
+        "https://www.w3.org/2018/credentials/v1",
+        "https://w3id.org/security/suites/ed25519-2020/v1",
+        {
+          "schema": "https://schema.org/"
+        }
+      ],
+      "type": [
+        "VerifiableCredential",
+        "schema:Brand"
+      ],
+      "credentialSubject": {
+        "id": "did:web:id-plus-broken-well-known.localhost%3A8443",
+        "schema:identifier": "1234567890",
+        "schema:name": "Example Company",
+        "schema:url": "https://euipo.europa.eu/eSearch/#details/trademarks/1234567890"
+      },
+      "issuer": "did:web:id-plus-broken-well-known.localhost%3A8443",
+      "issuanceDate": "2025-03-18T10:51:21Z",
+      "proof": {
+        "type": "Ed25519Signature2020",
+        "proofPurpose": "assertionMethod",
+        "proofValue": "zfYGV8nT5HpF1DADsXBeig2aMeSjtPLpgf8TQYcaY3cCSH2VySHyeWA9Lk7Xuzjrj1SeDvUr8cFxCE5XovcqNxDg",
+        "verificationMethod": "did:web:id-plus-broken-well-known.localhost%3A8443#jW1WpDyFWJbEUAtv2v7Ob_y1GOJLjpOeFgi90PXO_sI",
+        "created": "2025-03-18T10:51:21.315623453Z"
       }
     }
   ],
-  "proof":
-  {
+  "proof": {
     "type": "Ed25519Signature2020",
     "proofPurpose": "assertionMethod",
-    "proofValue": "z58AjraH3nvCb6VxU9rLkZS1a3VyQAPc77ixKNV1PmqpYNBGznGGgZQdpJAB8WARLDFu88KkpjxKwAVKJVSpWJa6o",
-    "verificationMethod": "did:web:id-broken.localhost%3A8443#dqqkiu1wiQWE7T3MmssDV_-xiHCGu1xzzcafoXoCNUs",
-    "created": "2024-02-12T12:39:20.895220443Z"
+    "proofValue": "z4Qwt2GBe1o12Vs8s69LcWRpLvzXdGUvs63BVBgbYUbK3u7B6yJfUWSYg8dNcCtqQ4iJ2wCX2M7fsyLF1diodKkgK",
+    "verificationMethod": "did:web:id-plus-broken-well-known.localhost%3A8443#jW1WpDyFWJbEUAtv2v7Ob_y1GOJLjpOeFgi90PXO_sI",
+    "created": "2025-03-18T10:51:21.379613128Z"
   },
-  "holder": "did:web:id-broken.localhost%3A8443"
+  "holder": "did:web:id-plus-broken-well-known.localhost%3A8443"
 }

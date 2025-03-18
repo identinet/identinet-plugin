@@ -73,7 +73,7 @@ def main [
     # Challenge added to proof
     --domain: string = "",
     # Domain added to proof
-    --verbose: bool = false
+    --verbose
     # Verbose output about what's going on
     ] {
   let credential = ($in | from json)

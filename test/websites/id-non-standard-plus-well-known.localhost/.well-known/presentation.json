@@ -1,98 +1,85 @@
 {
-  "@context":
-  [
+  "@context": [
     "https://www.w3.org/2018/credentials/v1",
     "https://w3id.org/security/suites/ed25519-2020/v1"
   ],
-  "type":
-  [
+  "type": [
     "VerifiablePresentation"
   ],
-  "verifiableCredential":
-  [
+  "verifiableCredential": [
     {
-      "@context":
-      [
+      "@context": [
         "https://www.w3.org/2018/credentials/v1",
         "https://w3id.org/security/suites/ed25519-2020/v1",
         {
           "schema": "https://schema.org/"
         }
       ],
-      "type":
-      [
+      "type": [
         "VerifiableCredential",
         "schema:Organization"
       ],
-      "credentialSubject":
-      {
-        "id": "did:web:id-plus.localhost%3A8443",
-        "schema:telephone": "+123456789",
+      "credentialSubject": {
+        "id": "did:web:id-non-standard-plus-well-known.localhost%3A8443:id-non-standard",
         "schema:leiCode": "54321",
-        "schema:legalName": "Example Company LLC",
-        "schema:vatID": "987654321",
         "schema:taxID": "132456789",
-        "schema:location":
-        {
+        "schema:vatID": "987654321",
+        "schema:legalName": "Example Company LLC",
+        "schema:email": "support@example.com",
+        "schema:location": {
           "schema:addressCountry": "Example Country",
           "schema:addressLocality": "Example City",
           "schema:postalCode": "12345",
           "schema:streetAddress": "1 Example Street",
           "type": "schema:PostalAddress"
         },
-        "schema:email": "support@example.com"
+        "schema:telephone": "+123456789"
       },
-      "issuer": "did:web:id-plus.localhost%3A8443",
-      "issuanceDate": "2024-04-11T12:40:24Z",
-      "proof":
-      {
+      "issuer": "did:web:id-non-standard-plus-well-known.localhost%3A8443:id-non-standard",
+      "issuanceDate": "2025-03-18T10:50:35Z",
+      "proof": {
         "type": "Ed25519Signature2020",
         "proofPurpose": "assertionMethod",
-        "proofValue": "z3jBgFoA6Wyng5GmYGbWhLVq6gLRaVegEdpaM6kKk7mpBikgdfaPgGjtF6jwHtRG192x2Ek5aBn8Pysanxuu26Tiw",
-        "verificationMethod": "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
-        "created": "2024-04-11T12:40:24.600500274Z"
+        "proofValue": "zRiJgTR9XxxgZHQ5ZCQpLsaVju9iRqbmDdAjAT2s8tfSzmLKwyYkakWbr4AqrLoJKETXbfR76PJse6CBxSprpiWo",
+        "verificationMethod": "did:web:id-non-standard-plus-well-known.localhost%3A8443:id-non-standard#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
+        "created": "2025-03-18T10:50:35.568175534Z"
       }
     },
     {
-      "@context":
-      [
+      "@context": [
         "https://www.w3.org/2018/credentials/v1",
         "https://w3id.org/security/suites/ed25519-2020/v1",
         {
           "schema": "https://schema.org/"
         }
       ],
-      "type":
-      [
+      "type": [
         "VerifiableCredential",
         "schema:Brand"
       ],
-      "credentialSubject":
-      {
-        "id": "did:web:id-plus.localhost%3A8443",
-        "schema:name": "Example Company",
+      "credentialSubject": {
+        "id": "did:web:id-non-standard-plus-well-known.localhost%3A8443:id-non-standard",
         "schema:url": "https://euipo.europa.eu/eSearch/#details/trademarks/1234567890",
-        "schema:identifier": "1234567890"
+        "schema:identifier": "1234567890",
+        "schema:name": "Example Company"
       },
-      "issuer": "did:web:id-plus.localhost%3A8443",
-      "issuanceDate": "2024-04-11T12:40:24Z",
-      "proof":
-      {
+      "issuer": "did:web:id-non-standard-plus-well-known.localhost%3A8443:id-non-standard",
+      "issuanceDate": "2025-03-18T10:50:35Z",
+      "proof": {
         "type": "Ed25519Signature2020",
         "proofPurpose": "assertionMethod",
-        "proofValue": "z3qYVDRS6oQzyhkTRvj2Gi6JqBPSamCu5dxdBtdsqLjvfxfFSxm5JQ7cqzip4KPziZJ1h9HQB6VNY56byRrVMjxMw",
-        "verificationMethod": "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
-        "created": "2024-04-11T12:40:24.833365687Z"
+        "proofValue": "z56Cg4h8DiGUovq4me6pnq1fu4eA43s8unTpeECbFGGx5aDFvNMRiYv5Tj8H7pf5ABASoWonGJyLy1Q7XvfosFTQU",
+        "verificationMethod": "did:web:id-non-standard-plus-well-known.localhost%3A8443:id-non-standard#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
+        "created": "2025-03-18T10:50:35.631760078Z"
       }
     }
   ],
-  "proof":
-  {
+  "proof": {
     "type": "Ed25519Signature2020",
     "proofPurpose": "assertionMethod",
-    "proofValue": "z62QKXiSwSKzTm3ghvcA5vvXTiDCYVjofEgBQkW2dDirjJbz5eZv19h8XH9RuNh4ut4RDdDBxaBDSMaqRWfpQ5e77",
-    "verificationMethod": "did:web:id-plus.localhost%3A8443#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
-    "created": "2024-04-11T12:40:25.082443682Z"
+    "proofValue": "z38fjUmnxeBRoGvLBRFbt19P1NA1QRgSV3NVvW1DhYrfKKnPdtGYjEGv3etR3xYxLAF9ADP53ZdXQsyKVLVr32hTc",
+    "verificationMethod": "did:web:id-non-standard-plus-well-known.localhost%3A8443:id-non-standard#MYIRc4JSHdBYPq-OJGVYVvdm9PB-C8Eua_JJX43BZ7g",
+    "created": "2025-03-18T10:50:35.697674356Z"
   },
-  "holder": "did:web:id-plus.localhost%3A8443"
+  "holder": "did:web:id-non-standard-plus-well-known.localhost%3A8443:id-non-standard"
 }
