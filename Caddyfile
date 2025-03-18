@@ -32,6 +32,15 @@ id-plus-well-known.localhost {
   }
 }
 
+id-non-standard-plus-well-known.localhost {
+  file_server {
+    root ./test/websites/id-non-standard-plus-well-known.localhost
+  }
+  tls {
+    load ./test/website-certificates/id-non-standard-plus-well-known.localhost.pem
+  }
+}
+
 id-well-known.localhost {
   file_server {
     root ./test/websites/id-well-known.localhost

@@ -162,6 +162,7 @@ run-websites:
       "id-broken-plus-well-known.localhost"
       "id-plus-broken-well-known.localhost"
       "id-plus-well-known.localhost"
+      "id-non-standard-plus-well-known.localhost"
       "id-well-known.localhost"
     ]
     $domains | each {|domain|
