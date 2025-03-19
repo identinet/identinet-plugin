@@ -54,17 +54,17 @@ displayed with the following icons:
 
 Examples:
 
-- <img style="height: 1em" alt="No ID" src="./icons/shield-slash.svg" />
+- <img style="height: 1em" alt="No ID" src="./public/icons/shield-slash.svg" />
   <a href="https://no-id-example.identinet.io/">No ID</a>
-- <img style="height: 1em" alt="ID and Well-Known DID Configuration" src="./icons/shield-plus.svg" />
+- <img style="height: 1em" alt="ID and Well-Known DID Configuration" src="./public/icons/shield-plus.svg" />
   <a href="https://id-well-known-example.identinet.io/">ID and Well-Known DID Configuration</a>
-- <img style="height: 1em" alt="ID, Linked Verifiable Presentation and Well-Known DID Configuration" src="./icons/shield-plus.svg" />
+- <img style="height: 1em" alt="ID, Linked Verifiable Presentation and Well-Known DID Configuration" src="./public/icons/shield-plus.svg" />
   <a href="https://id-plus-well-knwon-example.identinet.io/">ID, Linked Verifiable Presentation and Well-Known DID Configuration</a>
-- <img style="height: 1em" alt="Non-standard ID, Linked Verifiable Presentation and Well-Known DID Configuration" src="./icons/shield-plus.svg" />
+- <img style="height: 1em" alt="Non-standard ID, Linked Verifiable Presentation and Well-Known DID Configuration" src="./public/icons/shield-plus.svg" />
   <a href="https://id-non-standard-plus-well-knwon-example.identinet.io/">Non-standard ID, Linked Verifiable Presentation and Well-Known DID Configuration</a>
-- <img style="height: 1em" alt="Broken Linked Verifiable Presentation" src="./icons/shield-xmark.svg" />
+- <img style="height: 1em" alt="Broken Linked Verifiable Presentation" src="./public/icons/shield-xmark.svg" />
   <a href="https://id-plus-broken-well-known-example.identinet.io/">Broken Linked Verifiable Presentation</a>
-- <img style="height: 1em" alt="Broken Well-Known DID Configuration" src="./icons/shield-xmark.svg" />
+- <img style="height: 1em" alt="Broken Well-Known DID Configuration" src="./public/icons/shield-xmark.svg" />
   <a href="https://id-broken-plus-well-known-example.identinet.io/">Broken Well-Known DID Configuration</a>
 
 ## How it Works
