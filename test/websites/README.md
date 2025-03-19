@@ -17,6 +17,19 @@ $env.DID = did:web:id-plus.localhost%3A8443
 $env.PROOF_SUITE = Ed25519Signature2020
 ../create-vc-empty.nu $env.DID $env.DID | ../sign.nu private.jwk --proofSuite $env.PROOF_SUITE | ../create-vp.nu $env.DID | ../sign.nu private.jwk --proofSuite $env.PROOF_SUITE | save -f .well-known/presentation.json
 ../create-vc-imprint.nu $env.DID $env.DID | ../sign.nu private.jwk --proofSuite $env.PROOF_SUITE | ../create-vp.nu $env.DID | ../sign.nu private.jwk --proofSuite $env.PROOF_SUITE | save -f .well-known/presentation.json
+
+# tampered credential - doesn't work, didkit will not sign it
+../create-vc-imprint.nu $env.DID $env.DID | ../sign.nu private.jwk --proofSuite $env.PROOF_SUITE | from json | upsert credentialSubject.TAMPERED "with credential" | to json | ../create-vp.nu $env.DID | ../sign.nu private.jwk --proofSuite $env.PROOF_SUITE | save -f .well-known/presentation.json
 ../create-vc-brand.nu $env.DID $env.DID | ../sign.nu private.jwk --proofSuite $env.PROOF_SUITE | ../create-vp.nu $env.DID | ../sign.nu private.jwk --proofSuite $env.PROOF_SUITE | save -f .well-known/presentation.json
+
+../create-vc-domain-linkage.nu $env.DID $"https://($env.DOMAINNAME | url decode)" | ../sign.nu private.jwk --proofSuite $env.PROOF_SUITE | from json | { "@context": "https://identity.foundation/.well-known/did-configuration/v1", "linked_dids": [ $in ] } | to json | save -f .well-known/did-configuration.json
+
 [(../create-vc-imprint.nu $env.DID $env.DID | ../sign.nu private.jwk --proofSuite $env.PROOF_SUITE | from json) (../create-vc-brand.nu $env.DID $env.DID | ../sign.nu private.jwk --proofSuite $env.PROOF_SUITE | from json)] | to json | ../create-vp.nu $env.DID | ../sign.nu private.jwk --proofSuite $env.PROOF_SUITE | save -f .well-known/presentation.json
+
+# invalid credential - domain name doesn't match
+../create-vc-domain-linkage.nu $env.DID $"https://domain-doesnt-match-($env.DOMAINNAME | url decode)" | ../sign.nu private.jwk --proofSuite $env.PROOF_SUITE | from json | { "@context": "https://identity.foundation/.well-known/did-configuration/v1", "linked_dids": [ $in ] } | to json | save -f .well-known/did-configuration.json
+
+# tampered presentation
+../create-vc-empty.nu $env.DID $env.DID | ../sign.nu private.jwk --proofSuite $env.PROOF_SUITE | from json | to json | ../create-vp.nu $env.DID | ../sign.nu private.jwk --proofSuite $env.PROOF_SUITE | from json | upsert verifiableCredential.0.credentialSubject.TAMPERED "with credential" | to json | save -f .well-known/presentation.json
+[(../create-vc-imprint.nu $env.DID $env.DID | ../sign.nu private.jwk --proofSuite $env.PROOF_SUITE | from json) (../create-vc-brand.nu $env.DID $env.DID | ../sign.nu private.jwk --proofSuite $env.PROOF_SUITE | from json)] | to json | ../create-vp.nu $env.DID | ../sign.nu private.jwk --proofSuite $env.PROOF_SUITE | from json | upsert verifiableCredential.0.credentialSubject.TAMPERED "with credential" | to json | save -f .well-known/presentation.json
 ```

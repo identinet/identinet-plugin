@@ -1,0 +1,29 @@
+{
+  "@context": "https://identity.foundation/.well-known/did-configuration/v1",
+  "linked_dids": [
+    {
+      "@context": [
+        "https://www.w3.org/2018/credentials/v1",
+        "https://identity.foundation/.well-known/did-configuration/v1",
+        "https://w3id.org/security/suites/ed25519-2020/v1"
+      ],
+      "type": [
+        "VerifiableCredential",
+        "DomainLinkageCredential"
+      ],
+      "credentialSubject": {
+        "id": "did:web:id-well-known.localhost%3A8443",
+        "origin": "https://id-well-known.localhost:8443"
+      },
+      "issuer": "did:web:id-well-known.localhost%3A8443",
+      "issuanceDate": "2025-03-19T10:02:36Z",
+      "proof": {
+        "type": "Ed25519Signature2020",
+        "proofPurpose": "assertionMethod",
+        "proofValue": "z2M2eeJq3WV4Ps3fRqas5whNrQx8he9wAid3DDrxLN7aZm17y8ATQMgtdjvFTRBLGZHRpQvkpnGSLxJKALjkrFjzT",
+        "verificationMethod": "did:web:id-well-known.localhost%3A8443#SnRH-_DnOrKR597KXHgt6javP6bPeJZi9U1DoOXAyg4",
+        "created": "2025-03-19T10:02:36.740685230Z"
+      }
+    }
+  ]
+}
