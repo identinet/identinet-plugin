@@ -17,25 +17,25 @@
       ],
       "credentialSubject": {
         "id": "did:web:id-broken-plus-well-known.localhost%3A8443",
-        "broken": "tampered attribute"
+        "TAMPERED": "with credential"
       },
       "issuer": "did:web:id-broken-plus-well-known.localhost%3A8443",
-      "issuanceDate": "2025-03-18T10:48:56Z",
+      "issuanceDate": "2025-03-19T07:36:55Z",
       "proof": {
         "type": "Ed25519Signature2020",
         "proofPurpose": "assertionMethod",
-        "proofValue": "z2R7iqMKc6Drb6vDt53dNsFafVJ7UWxPLKYwL6akEDiXP4Gi1wCTdGLV3MBJdU8CmtYUD6U7mMkCQQJRCwPm6KNzG",
+        "proofValue": "z5JUtQVDbwKHqSZdZJQcFvEmNKdPd8PRen4SND8aAZb2GUzzPsTYV1k6U7o9dAaCHxtYE7sp2ETAgWRRwJWZBZUbh",
         "verificationMethod": "did:web:id-broken-plus-well-known.localhost%3A8443#dqqkiu1wiQWE7T3MmssDV_-xiHCGu1xzzcafoXoCNUs",
-        "created": "2025-03-18T10:48:56.939887829Z"
+        "created": "2025-03-19T07:36:55.757404221Z"
       }
     }
   ],
   "proof": {
     "type": "Ed25519Signature2020",
     "proofPurpose": "assertionMethod",
-    "proofValue": "ziGv1YbyyJqw5Ergrr6pt8Xnu2nFH6S6z2JY9UBFthFvpgnkdWopeYarzcNxLTwYetTqr5kpafXDovaTaKQiV6PB",
+    "proofValue": "z66QfVvd3MQbYtDAULof7Gyfzvo46wf8vcsCZhfFHDx58CsqGe655xH3frEXN9VJhhLjFBH94TFVPxuCQV5SpPRau",
     "verificationMethod": "did:web:id-broken-plus-well-known.localhost%3A8443#dqqkiu1wiQWE7T3MmssDV_-xiHCGu1xzzcafoXoCNUs",
-    "created": "2025-03-18T10:48:56.993151013Z"
+    "created": "2025-03-19T07:36:55.821165332Z"
   },
   "holder": "did:web:id-broken-plus-well-known.localhost%3A8443"
 }
